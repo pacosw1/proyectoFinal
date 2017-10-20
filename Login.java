@@ -17,6 +17,14 @@ public class Login extends Application {
       return false;
     }
  }
+
+ public String stringPassword(char[] pass) {
+   String t = "";
+   for (int i = 0;i<pass.length;i++) {
+     t+= pass[i];
+   }
+   return t;
+ }
 //char[] password = console.readPassword("Enter password");
 //Arrays.fill(password, ' ');
   public String loginAttempts() { //recursive function to test for login attempts
@@ -26,6 +34,7 @@ public class Login extends Application {
         }
         else if (attempts > 0) {
           System.out.println("Attempts: " + (attempts));
+          //char[] password = console.readPassword("Enter password");
           setUsername(Lectura.readString("Username")); setPassword(Lectura.readString("Password")); //
           checkAccount();
           attempts--;
