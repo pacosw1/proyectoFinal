@@ -1,14 +1,15 @@
 public class Login extends Application {
-  private String username;
-  private String password;
-  private int attempts = 3;
+  private int attempts = 2; //2+initial
+  private String username = Lectura.readString("Attempts: " + (attempts+1) + "\nusername:");
+  private String password = password = Lectura.readString("password");
   protected boolean status;
 
-  public Login(String username, String password, boolean status) {
+  public Login() {
     setUsername(username);
     setPassword(password);
     setStatus(status);
   }
+
 
   public boolean checkAccount() {
     if (username.equals("mario") && password.equals("1234")) {
@@ -40,7 +41,7 @@ public class Login extends Application {
           attempts--;
           return loginAttempts();
         } else
-          return "Try Again Later";
+          return "Attempts Depleted, Try Again Later";
       }
   public String toString() {
     return loginAttempts();
