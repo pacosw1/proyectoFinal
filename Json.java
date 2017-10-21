@@ -12,21 +12,25 @@ class Json {
   }
   public JSONArray getData() {
     JSONParser parser = new JSONParser(); //used to turn JSON to string
-    JSONArray array = null;
+    JSONArray array = new JSONArray();
     try {
          array = (JSONArray)parser.parse(new FileReader("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\data.json")); // reads from exisiting file
     }
       catch (FileNotFoundException e) {e.printStackTrace();} //error catching
      catch (IOException e) {e.printStackTrace();}
-    catch (ParseException e) {e.printStackTrace();}
+    catch (ParseException e) {e.printStackTrace(); }
     return array;
   }
   //
-  public void addProduct() { //adds object to array and saves it to file
+  public void addProduct(String type, String subType, String name, String size, String price, String timestamp) { //adds object to array and saves it to file
     JSONArray data = getData();
     JSONObject product = new JSONObject(); //new object to add
-    product.put("city","New York"); //object fields (attributes)
-    product.put("job","teacher");
+    product.put("type",type); //object fields (attributes)
+    product.put("subType",subType);
+    product.put("name",name);
+    product.put("size",size);
+    product.put("price",price);
+    product.put("timestamp", timestamp);
     data.add(product); //add object to array
     try (FileWriter file = new FileWriter("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\data.json")) { //write updated array to file
   			file.write(data.toJSONString());
@@ -34,8 +38,5 @@ class Json {
       catch (FileNotFoundException e) {e.printStackTrace();}
      catch (IOException e) {e.printStackTrace();}
   }
-  public String toString() {
-    addProduct();
-    return "";
-  }
+   
 }
