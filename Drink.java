@@ -1,21 +1,18 @@
-class Drink {
-  private String size;
+class Drink extends Product{
+  protected String size;
 
-
-	public String getSize() {
-		return size;
-	}
-
-	public void setSize(String size) {
-		this.size = size;
-	}
-
-	public Drink() {
-		super();
-	}
-
+  //Construct
 	public Drink(String size) {
 		super();
-		this.size = size;
+		setSize(size);
 	}
+  //Set
+  public void setSize(String size) {
+    this.size = size;
+  }
+  //Get
+  public String getSize() {
+    return size;
+  }
+
 }
