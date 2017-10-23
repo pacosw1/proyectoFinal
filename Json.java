@@ -10,11 +10,12 @@ import org.json.simple.parser.ParseException;
 class Json {
   public Json() {
   }
+  String name = "paco";
   public JSONArray getData() {
     JSONParser parser = new JSONParser(); //used to turn JSON to string
     JSONArray array = new JSONArray();
     try {
-         array = (JSONArray)parser.parse(new FileReader("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\data.json")); // reads from exisiting file
+         array = (JSONArray)parser.parse(new FileReader("C:\\Users\\"+name+"\\Documents\\GitHub\\proyectoFinal\\data\\data.json")); // reads from exisiting file
     }
       catch (FileNotFoundException e) {e.printStackTrace();} //error catching
      catch (IOException e) {e.printStackTrace();}
@@ -32,11 +33,11 @@ class Json {
     product.put("price",price);
     product.put("timestamp", timestamp);
     data.add(product); //add object to array
-    try (FileWriter file = new FileWriter("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\data.json")) { //write updated array to file
+    try (FileWriter file = new FileWriter("C:\\Users\\"+name+"\\Documents\\GitHub\\proyectoFinal\\data\\data.json")) { //write updated array to file
   			file.write(data.toJSONString());
   		}
       catch (FileNotFoundException e) {e.printStackTrace();}
      catch (IOException e) {e.printStackTrace();}
   }
-   
+
 }
