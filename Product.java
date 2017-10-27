@@ -1,3 +1,4 @@
+import java.io.*;
 class Product {
   protected CurrentDate timestamp;
 
