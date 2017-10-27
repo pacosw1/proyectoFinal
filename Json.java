@@ -16,22 +16,25 @@ class Json {
     JSONArray array = new JSONArray();
     try {
          array = (JSONArray)parser.parse(new FileReader("C:\\Users\\"+names+"\\Documents\\GitHub\\proyectoFinal\\data\\data.json")); // reads from exisiting file
-    }
+         //System.out.print(array.get(1).get("city"));
+      }
       catch (FileNotFoundException e) {e.printStackTrace();} //error catching
      catch (IOException e) {e.printStackTrace();}
     catch (ParseException e) {e.printStackTrace(); }
     return array;
   }
   //
-  public void addProduct(String type, String subType, String name, String size, String price, String timestamp) { //adds object to array and saves it to file
+  public void addProduct(String name, String size, String price, String quantity, String temp, String timestamp) { //adds object to array and saves it to file
     JSONArray data = getData();
     JSONObject product = new JSONObject(); //new object to add
-    product.put("type",type); //object fields (attributes)
-    product.put("subType",subType);
+    product.put("Temp", temp);
+    product.put("Quantity", quantity);
     product.put("name",name);
     product.put("size",size);
     product.put("price",price);
+    product.put("total",Double.valueOf(price)*Double.valueOf(quantity));
     product.put("timestamp", timestamp);
+    product.put("payment-type","cash");
     data.add(product); //add object to array
     try (FileWriter file = new FileWriter("C:\\Users\\"+names+"\\Documents\\GitHub\\proyectoFinal\\data\\data.json")) { //write updated array to file
   			file.write(data.toJSONString());
