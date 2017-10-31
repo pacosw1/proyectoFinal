@@ -1,7 +1,7 @@
 import java.io.*;
-class Tea extends Drink{
+class Others extends Drink{
   //Construct
-    public Tea(String size){
+    public Others(String size){
       super(size);
     }
   //Set
