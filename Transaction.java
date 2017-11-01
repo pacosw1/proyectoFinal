@@ -4,19 +4,28 @@ class Transaction {
     private int Cantidad;
     private Drink product;
     private CurrentDate datetime;
+    private Database data;
 
-	  public Transaction(double total, String payment, int Cantidad, Drink product, CurrentDate datetime) {
-		this.total = total;
+	  public Transaction(double price, String payment, int amount, Drink product, CurrentDate datetime, Database data) {
+		this.price = price;
 		this.payment = payment;
-		this.Cantidad = Cantidad;
+		this.amount = amount;
 		this.product = product;
 		this.datetime = datetime;
+    this.data = data;
 	}
 
+  public void total() {
+    total = price*amiount;
+  }
+  /*
+  public void saveTransaction() {
+    data.addTransaction
+  }
 
 
 
-
+*/
 
 
 

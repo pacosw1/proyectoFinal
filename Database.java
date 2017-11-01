@@ -7,8 +7,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-class Json {
-  public Json() {
+class Database {
+  public Database() {
   }
   String names = "paco";
   public JSONArray getData() {
@@ -23,18 +23,12 @@ class Json {
          //System.out.print(array.get(1).get("city"));
       }
       catch (FileNotFoundException e) {e.printStackTrace();} //error catching
-<<<<<<< HEAD
      catch (IOException e) {System.out.println("File was Empty, new Entry created Successfuly");}
     catch (ParseException e) {System.out.print(""); }
-=======
-     catch (IOException e) {e.printStackTrace();}
-    catch (ParseException e) {e.printStackTrace(); }
-    finally{}
->>>>>>> 67f458d3efac1e96177bd2013fc97d3235c344fe
     return array;
   }
   //
-  public void addProduct(String name, String size, double price, int quantity, String temp, String timestamp, String payT) { //adds object to array and saves it to file
+  public void addTransaction(String name, String size, double price, int quantity, String temp, String timestamp, String payT) { //adds object to array and saves it to file
     JSONArray data = getData();
     FileWriter file = null;
     JSONObject product = new JSONObject(); //new object to add
