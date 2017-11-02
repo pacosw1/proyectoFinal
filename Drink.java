@@ -1,25 +1,33 @@
 import java.io.*;
 class Drink extends Product{
   protected String size;
+  protected Recipe recipe;
 
   //Construct
-	public Drink(String size, CurrentDate timestamp) {
+	public Drink(String size, Recipe recipe, CurrentDate timestamp) {
 		super(timestamp);
 		setSize(size);
 	}
   //Set
-  public void setTimestamp(CurrentDate timestamp){
-    this.timestamp = timestamp;
-  }
-  public void setSize(String size) {
-    this.size = size;
-  }
-  //Get
-  public CurrentDate getTimestamp(){
-    return timestamp;
-  }
-  public String getSize() {
-    return size;
-  }
+	public String getSize() {
+		return size;
+	}
 
+	public Recipe getRecipe() {
+		return recipe;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public void setRecipe(Recipe recipe) {
+		this.recipe = recipe;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Drink [size=" + size + ", recipe=" + recipe + "]";
+	}
 }
