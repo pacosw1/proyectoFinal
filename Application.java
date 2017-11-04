@@ -1,7 +1,6 @@
 import java.io.*;
-
 class Application {
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     System.out.println("Login:");
     //Login toby = new Login();
     Json test = new Json();
