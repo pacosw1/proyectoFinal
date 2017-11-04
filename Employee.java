@@ -1,4 +1,3 @@
-import java.io.*;
 class Employee{
 protected double salary;
   //Construct

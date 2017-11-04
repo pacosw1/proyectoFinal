@@ -1,4 +1,3 @@
-import java.io.*;
 class Drink extends Product{
   protected String size;
 

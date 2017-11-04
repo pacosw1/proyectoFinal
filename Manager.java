@@ -1,4 +1,3 @@
-import java.io.*;
 class Manager extends Employee{
     //Construct
       public Manager(double salary){
