@@ -1,4 +1,3 @@
-import java.io.*;
 class Tea extends Drink{
   //Construct
     public Tea(String size){
