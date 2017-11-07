@@ -1,5 +1,7 @@
-class Drink extends Product{
+class Drink extends Product{//Abstract or Inteface?
   protected String size;
+  /*public double calculatePrice(); price depends on size
+  Sizes: small = $, medium = $, tall = $*/
   //Construct
   	public Drink(String size, CurrentDate timestamp) {
   		super(timestamp);
@@ -19,5 +21,4 @@ class Drink extends Product{
     public String getSize() {
       return size;
     }
-
 }
