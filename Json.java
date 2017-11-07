@@ -8,7 +8,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 class Json {
-  public Json() {
+  private String path;
+  public Json(String path) {
+    this.path = path;
   }
   String names = "paco";
   public JSONArray getData() {
@@ -16,7 +18,7 @@ class Json {
     JSONArray array = new JSONArray();
     FileReader file = null;
     try {
-         file = new FileReader("C:\\Users\\"+names+"\\Documents\\GitHub\\proyectoFinal\\data\\data.json");
+         file = new FileReader(path);
 
          array = (JSONArray)parser.parse(file); // reads from exisiting file
          file.close();
@@ -43,7 +45,7 @@ class Json {
     product.put("payment-type","cash");
     data.add(product); //add object to array
     try { //write updated array to file
-        file = new FileWriter("C:\\Users\\"+names+"\\Documents\\GitHub\\proyectoFinal\\data\\data.json");
+        file = new FileWriter(path);
   			file.write(data.toJSONString());
         file.close();
   		}
