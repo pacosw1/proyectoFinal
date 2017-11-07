@@ -1,15 +1,15 @@
 class Suggestions{
 private String complaint;
   //Construct
-  public Suggestions(String complaint){
-    setComplaint(complaint);
-  }
+    public Suggestions(String complaint){
+      setComplaint(complaint);
+    }
   //Set
-  public void setComplaint(String complaint){
-    this.complaint = complaint;
-  }
+    public void setComplaint(String complaint){
+      this.complaint = complaint;
+    }
   //Get
-  public String getComplaint(){
-    return complaint;
-  }
+    public String getComplaint(){
+      return complaint;
+    }
 }
