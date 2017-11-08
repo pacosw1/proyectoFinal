@@ -21,10 +21,5 @@ class SaveToFile implements Serialable {
       }
       catch(IOException e) {System.out.println("Error al cerrar el archivo");}
     }
-
-
-    }
-
-
+   }
   }
-}
