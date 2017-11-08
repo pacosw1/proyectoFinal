@@ -1,12 +1,15 @@
 import java.io.*;
 class Application {
   public static void main(String[] args) {
-    System.out.println("Login:");
+    //System.out.println("Login:");
     //Login toby = new Login();
-    Json test = new Json();
-    test.addProduct("Latte","Venti",100.23,2,"cold","10.18.2017","cash");
-    System.out.print(test.getData());
-    System.out.println(test);
+    String path = "C:\\Users\\paco\\Desktop";
+    SaveToFile f = new SaveToFile();
+    Ingedient i = new Ingredient("cofee-beans",2,0.23,"kg");
+    f.saveIngredient(i,path);
+
+
+    
     //System.out.println(toby);
   }
 }

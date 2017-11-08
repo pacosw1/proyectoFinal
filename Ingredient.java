@@ -1,4 +1,4 @@
-class Ingredients {
+class Ingredient {
   private String name;
   private double unitaryPrice;
   private int quantity;
