@@ -1,22 +1,22 @@
 class Transaction {
     private double total;
-    private String payment-type;
-    private int Cantidad;
+    private String payment;
+    private int amount;
     private Drink product;
     private CurrentDate datetime;
-    private Database data;
+    //private Database data;
 
-	  public Transaction(double price, String payment, int amount, Drink product, CurrentDate datetime, Database data) {
+	  public Transaction(double price, String payment, int amount, Drink product, CurrentDate datetime) {
 		this.price = price;
 		this.payment = payment;
 		this.amount = amount;
 		this.product = product;
-		this.datetime = datetime;
+		//this.datetime = datetime;
     this.data = data;
 	}
 
   public void total() {
-    total = price*amiount;
+    total = price*amount;
   }
   /*
   public void saveTransaction() {
