@@ -1,5 +1,5 @@
 class Transaction {
-    private double total;
+    private double price;
     private String payment;
     private int amount;
     private Drink product;
@@ -12,11 +12,11 @@ class Transaction {
 		this.amount = amount;
 		this.product = product;
 		//this.datetime = datetime;
-    this.data = data;
+    //this.data = data;
 	}
 
   public void total() {
-    total = price*amount;
+    price = price*amount;
   }
   /*
   public void saveTransaction() {
@@ -53,16 +53,13 @@ class Transaction {
 
   //sets and gets
 
-  	public double getTotal() {
-  		return total;
-  	}
-
+  
   	public String getPayment() {
   		return payment;
   	}
 
-  	public int getCantidad() {
-  		return Cantidad;
+  	public int getAmount() {
+  		return amount;
   	}
 
   	public Drink getProduct() {
@@ -73,23 +70,6 @@ class Transaction {
   		return datetime;
   	}
 
-  	public void setTotal(double total) {
-  		this.total = total;
-  	}
-
-  	public void setPayment(String payment) {
-  		this.payment = payment;
-  	}
-
-  	public void setCantidad(int Cantidad) {
-  		this.Cantidad = Cantidad;
-  	}
-
-  	public void setProduct(Drink product) {
-  		this.product = product;
-  	}
-
-  	public void setDatetime(CurrentDate datetime) {
-  		this.datetime = datetime;
-  	}
-  }
+  	 
+  
+    }

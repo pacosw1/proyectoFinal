@@ -1,14 +1,46 @@
 import java.io.*;
+import java.util.*;
+
 class SaveToFile implements Serializable {
 
     public SaveToFile() {}
-    public void saveIngredient(Ingredient i, String path) { //saves ingredient object to .dat file.
+
+    public ArrayList<Ingredient> readIngredients(String path) {
+      FileInputStream fis = null;
+      ArrayList<Ingredient> objectsList = new ArrayList<Ingredient>(); //Ingredient specified as type
+      boolean cont = true;
+      try{
+         fis = new FileInputStream(path);
+         ObjectInputStream input = new ObjectInputStream(fis);
+         while(cont){
+            Ingredient obj = (Ingredient)input.readObject(); //reads objects from file and adds them to an arraylist which is then returned
+            if(obj != null)
+               objectsList.add(obj);
+            else
+               cont = false;
+         }
+        }catch(Exception e){
+           //System.out.println(e.printStackTrace());
+        }
+        return objectsList;
+    }
+    public void saveIngredient(Ingredient[] ingredients, String path) { //saves ingredient object to .dat file.
+
+      ArrayList<Ingredient> current = readIngredients(path); //uses the read method tu get all saved objects from the file.
+      for (int j = 0;j< ingredients.length;j++) //adds the ingredient array to arraylist.
+      {
+        current.add(ingredients[j]);
+      }
       FileOutputStream f1 = null;
       ObjectOutputStream f2=null;
       try {
         f1 = new FileOutputStream(path);
         f2 = new ObjectOutputStream(f1);
-        f2.writeObject(i);
+        for (int j = 0;j< current.size();j++) //writes all old and new Objects to file from the arrayList;
+        {
+          f2.writeObject(current.get(j));
+        }
+
       }
       catch(IOException e) {System.out.println("No se almaceno");}
       finally {
@@ -20,7 +52,7 @@ class SaveToFile implements Serializable {
       }
     }
     public void saveTransaction(Transaction obj, String path) { //saves object to an object .dat file for transactions;
-     
+      obj = null;
       FileOutputStream f1 = null;
       ObjectOutputStream f2=null;
       try {

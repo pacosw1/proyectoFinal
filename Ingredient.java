@@ -1,11 +1,12 @@
-class Ingredient {
+import java.io.*;
+class Ingredient implements Serializable {
   private String name;
   private double unitaryPrice;
   private int quantity;
   private String measure;
 // This class creates an ingredient by creating an object with name unitary price, quanity and unitary measure (kg, mg, etc..)
-	public Ingredients(String name,int quantity, double unitaryPrice, String measure) {
-		this.nameIngredient = nameIngredient;
+	public Ingredient(String name,int quantity, double unitaryPrice, String measure) {
+		this.name = name;
 		this.unitaryPrice = unitaryPrice;
 		this.measure = measure;
     this.quantity = quantity;
@@ -14,10 +15,7 @@ class Ingredient {
  public double price() { // gets total price of ingredient
    return quantity*unitaryPrice;
  }
-	@Override
-	public String toString() {
-		return "Ingredients [name=" + name + ", unitaryPrice=" + unitaryPrice + ", measure=" + measure + "]";
-	}
+
 
 	public String getName() {
 		return name;
@@ -49,5 +47,10 @@ class Ingredient {
 
 	public void setMeasure(String measure) {
 		this.measure = measure;
+	}
+
+	@Override
+	public String toString() {
+		return "Ingredient [name=" + name + ", unitaryPrice=" + unitaryPrice + ", quantity=" + quantity + ", measure=" + measure + "]";
 	}
 }

@@ -27,6 +27,6 @@ class Recipe{
 
 	@Override
 	public String toString() {
-		return ingredients;
+		return ingredients + "";
 	}
 }

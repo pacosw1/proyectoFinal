@@ -1,10 +1,9 @@
-class Drink extends Product{//Abstract or Inteface?
+class Drink{//Abstract or Inteface?
   protected String size;
   protected Recipe recipe;
 
   //Construct
 	public Drink(String size, Recipe recipe, CurrentDate timestamp) {
-		super(timestamp);
 		setSize(size);
 	}
   //Set
