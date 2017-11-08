@@ -1,4 +1,8 @@
 class Recipe{
+<<<<<<< HEAD
+=======
+
+>>>>>>> a3f77c105b85329e79a1c014c3cc7104497416c1
   private Ingredient[] ingredients;
 
 	public Recipe(Ingredient[] ingredients) {
