@@ -1,18 +1,41 @@
-class Drink{//Abstract or Inteface?
+class Drink extends Product  {//Abstract or Inteface?
   protected String size;
   protected Recipe recipe;
+  protected String name;
+
+
 
   //Construct
-	public Drink(String size, Recipe recipe, CurrentDate timestamp) {
+	public Drink(double price,String code, String name,String size, Recipe recipe, int quantity) {
+    super(price,code,quantity);
 		setSize(size);
+    setRecipe(recipe);
+    setName(name);
+    setCode(code);
 	}
   //Set
+
+ public double cost() {
+   return recipe.cost();
+ }
+  public String toString() {
+    return "Drink [size=" + size + ", recipe=" + recipe + ", name=" + name + ", code=" + code + "]";
+  }
+
 	public String getSize() {
 		return size;
 	}
 
 	public Recipe getRecipe() {
 		return recipe;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getCode() {
+		return code;
 	}
 
 	public void setSize(String size) {
@@ -23,9 +46,11 @@ class Drink{//Abstract or Inteface?
 		this.recipe = recipe;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 
-	@Override
-	public String toString() {
-		return "Drink [size=" + size + ", recipe=" + recipe + "]";
+	public void setCode(String code) {
+		this.code = code;
 	}
 }
