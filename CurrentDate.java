@@ -8,28 +8,29 @@ import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 
 class CurrentDate implements Serializable {
-   Date date = new Date();
-   LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-   int year  = localDate.getYear();
-   int month = localDate.getMonthValue();
-   int day   = localDate.getDayOfMonth();
+Date date = new Date();
+LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+int year  = localDate.getYear();
+int month = localDate.getMonthValue();
+int day   = localDate.getDayOfMonth();
 
-   public CurrentDate() {};
+public CurrentDate() {
+};
 
-   public int day()
-   {
-      return day;
-   }
-   public int month()
-   {
-      return month;
-   }
-	public int year()
-   {
-      return year;
-   }
+public int day()
+{
+        return day;
+}
+public int month()
+{
+        return month;
+}
+public int year()
+{
+        return year;
+}
 
-	public String toString() {
-	   return day + "/" + month + "/" + year;
-	}
+public String toString() {
+        return day + "/" + month + "/" + year;
+}
 }
