@@ -1,9 +1,10 @@
-class Recipe{
+import java.io.*;
+class Recipe implements Serializable{
 
   private Ingredient[] ingredients;
 
 	public Recipe(Ingredient[] ingredients) {
-		super();
+
 		this.ingredients = ingredients;
 	}
 
@@ -12,7 +13,7 @@ class Recipe{
 		return ingredients;
 	}
 
-  public double price() { //sums all the prices of each ingredient with their quanity to get the actual cost of the recipe array;
+  public double cost() { //sums all the prices of each ingredient with their quanity to get the actual cost of the recipe array;
     double sum = 0;
     for (int i = 0;i < ingredients.length;i++) {
       sum+= ingredients[i].price();
