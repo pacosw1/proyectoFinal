@@ -1,22 +1,28 @@
-class Transaction {
-    private double price;
+import java.io.*;
+import java.util.*;
+class Transaction implements Serializable{
+    private double total;
     private String payment;
-    private int amount;
-    private Drink product;
+    private ArrayList<Product> product;
     private CurrentDate datetime;
     //private Database data;
 
-	  public Transaction(double price, String payment, int amount, Drink product, CurrentDate datetime) {
-		this.price = price;
+	  public Transaction(String payment, ArrayList<Product> product, CurrentDate datetime) {
+
 		this.payment = payment;
-		this.amount = amount;
 		this.product = product;
-		//this.datetime = datetime;
+		this.datetime = datetime;
+    this.total = total();
     //this.data = data;
 	}
 
-  public void total() {
-    price = price*amount;
+  public double total() {
+    double sum = 0;
+    for(int i = 0;i < product.size();i++)
+    {
+      sum += product.get(i).getPrice() * product.get(i).getQuantity();
+    }
+    return sum;
   }
   /*
   public void saveTransaction() {
@@ -26,50 +32,14 @@ class Transaction {
 
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   //sets and gets
 
-  
-  	public String getPayment() {
-  		return payment;
-  	}
 
-  	public int getAmount() {
-  		return amount;
-  	}
 
-  	public Drink getProduct() {
-  		return product;
-  	}
 
-  	public CurrentDate getDatetime() {
-  		return datetime;
-  	}
 
-  	 
-  
-    }
+	@Override
+	public String toString() {
+		return "Transaction [total=" + total + ", payment=" + payment + ", datetime=" + datetime + "]";
+	}
+}
