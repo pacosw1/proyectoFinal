@@ -1,7 +1,8 @@
-class Chocolate extends Drink {
+class Chocolate extends Drink  {
   //Construct
-    public Chocolate(String size){
-      super(size);
+    private String type;
+    public Chocolate(double price,String code, String name,String size, Recipe recipe,String type, int quantity){ //blanco o negro (chocolate)
+      super(price,code,name,size,recipe, quantity);
     }
   //Set
     public void setSize(String size){
