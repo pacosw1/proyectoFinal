@@ -7,6 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import java.util.*;
 class Json {
 private String path;
 public Json(String path) {
@@ -31,19 +32,25 @@ public JSONArray getData() {
         return array;
 }
 //
-public void addProduct(String name, String size, String price, String quantity, String temp, String timestamp) {   //adds object to array and saves it to file
+public void addTransaction(ArrayList<Transaction> transaction) {   //adds object to array and saves it to file
         JSONArray data = getData();
         FileWriter file = null;
-        JSONObject product = new JSONObject(); //new object to add
-        product.put("Temp", temp);
-        product.put("Quantity", quantity);
-        product.put("name",name);
-        product.put("size",size);
-        product.put("price",price);
-        product.put("total",Double.valueOf(price)*Double.valueOf(quantity));
-        product.put("timestamp", timestamp);
-        product.put("payment-type","cash");
-        data.add(product); //add object to array
+        for (int i = 0; i < transaction.size(); i++) {
+                JSONObject tran = new JSONObject(); //new object to add
+                tran.put("Payment", transaction.get(i).getPayment());
+                tran.put("Products", transaction.get(i).getProduct());
+                tran.put("date",transaction.get(i).getDatetime());
+                data.add(tran);
+        }
+
+        /*
+           product.put("size",size);
+           product.put("price",price);
+           product.put("total",Double.valueOf(price)*Double.valueOf(quantity));
+           product.put("timestamp", timestamp);
+           product.put("payment-type","cash");
+         */
+        //add object to array
         try { //write updated array to file
                 file = new FileWriter(path);
                 file.write(data.toJSONString());

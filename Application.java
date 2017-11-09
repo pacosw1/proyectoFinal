@@ -5,13 +5,17 @@ public static void main(String[] args) {
         //System.out.println("Login:");
         //Login toby = new Login();
         CurrentDate curr = new CurrentDate();
+        Json save = new Json("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\data.json");
+        
         String path = "C:\\Users\\paco\\Desktop\\ingredients.dat";
         String path2 = "C:\\Users\\paco\\Desktop\\transactions.dat";
         //path3
         SaveToFile f = new SaveToFile();
         Ingredient i = new Ingredient("cofee-beans",2,0.23,"kg");
         Ingredient i2 = new Ingredient("milk",20,8.23,"Gallon");
-        Ingredient[] ingredients = {i,i2};
+        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+        ingredients.add(i);
+        ingredients.add(i2);
 
         Recipe recipe = new Recipe(ingredients);
         Chocolate ch = new Chocolate(23.23,"232","Hot-Chocolate","venti",recipe,"white",2);
@@ -23,6 +27,7 @@ public static void main(String[] args) {
         Transaction tran = new Transaction("cash",pro,curr);
         ArrayList<Transaction> trans =  new ArrayList<Transaction>();
         trans.add(tran);
+        save.addTransaction(trans);
         f.saveTransaction(trans,path2);
         //Ingredient gg = new Ingredient("vodka",99,50.52,"1L");
         f.saveIngredient(ingredients,path);

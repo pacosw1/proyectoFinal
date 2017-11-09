@@ -24,22 +24,41 @@ public double total() {
         }
         return sum;
 }
-/*
-   public void saveTransaction() {
-   data.addTransaction
-   }
-
-
-
- */
-//sets and gets
-
-
-
-
 
 @Override
 public String toString() {
         return "Transaction [total=" + total + ", payment=" + payment + ", datetime=" + datetime + "]";
+}
+
+public double getTotal() {
+        return total;
+}
+
+public String getPayment() {
+        return payment;
+}
+
+public ArrayList<Product> getProduct() {
+        return product;
+}
+
+public CurrentDate getDatetime() {
+        return datetime;
+}
+
+public void setTotal(double total) {
+        this.total = total;
+}
+
+public void setPayment(String payment) {
+        this.payment = payment;
+}
+
+public void setProduct(ArrayList<Product> product) {
+        this.product = product;
+}
+
+public void setDatetime(CurrentDate datetime) {
+        this.datetime = datetime;
 }
 }

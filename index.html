@@ -1,0 +1,63 @@
+<html>
+
+<head>
+  <title>BitCheck</title>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="footable/footable.bootstrap.css">
+  <link rel="stylesheet" href="images/webfont/cryptocoins.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+  <!-- under dev
+  <script src="autocomplete/dist/jquery.easy-autocomplete.min.js" type="text/javascript"></script>
+  <link href="autocomplete/dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+  -->
+  <script type="text/javascript" src="footable/footable.js"></script>
+  <script type="text/javascript" src="scripts/scripts.js"></script>
+</head>
+
+<body>
+  <h1 id="intro">BitCheck</h1>
+  <div class="stat-page"></div>
+  <div class="results"> <!-- fills with top 10 results-->
+  </div>
+  <div class="charts"> <!-- Fills with all availiable coins -->
+    <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-filtering="true" data-paging-size="50">
+      <thead>
+        <tr class="rowSelector">
+          <h1 id="top100">Top 100</h1>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>BTC</th>
+          <th>24h Change</th>
+          <th data-breakpoints="xs sm md">1h Change</th>
+          <th data-breakpoints="xs sm md">7d Change</th>
+          <th data-breakpoints="xs sm md">Market Cap</th>
+          <th data-breakpoints="xs sm md">Total Supply</th>
+        </tr>
+      </thead>
+      <tbody id="table">
+      </tbody>
+    </table>
+  </div>
+  <!-- This is a comment -->
+  <script id="charts" type="text/x-jquery-tmpl">
+    <tr>
+      <td>${rank}</td>
+      <td>${name} (${symbol})</td>
+      <td class="price">${price_usd}</td>
+      <td>${price_btc}</td>
+      <td class="change">${percent_change_24h}%</td>
+      <td class="change1">${percent_change_1h}%</td>
+      <td class="change7">${percent_change_7d}%</td>
+      <td>$${market_cap_usd}</td>
+      <td>${total_supply} ${symbol}</td>
+    </tr>
+  </script>
+</body>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+</html>

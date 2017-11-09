@@ -1,0 +1,59 @@
+.results {
+
+margin: 9rem;
+
+}
+#top100 {
+  color: black;
+
+  text-align: center;
+}
+h1 ,#intro{
+  padding-top: 2rem;
+  text-align: center;
+  color: white;
+}
+.charts {
+  background-color: white;
+  margin: 0rem 5rem 0rem 5rem;
+  padding: 0 2rem 0 2rem;
+}
+.stat-page {
+
+  padding: 0rem;
+  background-color: white;
+}
+.top {
+  padding: 10rem;
+}
+
+.home-screen {
+  background-color: white;
+  opacity: .6;
+
+
+  text-align: center;
+
+  display: inline-table;
+
+  width: 10rem;
+  height: 12rem;
+
+  margin: 0rem;
+  border-color: black;
+  border-width: 0.1rem;
+  border-radius: 1%;
+  border-style: solid;
+}
+#price {
+  background-color: rgb(225, 212, 255);
+  padding: .5rem;
+}
+
+body {
+  background-image: url(https://orig00.deviantart.net/a6c1/f/2014/008/d/b/bbt_bitcoin__litecoin__feathercoin_background_by_bitsbetrippin-d71gduq.jpg); !important;
+}
+
+
+i.cc { font-size: 2rem; }
+i.cc:hover { color: #0060BD; transform-origin: 0.49em 0.7em; }

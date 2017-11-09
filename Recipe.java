@@ -1,31 +1,31 @@
 import java.io.*;
+import java.util.*;
 class Recipe implements Serializable {
 
-private Ingredient[] ingredients;
+private ArrayList<Ingredient> ingredients;
 
-public Recipe(Ingredient[] ingredients) {
-
+public Recipe(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
 }
 
-
-public Ingredient[] ingredients() {
+public ArrayList<Ingredient> ingredients() {
         return ingredients;
 }
 
 public double cost() {   //sums all the prices of each ingredient with their quanity to get the actual cost of the recipe array;
         double sum = 0;
-        for (int i = 0; i < ingredients.length; i++) {
-                sum+= ingredients[i].price();
+        for (int i = 0; i < ingredients.size(); i++) {
+                sum+= ingredients.get(i).price();
         }
         return sum;
 }
 
-public void setT(Ingredient[] Ingredient) {
+public void setT(ArrayList<Ingredient> Ingredient) {
         this.ingredients = ingredients;
 }
-
-
+public ArrayList<Ingredient> getIngredients() {
+        return ingredients;
+}
 @Override
 public String toString() {
         return ingredients + "";

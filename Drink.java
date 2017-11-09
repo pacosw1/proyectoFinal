@@ -53,7 +53,7 @@ class Drink extends Product {
       return recipe.cost();
     }
   //Displays
-    public String toString() {/
+    public String toString() {
       return "Drink [size=" + size + ", recipe=" + recipe + ", name=" + name + ", code=" + code + "]";
     }
 }
