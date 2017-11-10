@@ -1,4 +1,4 @@
-class Cafe extends Drink {
+class Cafe extends Drink {//Test
 //Construct
 public Cafe(String size){
         super(size);
