@@ -25,7 +25,7 @@ public JSONArray getData() {
                 file.close();
                 //System.out.print(array.get(1).get("city"));
         }
-        catch (FileNotFoundException e) {e.printStackTrace();} //error catching
+        catch (FileNotFoundException e) {e.printStackTrace();}           //error catching
         catch (IOException e) {e.printStackTrace();}
         catch (ParseException e) {e.printStackTrace(); }
         finally{}
