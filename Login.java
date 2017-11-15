@@ -1,37 +1,21 @@
 import java.io.*;
-import java.util.*;
-public class Login extends Application {
-private int attempts = 2;   //2+initial
-private String username = Lectura.readString("Attempts: " + (attempts+1) + "\nusername:");
-private String typedPassword = typedPassword = Lectura.readString("password");//Asks for password
-private JPasswordField password; //Hides password
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+public class Login extends Application{
+private int attempts = 2;//2+initial
+private String username;
+private String typedPassword;
 protected boolean status;
+private JPasswordField password;//Hides password
 
 public Login() {
         setUsername(username);
         setTypedPassword(typedPassword);
-        setPassword(password);
         setStatus(status);
 }
 
-public void createPasswordField(){//Field to enter password
-  password = new JPasswordField(30);
-  password.setBounds(280, 240, 90, 20);
-  password.setEchoChar('*');
-  password.setBackgroundColor(Color.white);
-  password.addActionListener(new ActionListener()){
-
-  /*  @Override ~~~~~~~ For Consideration!
-    public void actionPerformed(ActionEvent e){//Inputs and checks Password
-        password = (JPasswordField) e.getSource();
-
-        if(!typedPassword.equals("Mario")){
-          JOptionPane.showMessageDialog(null, "Incorrect Password", JOptionPane.ERROR_MESSAGE);
-        }
-    }*/
-  }
-}
-public boolean checkAccount() {//True Username and Password
+public boolean checkAccount() {
         if (username.equals("mario") && typedPassword.equals("1234")) {
                 return true;
         } else {
@@ -48,21 +32,38 @@ public String stringPassword(char[] pass) {
 }
 //char[] password = console.readPassword("Enter password");
 //Arrays.fill(password, ' ');
-public String loginAttempts() {   //recursive function to test for login attempts
-        if (checkAccount()) {
+public String loginAttempts() {//Recursive function to test for login attempts
+  password = new JPasswordField(30);
+  password.setBounds(280, 240, 90, 20);
+  password.setEchoChar('*');
+  password.setBackground(Color.white);
+  setUsername(Lectura.readString("Attempts: " + (attempts+1) + "\nusername:"));//Inputs Username
+  password.addActionListener(ActionListener(actionPerformed(ActionEvent)));//Hides input
+
+        if(checkAccount()) {
                 setStatus(true); //log in status to true;
                 return "Success!";
         }
         else if (attempts > 0) {
+                //Displays error tab
+                JOptionPane.showMessageDialog(null, "Incorrect Password", "Enter password again", JOptionPane.ERROR_MESSAGE);
                 System.out.println("Attempts: " + (attempts));
                 //char[] password = console.readPassword("Enter password");
-                setUsername(Lectura.readString("Username")); setTypedPassword(Lectura.readString("Password")); //
+                setUsername(Lectura.readString("Username"));
+                password.addActionListener(new ActionListener(){//Hides input
+                  public void actionPerformed(ActionEvent e){//Inputs and checks Password
+                  password = (JPasswordField) e.getSource(setTypedPassword(Lectura.readString("Password")));
+                  }
+                });
                 checkAccount();
                 attempts--;
                 return loginAttempts();
         } else
                 return "Attempts Depleted, Try Again Later";
 }
+public void actionPerformed(ActionEvent e){//Inputs and checks Password
+    password = (JPasswordField) e.getSource(setTypedPassword(Lectura.readString("password")));
+    }
 public String toString() {
         return loginAttempts();
 }
@@ -75,9 +76,6 @@ public void setStatus(boolean status) {
 }
 public void setTypedPassword(String typedPassword) {
         this.typedPassword = typedPassword;
-}
-public void setPassword(JPasswordField password){
-        this.password = password;
 }/*
 public String username() {
         return username;
