@@ -44,12 +44,12 @@ public ArrayList<Transaction> readTransactions(String path) {
         }
         return objectsList;
 }
-public void saveIngredient(Ingredient[] ingredients, String path) {     //saves ingredient object to .dat file.
+public void saveIngredient(ArrayList<Ingredient>ingredients, String path) {     //saves ingredient object to .dat file.
 
         ArrayList<Ingredient> current = readIngredients(path); //uses the read method tu get all saved objects from the file.
-        for (int j = 0; j< ingredients.length; j++) //adds the ingredient array to arraylist.
+        for (int j = 0; j< ingredients.size(); j++) //adds the ingredient array to arraylist.
         {
-                current.add(ingredients[j]);
+                current.add(ingredients.get(j));
         }
         FileOutputStream f1 = null;
         ObjectOutputStream f2=null;

@@ -32,7 +32,7 @@ public JSONArray getData() {
         finally{}
         return array;
 }
-//
+//Puedes ver UserLogin?
 public void saveReport(String[] names, String[] values, Report report) {
         JSONArray data = getData();
         FileWriter file = null;
