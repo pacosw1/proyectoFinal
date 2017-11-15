@@ -24,6 +24,14 @@ public double total() {
         }
         return sum;
 }
+public double cost() {
+        double sum = 0;
+        for(int i = 0; i < product.size(); i++)
+        {
+                sum += ((Drink)product.get(i)).getRecipe().cost();
+        }
+        return sum;
+}
 
 @Override
 public String toString() {

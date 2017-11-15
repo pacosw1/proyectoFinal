@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
+import java.lang.reflect.Field;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -32,6 +33,27 @@ public JSONArray getData() {
         return array;
 }
 //
+public void saveReport(String[] names, String[] values, Report report) {
+        JSONArray data = getData();
+        FileWriter file = null;
+        for (int i = 0; i < names.length; i++) {
+                JSONObject tran = new JSONObject(); //new object to add
+                tran.put(names[i],"");
+
+
+        }
+
+        try { //write updated array to file
+                file = new FileWriter(path);
+                file.write(data.toJSONString());
+                file.close();
+        }
+        catch (FileNotFoundException e) {e.printStackTrace();}
+        catch (IOException e) {e.printStackTrace();}
+        //finally{}
+}
+
+
 public void addTransaction(ArrayList<Transaction> transaction) {   //adds object to array and saves it to file
         JSONArray data = getData();
         FileWriter file = null;
