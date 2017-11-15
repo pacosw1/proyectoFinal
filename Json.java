@@ -14,7 +14,7 @@ private String path;
 public Json(String path) {
         this.path = path;
 }
-String names = "paco";
+String names = "pacos";
 public JSONArray getData() {
         JSONParser parser = new JSONParser(); //used to turn JSON to string
         JSONArray array = new JSONArray();

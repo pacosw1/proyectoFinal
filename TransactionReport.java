@@ -10,6 +10,7 @@ public TransactionReport(CurrentDate date, String title, SaveToFile save, String
         super(date, title, fileName,save);
 }
 
+
 public String[] names() {
         Field[] f = TransactionReport.class.getDeclaredFields();
         String[] name = new String[f.length];

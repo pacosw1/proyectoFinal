@@ -21,6 +21,7 @@ public CurrentDate getDate() {
 
 public String getTitle() {
         return title;
+
 }
 
 public void setDate(CurrentDate date) {
