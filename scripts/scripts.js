@@ -1,40 +1,37 @@
 $(document).ready(function() {
   $(".stat-page").hide();
 
-  function percentColor(x) {          //changes color of percentage change
-    x.each(function() {
-      var curr = $(this).text();
-      if (curr.includes("-")) {
-        $(this).css("color", "red");
-      } else {
-        $(this).css("color", "green");
+
+  $.getJSON( "data/data.json", function( data ) {
+    var totalCost = 0;
+    var totalPrice = 0;
+    for (var i = 0;i< data.length;i++) {
+        var curr = data[i]
+      console.log(curr);
+      for (var j = 0; j < curr['Products'].length;j++) {
+        var current = curr["Products"][j];
+        var name = current["name"];
+        var price = current["price"];
+        var quantity = current["quantity"];
+        totalCost += current["cost"];
+
+
+
+
+
       }
-  });
-}
-  $.getJSON("https://api.coinmarketcap.com/v1/ticker/", function(result) { //gets object array
 
-    result1 = result.slice(0, 10); //top 10 list
-    var result100 = result.slice(0, 100);
-    var coins = "<div class='home-screen'><h2>${rank}</h2><i class='cc ${symbol}'><h2>${symbol}</h2></i><h4>$${price_usd}</h4></div>";
-    $.template("coins", coins); //sets top 10 template
-    $.tmpl("coins", result1)
-      .appendTo(".results"); //adds it to results div
+    }
+  console.log(totalPrice - totalCost);
 
-    //initialized table template loop
-    $("#charts").tmpl(result100)  //same but for top 100 chart
-      .appendTo("#table");
-    $('#tables').footable();
-    var change = $(".change");
-    var change1 = $(".change1");
-    var change7 = $(".change7");
-    percentColor(change);
-    percentColor(change1);
-    percentColor(change7);
+    $("#charts").tmpl(data)  //same but for top 100 chart
+        .appendTo("#table");
+      $('#tables').footable();
+   });
 
-    });
-  });
-//under development
 
+
+});
 /*  function getObj(result, search) { // manual search. currenly not being used
     for (x in result) {
       var obj;

@@ -38,7 +38,7 @@ public String getPayment() {
         return payment;
 }
 
-public ArrayList<Product> getProduct() {
+public ArrayList<Product> getProducts() {
         return product;
 }
 
