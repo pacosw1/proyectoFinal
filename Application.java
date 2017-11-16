@@ -3,7 +3,14 @@ import java.util.*;
 class Application implements Serializable {
 public static void main(String[] args) {
         //System.out.println("Login:");
-        //Login toby = new Login();
+        CLogin toby = new CLogin();
+        toby.setUsername(Lectura.readString("Ingresar Usuario"));
+        toby.setTypedPassword(Lectura.readString("Ingresar Password"));
+        if (toby.loginAttempts()) {
+          //run code
+          System.out.println("Pass");
+        }
+        /*
         CurrentDate curr = new CurrentDate();
         Json save = new Json();
         String jPath = "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\data.json";
@@ -38,11 +45,12 @@ public static void main(String[] args) {
 
            System.out.println(m.get(j).price());
            }
-         */
+
         double margin = (ch.getPrice() - ch.cost()) / (ch.cost()) * 100;
         System.out.println("Name " + ch.getName() + " Recipe cost: "+ ch.cost() + " Price: "+ ch.getPrice() + "profit Margin: "+margin+"%");
         System.out.println(tran);
          TransactionReport report = new TransactionReport(curr,"test",save,f,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
         System.out.println(report);
+        */
 }
 }

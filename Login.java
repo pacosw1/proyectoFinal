@@ -6,7 +6,7 @@ public class Login extends Application{
 private int attempts = 2;//2+initial
 private String username;
 private String typedPassword;
-protected boolean status;
+protected int status;
 private JPasswordField password;//Hides password
 
 public Login() {
@@ -17,8 +17,11 @@ public Login() {
 
 public boolean checkAccount() {
         if (username.equals("mario") && typedPassword.equals("1234")) {
+                status = 0; //manager
                 return true;
-        } else {
+        } else if (username.equals("paco") && typedPassword.equals("12345")) {
+          status = 1; //employee
+        }else {
                 return false;
         }
 }
