@@ -23,56 +23,56 @@ private int sec = now.getSecond();
 
 
 public String toString() {
-        return hour + ":"+min+":"+sec+" | "+ day + "/" + month + "/" + year ;
+        return hour + ":"+min+":"+sec+" | "+ day + "/" + month + "/" + year;
 }
 
 
 
-	public int getYear() {
-		return year;
-	}
+public int getYear() {
+        return year;
+}
 
-	public int getMonth() {
-		return month;
-	}
+public int getMonth() {
+        return month;
+}
 
-	public int getDay() {
-		return day;
-	}
+public int getDay() {
+        return day;
+}
 
-	public int getHour() {
-		return hour;
-	}
+public int getHour() {
+        return hour;
+}
 
-	public int getMin() {
-		return min;
-	}
+public int getMin() {
+        return min;
+}
 
-	public int getSec() {
-		return sec;
-	}
+public int getSec() {
+        return sec;
+}
 
-	public void setYear(int year) {
-		this.year = year;
-	}
+public void setYear(int year) {
+        this.year = year;
+}
 
-	public void setMonth(int month) {
-		this.month = month;
-	}
+public void setMonth(int month) {
+        this.month = month;
+}
 
-	public void setDay(int day) {
-		this.day = day;
-	}
+public void setDay(int day) {
+        this.day = day;
+}
 
-	public void setHour(int hour) {
-		this.hour = hour;
-	}
+public void setHour(int hour) {
+        this.hour = hour;
+}
 
-	public void setMin(int min) {
-		this.min = min;
-	}
+public void setMin(int min) {
+        this.min = min;
+}
 
-	public void setSec(int sec) {
-		this.sec = sec;
-	}
+public void setSec(int sec) {
+        this.sec = sec;
+}
 }
