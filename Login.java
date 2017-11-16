@@ -32,7 +32,6 @@ public boolean checkAccount(String username, String password) {
 		GridBagConstraints cs = new GridBagConstraints();
 
 		cs.fill = GridBagConstraints.HORIZONTAL;
-
 		lbUsername = new JLabel("User: ");//User Label
 		cs.gridx = 0;
 		cs.gridy = 0;
@@ -59,8 +58,6 @@ public boolean checkAccount(String username, String password) {
 		panel.setBorder(new LineBorder(Color.GRAY));
 
 		btnLogin = new JButton("Login");
-		//while(attempts > 0){
-		//if(attempts > 3){
 		btnLogin.addActionListener(new ActionListener() {//Starts event
 			public void actionPerformed(ActionEvent e) {//Obtains input
 				if (checkAccount(getUsername(), getPassword())){//Verifies input
@@ -76,37 +73,24 @@ public boolean checkAccount(String username, String password) {
 							"Login",
 							JOptionPane.ERROR_MESSAGE);
 					//Resets username and password
-					attempts--;
 					tfUsername.setText("");
 					pfPassword.setText("");
 					succeeded = false;
-
+					attempts--;
 				}
 			}
 		});
 		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {//Force end after 3 attempts
 				dispose();
 			}
 		});
-	//}
-	//else{
-		/*JPanel bp = new JPanel();
-		bp.add(btnLogin);
-		bp.add(btnCancel);
-
-		getContentPane().add(panel, BorderLayout.CENTER);
-		getContentPane().add(bp, BorderLayout.PAGE_END);
-
-		pack();
-		setResizable(false);
-		setLocationRelativeTo(parent);
-	}*/
+		if(attempts == 0){//This needs to be a condition to force end
 		JOptionPane.showMessageDialog(Login.this,
-				"You ran out of Attempts!",
 				"Try again next time!",
+				"You ran out of Attempts",
 				JOptionPane.ERROR_MESSAGE);
 		succeeded = false;
 
@@ -117,7 +101,7 @@ public boolean checkAccount(String username, String password) {
 				dispose();
 			}
 		});
-	//}
+	}
 		JPanel bp = new JPanel();
 		bp.add(btnLogin);
 		bp.add(btnCancel);
@@ -137,7 +121,7 @@ public boolean checkAccount(String username, String password) {
 			return new String(pfPassword.getPassword());
 		}
 
-		public boolean isSucceeded() {
+		public boolean isSucceeded() {//Needs to be implemented
 			return succeeded;
 		}
 }
