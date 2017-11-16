@@ -12,7 +12,7 @@ class Login extends JDialog {
 	private JButton btnLogin;
 	private JButton btnCancel;
 	private boolean succeeded;
-	private int attempts = 2;//2+initial
+	private int attempts = 3;
 	protected int status;
 	/*private String username;
 	private String typedPassword;
@@ -35,7 +35,7 @@ public boolean checkAccount(String username, String password) {
 		GridBagConstraints cs = new GridBagConstraints();
 
 		cs.fill = GridBagConstraints.HORIZONTAL;
-
+		do{
 		lbUsername = new JLabel("User: ");
 		cs.gridx = 0;
 		cs.gridy = 0;
@@ -71,7 +71,7 @@ public boolean checkAccount(String username, String password) {
 							JOptionPane.INFORMATION_MESSAGE);
 					succeeded = true;
 					dispose();
-				} else if(attempts > 0){
+				} else{
 					JOptionPane.showMessageDialog(Login.this,
 							"Username or Password Incorrect\nAttempts: " + attempts,
 							"Login",
@@ -83,13 +83,6 @@ public boolean checkAccount(String username, String password) {
 					succeeded = false;
 
 				}
-				else{
-					JOptionPane.showMessageDialog(Login.this,
-							"You ran out of Attempts!",
-                     "Try again next time!",
-							JOptionPane.ERROR_MESSAGE);
-					succeeded = false;
-				}
 			}
 		});
 		btnCancel = new JButton("Cancel");
@@ -99,6 +92,29 @@ public boolean checkAccount(String username, String password) {
 				dispose();
 			}
 		});
+
+		JPanel bp = new JPanel();
+		bp.add(btnLogin);
+		bp.add(btnCancel);
+
+		getContentPane().add(panel, BorderLayout.CENTER);
+		getContentPane().add(bp, BorderLayout.PAGE_END);
+		}while(attempts > 0);
+
+		JOptionPane.showMessageDialog(Login.this,
+				"You ran out of Attempts!",
+				"Try again next time!",
+				JOptionPane.ERROR_MESSAGE);
+		succeeded = false;
+
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+
 		JPanel bp = new JPanel();
 		bp.add(btnLogin);
 		bp.add(btnCancel);
