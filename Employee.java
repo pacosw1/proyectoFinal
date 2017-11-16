@@ -1,3 +1,4 @@
+import java.io.*;
 class Employee {//On main ask Hours worked per employee
 /*
    main
@@ -5,7 +6,7 @@ class Employee {//On main ask Hours worked per employee
    class PrincipalEmployee{
    public static void main(String[] args){
       double totalHours = 0;
-      double payment = 0;
+      double[] payment = new double[7];
       double totalPayment = 0;
       String day = " ";
       System.out.println("What's the salary?");
@@ -37,11 +38,9 @@ class Employee {//On main ask Hours worked per employee
        System.out.print("How many hours did employee " + name + " work on " + day + ":");
        double hours = Lectura.readDouble();
 
-       payment = hours * salary;
+       payment[x] += (hours * salary);
 
-       System.out.println("Payment on " + day + ": " + payment);
-
-       totalPayment += payment;
+       totalPayment += payment[x];
        totalHours += hours;
       }
        System.out.println("How many client suggestions did you get?");
@@ -56,7 +55,7 @@ class Employee {//On main ask Hours worked per employee
        }
        System.out.println("Is there a suggestion you would like to make?");
        String suggestionEmployee = Lectura.readString();
-       Employee tuba = new Employee(totalPayment, totalHours, name, numberEmployees, suggestionEmployee, suggestionsClients, clients);
+       Employee tuba = new Employee(totalPayment, totalHours, name, numberEmployees, suggestionEmployee, suggestionsClients, clients, payment);
        System.out.println(tuba);
       }
    }
@@ -69,8 +68,9 @@ protected String suggestionEmployee;
 protected int numberEmployees;
 protected String[] suggestionClients;
 protected int clients;
+protected double[] payment;
 //Construct
-public Employee(double totalPayment, double totalHours, String name, int numberEmployees, String suggestionEmployee, String[] suggestionClients, int clients){
+public Employee(double totalPayment, double totalHours, String name, int numberEmployees, String suggestionEmployee, String[] suggestionClients, int clients, double[] payment){
         setTotalPayment(totalPayment);
         setName(name);
         setTotalHours(totalHours);
@@ -78,6 +78,7 @@ public Employee(double totalPayment, double totalHours, String name, int numberE
         setSuggestionEmployee(suggestionEmployee);
         setSuggestionClients(suggestionClients);
         setClients(clients);
+        setPayment(payment);
 }
 //Set
 public void setTotalPayment(double totalPayment){
@@ -101,6 +102,9 @@ public void setSuggestionClients(String[] suggestionClients){
 public void setClients(int clients){
         this.clients = clients;
 }
+public void setPayment(double[] payment){
+        this.payment = payment;
+}
 //Get
 public double getTotalPayment(){
         return totalPayment;
@@ -123,17 +127,43 @@ public String[] getSuggestionsClients(){
 public int getClients(){
         return clients;
 }
+public double[] getPayment(){
+        return payment;
+}
 //Methods
 public String employeeReport(){
-        return "\nEmployee: " + name + "\nTotal Payment : " + totalPayment + "\nTotal hours worked: " + totalHours + "\nEmployee suggestion: " + suggestionEmployee;
+        return "\nTotal Payment : " + totalPayment + "\nTotal hours worked: " + totalHours + "\nEmployee suggestion: " + suggestionEmployee;
 }
 //Display
 public String toString(){
-        System.out.println("Employee Report: " + employeeReport());
-        System.out.println("Client's Suggestions Report: ");
-        for(int i = 0; i < clients; i++) {
-                System.out.println("Suggestion of Client " + (i + 1) + ": " + suggestionClients[i]);
+String day = " ";
+        System.out.println("\nEmployee: " + name);
+        for(int x = 0; x < 7; x++){
+            switch(x){
+            case 0: day = "Monday";
+                    break;
+            case 1: day = "Tuesday";
+                    break;
+            case 2: day = "Wednesday";
+                    break;
+            case 3: day = "Thursday";
+                    break;
+            case 4: day = "Friday";
+                    break;
+            case 5: day = "Saturday";
+                    break;
+            case 6: day = "Sunday";
+                    break;
+           }
+           System.out.print("\nPayment on " + day + ": " + payment[x]);
+        }
+        System.out.println("Report: " + employeeReport());
+        if(clients > 0){
+           System.out.println("Client's Suggestions Report: ");
+           for(int i = 0; i < clients; i++) {
+                   System.out.println("Suggestion of Client " + (i + 1) + ": " + suggestionClients[i]);
+           }
         }
         return "End of Report";
-}
+  }
 }
