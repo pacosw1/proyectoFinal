@@ -14,9 +14,6 @@ class Login extends JDialog {
 	private boolean succeeded;
 	private int attempts = 3;
 	protected int status;
-	/*private String username;
-	private String typedPassword;
-	private JPasswordField password;//Hides password*/
 
 public boolean checkAccount(String username, String password) {
         if (username.equals("mario") && password.equals("1234")) {
@@ -35,26 +32,26 @@ public boolean checkAccount(String username, String password) {
 		GridBagConstraints cs = new GridBagConstraints();
 
 		cs.fill = GridBagConstraints.HORIZONTAL;
-		do{
-		lbUsername = new JLabel("User: ");
+
+		lbUsername = new JLabel("User: ");//User Label
 		cs.gridx = 0;
 		cs.gridy = 0;
 		cs.gridwidth = 1;
 		panel.add(lbUsername, cs);
 
-		tfUsername = new JTextField(20);
+		tfUsername = new JTextField(20);//User Text Field
 		cs.gridx = 1;
 		cs.gridy = 0;
 		cs.gridwidth = 2;
 		panel.add(tfUsername, cs);
 
-		lbPassword = new JLabel("Password: ");
+		lbPassword = new JLabel("Password: ");//Password Label
 		cs.gridx = 0;
 		cs.gridy = 1;
 		cs.gridwidth = 1;
 		panel.add(lbPassword, cs);
 
-		pfPassword = new JPasswordField(20);
+		pfPassword = new JPasswordField(20);//Password Text Field
 		cs.gridx = 1;
 		cs.gridy = 1;
 		cs.gridwidth = 2;
@@ -62,9 +59,11 @@ public boolean checkAccount(String username, String password) {
 		panel.setBorder(new LineBorder(Color.GRAY));
 
 		btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (checkAccount(getUsername(), getPassword())){//Checks input
+		//while(attempts > 0){
+		//if(attempts > 3){
+		btnLogin.addActionListener(new ActionListener() {//Starts event
+			public void actionPerformed(ActionEvent e) {//Obtains input
+				if (checkAccount(getUsername(), getPassword())){//Verifies input
 					JOptionPane.showMessageDialog(Login.this,
 							"Hello " + getUsername() + "! Welcome!",
 							"Login",
@@ -76,7 +75,7 @@ public boolean checkAccount(String username, String password) {
 							"Username or Password Incorrect\nAttempts: " + attempts,
 							"Login",
 							JOptionPane.ERROR_MESSAGE);
-					// reset username and password
+					//Resets username and password
 					attempts--;
 					tfUsername.setText("");
 					pfPassword.setText("");
@@ -92,15 +91,19 @@ public boolean checkAccount(String username, String password) {
 				dispose();
 			}
 		});
-
-		JPanel bp = new JPanel();
+	//}
+	//else{
+		/*JPanel bp = new JPanel();
 		bp.add(btnLogin);
 		bp.add(btnCancel);
 
 		getContentPane().add(panel, BorderLayout.CENTER);
 		getContentPane().add(bp, BorderLayout.PAGE_END);
-		}while(attempts > 0);
 
+		pack();
+		setResizable(false);
+		setLocationRelativeTo(parent);
+	}*/
 		JOptionPane.showMessageDialog(Login.this,
 				"You ran out of Attempts!",
 				"Try again next time!",
@@ -114,7 +117,7 @@ public boolean checkAccount(String username, String password) {
 				dispose();
 			}
 		});
-
+	//}
 		JPanel bp = new JPanel();
 		bp.add(btnLogin);
 		bp.add(btnCancel);
