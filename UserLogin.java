@@ -10,7 +10,7 @@ public class UserLogin extends Application {//Tiene que estar en application
 		btnLogin.addActionListener(
 				new ActionListener(){
 					public void actionPerformed(ActionEvent e) {
-						Login loginDlg = new LoginDialog(frame);
+						Login loginDlg = new Login(frame);
 						loginDlg.setVisible(true);
 						// if login is successfull
 						if(loginDlg.isSucceeded()){

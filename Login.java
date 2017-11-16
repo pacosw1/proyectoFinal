@@ -13,6 +13,14 @@ public class Login extends JDialog {
 	private JButton btnCancel;
 	private boolean succeeded;
 
+	public boolean authenticate(String username, String password) {
+		// hardcoded username and password
+		if (username.equals("mario") && password.equals("1234")) {
+			return true;
+		}
+		return false;
+	}
+
 	public Login(Frame parent) {
 		super(parent, "Login", true);
 		JPanel panel = new JPanel(new GridBagLayout());
@@ -32,7 +40,7 @@ public class Login extends JDialog {
 		cs.gridwidth = 2;
 		panel.add(tfUsername, cs);
 
-		lbPassword = new JLabel("ContraseÃ±a: ");
+		lbPassword = new JLabel("Password: ");
 		cs.gridx = 0;
 		cs.gridy = 1;
 		cs.gridwidth = 1;
