@@ -16,10 +16,10 @@ class Login extends JDialog {
 
 public boolean checkAccount(String username, String password) {
         if (username.equals("mario") && password.equals("1234")) {
-                checkStatus(0); //manager
+                checkStatus(0); //Manager
                 return true;
         } else if (getUsername().equals("paco") && getPassword().equals("12345")) {
-          			checkStatus(1);//employee
+          			checkStatus(1);//Employee
         }
 				return false;
 
@@ -95,21 +95,7 @@ public String checkStatus(int status){
 				dispose();
 			}
 		});
-		/*if(attempts == 0){//This needs to be a condition to force end
-		JOptionPane.showMessageDialog(Login.this,
-				"Try again next time!",
-				"You ran out of Attempts",
-				JOptionPane.ERROR_MESSAGE);
-		succeeded = false;
 
-		btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-	}*/
 		JPanel bp = new JPanel();
 		bp.add(btnLogin);
 		bp.add(btnCancel);
@@ -131,7 +117,7 @@ public String checkStatus(int status){
 		public String getStatus(){
 			return checkStatus();
 		}
-		public boolean isSucceeded() {//Needs to be implemented
+		public boolean isSucceeded() {
 			return succeeded;
 		}
 }
