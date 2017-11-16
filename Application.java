@@ -12,7 +12,7 @@ public static void main(String[] args) {
         //path3
         SaveToFile f = new SaveToFile();
         Ingredient i = new Ingredient("cofee-beans",2,0.23,"kg");
-        Ingredient i2 = new Ingredient("milk",20,8.23,"Gallon");
+        Ingredient i2 = new Ingredient("milk",1,8.23,"Gallon");
         ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
         ingredients.add(i);
         ingredients.add(i2);

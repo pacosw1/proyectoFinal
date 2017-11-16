@@ -12,48 +12,52 @@
   <link href="autocomplete/dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
   -->
   <script type="text/javascript" src="footable/footable.js"></script>
-  <script type="text/javascript" src="scripts/scripts.js"></script>
-</head>
 
+
+
+</head>
+<h1 id="data" src="data/data.txt">Hello</h1>
 <body>
+  <script type="text/javascript" src="scripts/scripts.js"></script>
   <h1 id="intro">BitCheck</h1>
   <div class="stat-page"></div>
+<<<<<<< HEAD
   <div class="results">
     <!-- fills with top 10 results-->
   </div>
   <div class="charts">
     <!-- Fills with all availiable coins -->
+=======
+  <div class="results">  fills with top 10 results
+  </div>
+  <div class="charts">  Fills with all availiable coins
+>>>>>>> 5f58d1772206c3c2dfef40eac09138e80a21032a
     <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-filtering="true" data-paging-size="50">
       <thead>
         <tr class="rowSelector">
           <h1 id="top100">Top 100</h1>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th>BTC</th>
-          <th>24h Change</th>
-          <th data-breakpoints="xs sm md">1h Change</th>
-          <th data-breakpoints="xs sm md">7d Change</th>
-          <th data-breakpoints="xs sm md">Market Cap</th>
-          <th data-breakpoints="xs sm md">Total Supply</th>
+          <th>Date</th>
+          <th>Payment Type</th>
+          <th>Production Cost</th>
+          <th>Price Sold</th>
+
+
+
+
         </tr>
       </thead>
       <tbody id="table">
       </tbody>
     </table>
   </div>
-  <!-- This is a comment -->
+
   <script id="charts" type="text/x-jquery-tmpl">
-    <tr>
-      <td>${rank}</td>
-      <td>${name} (${symbol})</td>
-      <td class="price">${price_usd}</td>
-      <td>${price_btc}</td>
-      <td class="change">${percent_change_24h}%</td>
-      <td class="change1">${percent_change_1h}%</td>
-      <td class="change7">${percent_change_7d}%</td>
-      <td>$${market_cap_usd}</td>
-      <td>${total_supply} ${symbol}</td>
+    <tr id="tableRow">
+      <td>${date}</td>
+      <td>${Payment}</td>
+      <td>${cost}</td>
+      <td>${total}</td>
+
     </tr>
   </script>
 </body>
