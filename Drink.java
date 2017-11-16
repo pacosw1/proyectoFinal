@@ -57,6 +57,6 @@ public double total() {
 }
 //Displays
 public String toString() {
-        return "Drink [size=" + size + ", recipe=" + recipe + ", name=" + name + ", code=" + code + "]";
+        return name + "   "+"$"+price;
 }
 }
