@@ -1,5 +1,6 @@
 package jdialogdemo;
 import java.awt.*;
+<<<<<<< HEAD
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -12,6 +13,32 @@ public class Login extends JDialog {
 	private JButton btnLogin;
 	private JButton btnCancel;
 	private boolean succeeded;
+=======
+import java.awt.event.ActionEvent;
+public class Login extends Application{
+private int attempts = 2;//2+initial
+private String username;
+private String typedPassword;
+protected int status;
+private JPasswordField password;//Hides password
+
+public Login() {
+        setUsername(username);
+        setTypedPassword(typedPassword);
+        setStatus(status);
+}
+
+public boolean checkAccount() {
+        if (username.equals("mario") && typedPassword.equals("1234")) {
+                status = 0; //manager
+                return true;
+        } else if (username.equals("paco") && typedPassword.equals("12345")) {
+          status = 1; //employee
+        }else {
+                return false;
+        }
+}
+>>>>>>> 5dfe7d25a4ab27c502dc015521d02c782a594e01
 
 	public boolean authenticate(String username, String password) {
 		// hardcoded username and password
