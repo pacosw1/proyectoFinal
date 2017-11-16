@@ -12,18 +12,23 @@ class Login extends JDialog {
 	private JButton btnLogin;
 	private JButton btnCancel;
 	private boolean succeeded;
-	private int attempts = 3;
-	protected int status;
+	private int attempts = 2;
 
 public boolean checkAccount(String username, String password) {
         if (username.equals("mario") && password.equals("1234")) {
-                status = 0; //manager
+                checkStatus(0); //manager
                 return true;
         } else if (getUsername().equals("paco") && getPassword().equals("12345")) {
-          			status = 1; //employee
+          			checkStatus(1);//employee
         }
 				return false;
 
+}
+public String checkStatus(int status){
+				if(status == 0)
+				return "Manager";
+				else
+				return "Employee";
 }
 
 	public Login(Frame parent) {
@@ -69,13 +74,16 @@ public boolean checkAccount(String username, String password) {
 					dispose();
 				} else{
 					JOptionPane.showMessageDialog(Login.this,
-							"Username or Password Incorrect\nAttempts: " + attempts,
+							"Username or Password Incorrect\nAttempts: " + (attempts + 1),
 							"Login",
 							JOptionPane.ERROR_MESSAGE);
 					//Resets username and password
 					tfUsername.setText("");
 					pfPassword.setText("");
-					succeeded = false;
+					if(attempts == 0){
+						succeeded = false;
+						dispose();
+					}
 					attempts--;
 				}
 			}
@@ -83,11 +91,11 @@ public boolean checkAccount(String username, String password) {
 		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {//Force end after 3 attempts
+			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		if(attempts == 0){//This needs to be a condition to force end
+		/*if(attempts == 0){//This needs to be a condition to force end
 		JOptionPane.showMessageDialog(Login.this,
 				"Try again next time!",
 				"You ran out of Attempts",
@@ -101,7 +109,7 @@ public boolean checkAccount(String username, String password) {
 				dispose();
 			}
 		});
-	}
+	}*/
 		JPanel bp = new JPanel();
 		bp.add(btnLogin);
 		bp.add(btnCancel);
@@ -120,7 +128,9 @@ public boolean checkAccount(String username, String password) {
 		public String getPassword() {
 			return new String(pfPassword.getPassword());
 		}
-
+		public String getStatus(){
+			return checkStatus();
+		}
 		public boolean isSucceeded() {//Needs to be implemented
 			return succeeded;
 		}
