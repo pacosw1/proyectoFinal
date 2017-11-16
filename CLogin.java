@@ -2,7 +2,7 @@ import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-public class CLogin extends Application{
+public class CLogin extends Application {
 private int attempts = 2;//2+initial
 private String username;
 private String typedPassword;
@@ -19,8 +19,8 @@ public boolean checkAccount() {
                 setStatus(0); //manager
                 return true;
         } else if (username.equals("paco") && typedPassword.equals("12345")) {
-          setStatus(1); //employee
-          return true;
+                setStatus(1); //employee
+                return true;
         }else {
                 return false;
         }
@@ -38,12 +38,12 @@ public boolean loginAttempts() {//Recursive function to test for login attempts
         if(checkAccount()) {
                 //log in status to true;
                 if (status == 0) {
-                  System.out.println("Logging in as Admin");
-                  return true;
+                        System.out.println("Logging in as Admin");
+                        return true;
                 }
                 else {
-                  System.out.println("Logging in as floor employee");
-                  return true;
+                        System.out.println("Logging in as floor employee");
+                        return true;
                 }
         }
         else if (attempts > 0) {
@@ -57,7 +57,7 @@ public boolean loginAttempts() {//Recursive function to test for login attempts
                 return loginAttempts();
         } else
                 System.out.println("Attempts Depleted, Try Again Later");
-                return false;
+        return false;
 }
 public String toString() {
         return loginAttempts() + "";
@@ -68,38 +68,38 @@ public String username() {
         return username;
 }
 
-	public int getAttempts() {
-		return attempts;
-	}
+public int getAttempts() {
+        return attempts;
+}
 
-	public String getUsername() {
-		return username;
-	}
+public String getUsername() {
+        return username;
+}
 
-	public String getTypedPassword() {
-		return typedPassword;
-	}
+public String getTypedPassword() {
+        return typedPassword;
+}
 
-	public int getStatus() {
-		return status;
-	}
+public int getStatus() {
+        return status;
+}
 
 
-	public void setAttempts(int attempts) {
-		this.attempts = attempts;
-	}
+public void setAttempts(int attempts) {
+        this.attempts = attempts;
+}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+public void setUsername(String username) {
+        this.username = username;
+}
 
-	public void setTypedPassword(String typedPassword) {
-		this.typedPassword = typedPassword;
-	}
+public void setTypedPassword(String typedPassword) {
+        this.typedPassword = typedPassword;
+}
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
+public void setStatus(int status) {
+        this.status = status;
+}
 
 
 
