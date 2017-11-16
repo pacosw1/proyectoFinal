@@ -1,87 +1,103 @@
-import java.io.*;
-import javax.swing.*;
+package jdialogdemo;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-public class Login extends Application{
-private int attempts = 2;//2+initial
-private String username;
-private String typedPassword;
-protected boolean status;
-private JPasswordField password;//Hides password
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
 
-public Login() {
-        setUsername(username);
-        setTypedPassword(typedPassword);
-        setStatus(status);
-}
+public class Login extends JDialog {
+	private JTextField tfUsername;
+	private JPasswordField pfPassword;
+	private JLabel lbUsername;
+	private JLabel lbPassword;
+	private JButton btnLogin;
+	private JButton btnCancel;
+	private boolean succeeded;
 
-public boolean checkAccount() {
-        if (username.equals("mario") && typedPassword.equals("1234")) {
-                return true;
-        } else {
-                return false;
-        }
-}
+	public Login(Frame parent) {
+		super(parent, "Login", true);
+		JPanel panel = new JPanel(new GridBagLayout());
+		GridBagConstraints cs = new GridBagConstraints();
 
-public String stringPassword(char[] pass) {
-        String t = "";
-        for (int i = 0; i<pass.length; i++) {
-                t+= pass[i];
-        }
-        return t;
-}
-//char[] password = console.readPassword("Enter password");
-//Arrays.fill(password, ' ');
-public String loginAttempts() {//Recursive function to test for login attempts
-  password = new JPasswordField(30);
-  password.setBounds(280, 240, 90, 20);
-  password.setEchoChar('*');
-  password.setBackground(Color.white);
-  setUsername(Lectura.readString("Attempts: " + (attempts+1) + "\nusername:"));//Inputs Username
-  password.addActionListener(ActionListener(actionPerformed(ActionEvent)));//Hides input
+		cs.fill = GridBagConstraints.HORIZONTAL;
 
-        if(checkAccount()) {
-                setStatus(true); //log in status to true;
-                return "Success!";
-        }
-        else if (attempts > 0) {
-                //Displays error tab
-                JOptionPane.showMessageDialog(null, "Incorrect Password", "Enter password again", JOptionPane.ERROR_MESSAGE);
-                System.out.println("Attempts: " + (attempts));
-                //char[] password = console.readPassword("Enter password");
-                setUsername(Lectura.readString("Username"));
-                password.addActionListener(new ActionListener(){//Hides input
-                  public void actionPerformed(ActionEvent e){//Inputs and checks Password
-                  password = (JPasswordField) e.getSource(setTypedPassword(Lectura.readString("Password")));
-                  }
-                });
-                checkAccount();
-                attempts--;
-                return loginAttempts();
-        } else
-                return "Attempts Depleted, Try Again Later";
-}
-public void actionPerformed(ActionEvent e){//Inputs and checks Password
-    password = (JPasswordField) e.getSource(setTypedPassword(Lectura.readString("password")));
-    }
-public String toString() {
-        return loginAttempts();
-}
+		lbUsername = new JLabel("Usuario: ");
+		cs.gridx = 0;
+		cs.gridy = 0;
+		cs.gridwidth = 1;
+		panel.add(lbUsername, cs);
 
-public void setUsername(String username) {
-        this.username = username;
-}
-public void setStatus(boolean status) {
-        this.status = status;
-}
-public void setTypedPassword(String typedPassword) {
-        this.typedPassword = typedPassword;
-}/*
-public String username() {
-        return username;
-}
-public String password() {
-        return password;
-}
-^Sets?*/
+		tfUsername = new JTextField(20);
+		cs.gridx = 1;
+		cs.gridy = 0;
+		cs.gridwidth = 2;
+		panel.add(tfUsername, cs);
+
+		lbPassword = new JLabel("ContraseÃ±a: ");
+		cs.gridx = 0;
+		cs.gridy = 1;
+		cs.gridwidth = 1;
+		panel.add(lbPassword, cs);
+
+		pfPassword = new JPasswordField(20);
+		cs.gridx = 1;
+		cs.gridy = 1;
+		cs.gridwidth = 2;
+		panel.add(pfPassword, cs);
+		panel.setBorder(new LineBorder(Color.GRAY));
+
+		btnLogin = new JButton("Login");
+
+		btnLogin.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				if (TrueInput.authenticate(getUsername(), getPassword())) {//Checks input
+					JOptionPane.showMessageDialog(LoginDialog.this,
+							"Hello " + getUsername() + "! Welcome!",
+							"Login",
+							JOptionPane.INFORMATION_MESSAGE);
+					succeeded = true;
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(LoginDialog.this,
+							"Password or Username is incorrect",
+							"Login",
+							JOptionPane.ERROR_MESSAGE);
+					// reset username and password
+					tfUsername.setText("");
+					pfPassword.setText("");
+					succeeded = false;
+
+				}
+			}
+		});
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		JPanel bp = new JPanel();
+		bp.add(btnLogin);
+		bp.add(btnCancel);
+
+		getContentPane().add(panel, BorderLayout.CENTER);
+		getContentPane().add(bp, BorderLayout.PAGE_END);
+
+		pack();
+		setResizable(false);
+		setLocationRelativeTo(parent);
+	}
+
+	public String getUsername() {
+		return tfUsername.getText().trim();
+	}
+
+	public String getPassword() {
+		return new String(pfPassword.getPassword());
+	}
+
+	public boolean isSucceeded() {
+		return succeeded;
+	}
 }
