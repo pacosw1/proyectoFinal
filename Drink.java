@@ -2,12 +2,14 @@ class Drink extends Product {
 protected String size;
 protected Recipe recipe;
 protected String name;
+protected String temp;
 //Construct
-public Drink(double price,String code, String name,String size, Recipe recipe, int quantity) {
+public Drink(double price,String code, String name,String size, Recipe recipe, int quantity, String temp) {
         super(price,code,quantity);
         setSize(size);
         setRecipe(recipe);
         setName(name);
+        this.temp = temp;
 }
 //Set
 public void setSize(String size) {
