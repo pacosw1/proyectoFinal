@@ -8,7 +8,7 @@ public class UserLogin extends Application {//Tiene que estar en application
 		final JButton btnLogin = new JButton("Click here to start session");
 
 		btnLogin.addActionListener(
-				new ActionListener(){
+				new ActionListener(){//Starts Event
 					public void actionPerformed(ActionEvent e) {
 						Login loginDlg = new Login(frame);
 						loginDlg.setVisible(true);

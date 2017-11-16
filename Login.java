@@ -14,9 +14,6 @@ class Login extends JDialog {
 	private boolean succeeded;
 	private int attempts = 3;
 	protected int status;
-	/*private String username;
-	private String typedPassword;
-	private JPasswordField password;//Hides password*/
 
 public boolean checkAccount(String username, String password) {
         if (username.equals("mario") && password.equals("1234")) {
@@ -35,26 +32,25 @@ public boolean checkAccount(String username, String password) {
 		GridBagConstraints cs = new GridBagConstraints();
 
 		cs.fill = GridBagConstraints.HORIZONTAL;
-		do{
-		lbUsername = new JLabel("User: ");
+		lbUsername = new JLabel("User: ");//User Label
 		cs.gridx = 0;
 		cs.gridy = 0;
 		cs.gridwidth = 1;
 		panel.add(lbUsername, cs);
 
-		tfUsername = new JTextField(20);
+		tfUsername = new JTextField(20);//User Text Field
 		cs.gridx = 1;
 		cs.gridy = 0;
 		cs.gridwidth = 2;
 		panel.add(tfUsername, cs);
 
-		lbPassword = new JLabel("Password: ");
+		lbPassword = new JLabel("Password: ");//Password Label
 		cs.gridx = 0;
 		cs.gridy = 1;
 		cs.gridwidth = 1;
 		panel.add(lbPassword, cs);
 
-		pfPassword = new JPasswordField(20);
+		pfPassword = new JPasswordField(20);//Password Text Field
 		cs.gridx = 1;
 		cs.gridy = 1;
 		cs.gridwidth = 2;
@@ -62,9 +58,9 @@ public boolean checkAccount(String username, String password) {
 		panel.setBorder(new LineBorder(Color.GRAY));
 
 		btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (checkAccount(getUsername(), getPassword())){//Checks input
+		btnLogin.addActionListener(new ActionListener() {//Starts event
+			public void actionPerformed(ActionEvent e) {//Obtains input
+				if (checkAccount(getUsername(), getPassword())){//Verifies input
 					JOptionPane.showMessageDialog(Login.this,
 							"Hello " + getUsername() + "! Welcome!",
 							"Login",
@@ -76,34 +72,25 @@ public boolean checkAccount(String username, String password) {
 							"Username or Password Incorrect\nAttempts: " + attempts,
 							"Login",
 							JOptionPane.ERROR_MESSAGE);
-					// reset username and password
-					attempts--;
+					//Resets username and password
 					tfUsername.setText("");
 					pfPassword.setText("");
 					succeeded = false;
-
+					attempts--;
 				}
 			}
 		});
 		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {//Force end after 3 attempts
 				dispose();
 			}
 		});
-
-		JPanel bp = new JPanel();
-		bp.add(btnLogin);
-		bp.add(btnCancel);
-
-		getContentPane().add(panel, BorderLayout.CENTER);
-		getContentPane().add(bp, BorderLayout.PAGE_END);
-		}while(attempts > 0);
-
+		if(attempts == 0){//This needs to be a condition to force end
 		JOptionPane.showMessageDialog(Login.this,
-				"You ran out of Attempts!",
 				"Try again next time!",
+				"You ran out of Attempts",
 				JOptionPane.ERROR_MESSAGE);
 		succeeded = false;
 
@@ -114,7 +101,7 @@ public boolean checkAccount(String username, String password) {
 				dispose();
 			}
 		});
-
+	}
 		JPanel bp = new JPanel();
 		bp.add(btnLogin);
 		bp.add(btnCancel);
@@ -134,7 +121,7 @@ public boolean checkAccount(String username, String password) {
 			return new String(pfPassword.getPassword());
 		}
 
-		public boolean isSucceeded() {
+		public boolean isSucceeded() {//Needs to be implemented
 			return succeeded;
 		}
 }
