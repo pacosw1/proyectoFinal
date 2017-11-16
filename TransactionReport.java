@@ -1,55 +1,76 @@
-class TransactionReport extends Report {
+import java.lang.reflect.Field;
+import java.io.*;
+import java.util.*;
+ class TransactionReport extends Report {
 
 private double totalCost;
 private double totalPrice;
-private double highestTransaction = 0.0;
+private String bestProduct;
 private double profit;
 private double losses;
 private double profitMargin;
-public TransactionReport(CurrentDate date, String title, SaveToFile save, String fileName) {
-        super(date, title, fileName,save);
+public TransactionReport(CurrentDate date, String title, Json save, SaveToFile f, String path) {
+        super(date, title, save, f, path);
 }
 
 
-public String[] names() {
+public void saveReport() {
+  save.saveReport(names(),values(),path);
+}
+
+public ArrayList<String> names() {
+        ArrayList<String> name = new ArrayList<String>();
         Field[] f = TransactionReport.class.getDeclaredFields();
-        String[] name = new String[f.length];
         for (int i = 0; i < f.length; i++) {
-                name[i] = (String)f[i].getName();
+                name.add((String)f[i].getName());
         }
-} //abstract class
+        return name;
+}
+@Override
+public String toString() {
+  losses(); bestProduct(); totals(); profits();
+  path += "TransactionReport" +reportCount +".dat";
+  saveReport();
+  reportCount++;
+
+  return "TransactionReport [totalCost=" + totalCost + ", totalPrice=" + totalPrice  + ", profit=" + profit + ", bestProduct=" + bestProduct + ", losses=" + losses + ", profitMargin=" + profitMargin + "]";
+}
+
+
+
 public ArrayList<String> values() {
-        ArrayList<String> n = new ArrayString<String>();
+        ArrayList<String> n = new ArrayList<String>();
         n.add(String.valueOf(totalCost));
         n.add(String.valueOf(totalPrice));
-        n.add(String.valueOf(highestTransaction));
+        n.add(String.valueOf(bestProduct));
         n.add(String.valueOf(profit));
         n.add(String.valueOf(losses));
         n.add(String.valueOf(profitMargin));
         return n;
 }
 
-public double bestProduct() {
-        double best = 0.0; String name = ""; double profit = 0.0; //var declaration
-        for (int i = 0; i < data().size(); i++) { //transaction array
-                ArrayList<Product> curr = data.get(i).getProduct(); //product array
-                for (int j = 0; k < curr.size(); j++) {
+public void bestProduct() {
+  ArrayList<Transaction> data = data();
+        double best = 0.0; double profit = 0.0; //var declaration
+        for (int i = 0; i < data.size(); i++) { //transaction array
+                ArrayList<Product> curr = data.get(i).getProducts(); //product array
+                for (int j = 0; j < curr.size(); j++) {
                         Drink product = (Drink)curr.get(j);
                         profit = product.total() - product.cost();
                         if (profit > best) { //checks for highest profit of all products (saves name and profit)
-                                best = profit;
-                                name = product.getName();
+                                bestProduct = product.getName();
                         }
                 }
         }
 }
-public void data() {
-        data = data.readTransactions("C:\\Users\\paco\\Desktop\\transactions.dat"); //returns data from .dat file as arraylist
+public ArrayList<Transaction> data() {
+      return f.readTransactions("C:\\Users\\paco\\Desktop\\transactions.dat"); //returns data from .dat file as arraylist
 }
-public double losses() {
-        for (int i = 0; i < data().size(); i++) {
-                ArrayList<Product> curr = data.get(i).getProduct();
-                for (int j = 0; k < curr.size(); j++) {
+public void losses() {
+  ArrayList<Transaction> data = data();
+        for (int i = 0; i < data.size(); i++) {
+                ArrayList<Product> curr = data.get(i).getProducts();
+                for (int j = 0; j < curr.size(); j++) {
                         Drink product = (Drink)curr.get(j);
                         if (product.total() - product.cost() < 0) //checks if there are any losses in products.
                                 losses+= Math.abs(product.total() - product.cost());
@@ -57,6 +78,7 @@ public double losses() {
         }
 }
 public void totals() {
+        ArrayList<Transaction> data = data();
         double cost = 0.0; double price = 0.0;
         for (int i = 0; i < data.size(); i++) {
                 totalCost += data.get(i).cost(); //totals per transactions. Declared in transaction class
@@ -65,7 +87,9 @@ public void totals() {
 }
 public void profits() {
         profit = (totalPrice - totalCost);
-        profitMargin =  (totalPrice - totalCost) / totalCost;
+        profitMargin =  ((totalPrice - totalCost) / totalCost) *100;
 }
+
+
 
 }

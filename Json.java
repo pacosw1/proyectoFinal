@@ -11,11 +11,10 @@ import org.json.simple.parser.ParseException;
 import java.util.*;
 class Json {
 private String path;
-public Json(String path) {
-        this.path = path;
+public Json() {
 }
-String names = "pacos";
-public JSONArray getData() {
+
+public JSONArray getData(String path) {
         JSONParser parser = new JSONParser(); //used to turn JSON to string
         JSONArray array = new JSONArray();
         FileReader file = null;
@@ -33,14 +32,13 @@ public JSONArray getData() {
         return array;
 }
 //Puedes ver UserLogin?
-public void saveReport(String[] names, String[] values, Report report) {
-        JSONArray data = getData();
+public void saveReport(ArrayList<String> names, ArrayList<String> values, String path) {
+        JSONArray data = getData(path);
         FileWriter file = null;
-        for (int i = 0; i < names.length; i++) {
+        for (int i = 0; i < names.size(); i++) {
                 JSONObject tran = new JSONObject(); //new object to add
-                tran.put(names[i],"");
-
-
+                tran.put(names.get(i),values.get(i));
+                data.add(tran);
         }
 
         try { //write updated array to file
@@ -54,8 +52,10 @@ public void saveReport(String[] names, String[] values, Report report) {
 }
 
 
-public void addTransaction(ArrayList<Transaction> transaction) {   //adds object to array and saves it to file
-        JSONArray data = getData();
+public void addTransaction(ArrayList<Transaction> transaction, String path) {
+        //adds object to array and saves it to file
+        if (getData(path)!= null) {}
+        JSONArray data = getData(path);
         FileWriter file = null;
 
         JSONArray productsObj = new JSONArray();
@@ -98,14 +98,6 @@ public void addTransaction(ArrayList<Transaction> transaction) {   //adds object
                 data.add(tran);
         }
 
-        /*
-           product.put("size",size);
-           product.put("price",price);
-           product.put("total",Double.valueOf(price)*Double.valueOf(quantity));
-           product.put("timestamp", timestamp);
-           product.put("payment-type","cash");
-         */
-        //add object to array
         try { //write updated array to file
                 file = new FileWriter(path);
                 file.write(data.toJSONString());
@@ -115,6 +107,4 @@ public void addTransaction(ArrayList<Transaction> transaction) {   //adds object
         catch (IOException e) {e.printStackTrace();}
         //finally{}
 }
-
-
 }

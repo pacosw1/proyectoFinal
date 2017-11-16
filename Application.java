@@ -5,8 +5,8 @@ public static void main(String[] args) {
         //System.out.println("Login:");
         //Login toby = new Login();
         CurrentDate curr = new CurrentDate();
-        Json save = new Json("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\data.json");
-        
+        Json save = new Json();
+        String jPath = "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\data.json";
         String path = "C:\\Users\\paco\\Desktop\\ingredients.dat";
         String path2 = "C:\\Users\\paco\\Desktop\\transactions.dat";
         //path3
@@ -27,7 +27,7 @@ public static void main(String[] args) {
         Transaction tran = new Transaction("cash",pro,curr);
         ArrayList<Transaction> trans =  new ArrayList<Transaction>();
         trans.add(tran);
-        save.addTransaction(trans);
+        save.addTransaction(trans,jPath);
         f.saveTransaction(trans,path2);
         //Ingredient gg = new Ingredient("vodka",99,50.52,"1L");
         f.saveIngredient(ingredients,path);
@@ -42,7 +42,7 @@ public static void main(String[] args) {
         double margin = (ch.getPrice() - ch.cost()) / (ch.cost()) * 100;
         System.out.println("Name " + ch.getName() + " Recipe cost: "+ ch.cost() + " Price: "+ ch.getPrice() + "profit Margin: "+margin+"%");
         System.out.println(tran);
-
-        //System.out.println(toby);
+         TransactionReport report = new TransactionReport(curr,"test",save,f,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
+        System.out.println(report);
 }
 }
