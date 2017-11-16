@@ -62,9 +62,7 @@ public boolean checkAccount(String username, String password) {
 		panel.setBorder(new LineBorder(Color.GRAY));
 
 		btnLogin = new JButton("Login");
-
 		btnLogin.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
 				if (checkAccount(getUsername(), getPassword())){//Checks input
 					JOptionPane.showMessageDialog(Login.this,
@@ -73,16 +71,24 @@ public boolean checkAccount(String username, String password) {
 							JOptionPane.INFORMATION_MESSAGE);
 					succeeded = true;
 					dispose();
-				} else {
+				} else if(attempts > 0){
 					JOptionPane.showMessageDialog(Login.this,
-							"Password or Username is incorrect",
+							"Username or Password Incorrect\nAttempts: " + attempts,
 							"Login",
 							JOptionPane.ERROR_MESSAGE);
 					// reset username and password
+					attempts--;
 					tfUsername.setText("");
 					pfPassword.setText("");
 					succeeded = false;
 
+				}
+				else{
+					JOptionPane.showMessageDialog(Login.this,
+							"You ran out of Attempts!",
+                     "Try again next time!",
+							JOptionPane.ERROR_MESSAGE);
+					succeeded = false;
 				}
 			}
 		});
