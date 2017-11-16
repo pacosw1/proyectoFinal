@@ -3,11 +3,11 @@ import java.util.*;
 class Transaction implements Serializable {
 private double total;
 private String payment;
-private ArrayList<Product> product;
+private ArrayList<Drink> product;
 private CurrentDate datetime;
 //private Database data;
 
-public Transaction(String payment, ArrayList<Product> product, CurrentDate datetime) {
+public Transaction(String payment, ArrayList<Drink> product, CurrentDate datetime) {
 
         this.payment = payment;
         this.product = product;
@@ -46,7 +46,7 @@ public String getPayment() {
         return payment;
 }
 
-public ArrayList<Product> getProducts() {
+public ArrayList<Drink> getProducts() {
         return product;
 }
 
@@ -62,7 +62,7 @@ public void setPayment(String payment) {
         this.payment = payment;
 }
 
-public void setProduct(ArrayList<Product> product) {
+public void setProduct(ArrayList<Drink> product) {
         this.product = product;
 }
 
