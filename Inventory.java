@@ -92,7 +92,7 @@ public void saveIngredient(ArrayList<Ingredient>ingredients, String path) {     
 }
 public void updateInventory(ArrayList<Ingredient>ingredients, String path) {     //saves ingredient object to .dat file.
 
-       //uses the read method tu get all saved objects from the file.
+        //uses the read method tu get all saved objects from the file.
 
         FileOutputStream f1 = null;
         ObjectOutputStream f2=null;

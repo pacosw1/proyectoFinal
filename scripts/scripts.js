@@ -2,21 +2,8 @@ $(document).ready(function() {
   $(".stat-page").hide();
 
 
-  $.getJSON( "data/data.json", function( data ) {
-    var totalCost = 0;
-    var totalPrice = 0;
-    for (var i = 0;i< data.length;i++) {
-        var curr = data[i]
-      console.log(curr);
-      for (var j = 0; j < curr['Products'].length;j++) {
-        var current = curr["Products"][j];
-        var name = current["name"];
-        var price = current["price"];
-        var quantity = current["quantity"];
-        totalCost += current["cost"];
-      }
-    }
-  console.log(totalPrice - totalCost);
+  $.getJSON( "data/TransactionReport.json", function( data ) {
+
 
     $("#charts").tmpl(data)  //same but for top 100 chart
         .appendTo("#table");

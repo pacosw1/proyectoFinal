@@ -16,34 +16,100 @@
 
 
 </head>
-<h1 id="data" src="data/data.txt">Hello</h1>
+
+
 <body>
   <script type="text/javascript" src="scripts/scripts.js"></script>
-  <h1 id="intro">BitCheck</h1>
-  <div class="stat-page"></div>
-<<<<<<< HEAD
-  <div class="results">
-    <!-- fills with top 10 results-->
+
+
+  <!-- Fills with all availiable coins -->
+
+
+
+  <div class="charts">
+    <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+      <thead>
+        <h1>Reporte de Costo / Utilidad</h1>
+        <tr class="rowSelector">
+
+          <th>Total Vendido</th>
+          <th>Costos Totales</th>
+          <th>Utilidad</th>
+          <th>Bebida con Mayor Margen</th>
+          <th>Margen de Ganancias</th>
+          <th>Perdidas</th>
+        </tr>
+      </thead>
+      <tbody id="table">
+      </tbody>
+    </table>
   </div>
   <div class="charts">
-    <!-- Fills with all availiable coins -->
-=======
-  <div class="results">  fills with top 10 results
-  </div>
-  <div class="charts">  Fills with all availiable coins
->>>>>>> 5f58d1772206c3c2dfef40eac09138e80a21032a
-    <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-filtering="true" data-paging-size="50">
+    <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
       <thead>
+        <h1>Reporte de Horario</h1>
         <tr class="rowSelector">
-          <h1 id="top100">Top 100</h1>
-          <th>Date</th>
-          <th>Payment Type</th>
-          <th>Production Cost</th>
-          <th>Price Sold</th>
 
+          <th>Total Vendido</th>
+          <th>Costos Totales</th>
+          <th>Utilidad</th>
+          <th>Bebida con Mayor Margen</th>
+          <th>Margen de Ganancias</th>
+          <th>Perdidas</th>
+        </tr>
+      </thead>
+      <tbody id="table">
+      </tbody>
+    </table>
+  </div>
+  <div class="charts">
+    <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+      <thead>
+        <h1>Ventas Proyectadas</h1>
+        <tr class="rowSelector">
 
+          <th>Total Vendido</th>
+          <th>Costos Totales</th>
+          <th>Utilidad</th>
+          <th>Bebida con Mayor Margen</th>
+          <th>Margen de Ganancias</th>
+          <th>Perdidas</th>
+        </tr>
+      </thead>
+      <tbody id="table">
+      </tbody>
+    </table>
+  </div>
+  <div class="charts">
+    <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+      <thead>
+        <h1>Reporte de Costo / Utilidad</h1>
+        <tr class="rowSelector">
 
+          <th>Total Vendido</th>
+          <th>Costos Totales</th>
+          <th>Utilidad</th>
+          <th>Bebida con Mayor Margen</th>
+          <th>Margen de Ganancias</th>
+          <th>Perdidas</th>
+        </tr>
+      </thead>
+      <tbody id="table">
+      </tbody>
+    </table>
+  </div>
+  <div class="charts">
+    <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+      <thead>
+        <h1>Reporte de Costo / Utilidad</h1>
+        <tr class="rowSelector">
 
+          <th>Total Vendido</th>
+          <th>Costos Totales</th>
+          <th>Utilidad</th>
+          <th>Bebida con Mayor Margen</th>
+          <th>Margen de Ganancias</th>
+          <th>Perdidas</th>
         </tr>
       </thead>
       <tbody id="table">
@@ -52,13 +118,18 @@
   </div>
 
   <script id="charts" type="text/x-jquery-tmpl">
-    <tr id="tableRow">
-      <td>${date}</td>
-      <td>${Payment}</td>
-      <td>${cost}</td>
-      <td>${total}</td>
 
+
+    <tr id="tableRow">
+      <td>${totalPrice}</td>
+      <td>${totalCost}</td>
+      <td>${profit}</td>
+      <td>${bestProduct}</td>
+      <td>${profitMargin}%</td>
+
+      <td>${losses}</td>
     </tr>
+
   </script>
 </body>
 
