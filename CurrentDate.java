@@ -20,7 +20,7 @@ private int min = now.getMinute();
 private int sec = now.getSecond();
 
 public String toString() {
-        return hour + ":"+min+":"+sec+" | "+ day + "/" + month + "/" + year;
+        return hour + ":"+min+":"+sec+" | "+ day + "." + month + "." + year;
 }
 
 public int getYear() {

@@ -1,16 +1,13 @@
 <html>
 
 <head>
-  <title>BitCheck</title>
+  <title>Reportes</title>
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <link rel="stylesheet" type="text/css" href="footable/footable.bootstrap.css">
   <link rel="stylesheet" href="images/webfont/cryptocoins.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
-  <!-- under dev
-  <script src="autocomplete/dist/jquery.easy-autocomplete.min.js" type="text/javascript"></script>
-  <link href="autocomplete/dist/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
-  -->
+
   <script type="text/javascript" src="footable/footable.js"></script>
 
 
@@ -22,14 +19,14 @@
   <script type="text/javascript" src="scripts/scripts.js"></script>
 
 
-  <!-- Fills with all availiable coins -->
+
 
 
 
   <div class="charts">
     <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
       <thead>
-        <h1>Reporte de Costo / Utilidad</h1>
+        <h1 id="1">Reporte de Costo / Utilidad</h1>
         <tr class="rowSelector">
 
           <th>Total Vendido</th>
@@ -38,6 +35,7 @@
           <th>Bebida con Mayor Margen</th>
           <th>Margen de Ganancias</th>
           <th>Perdidas</th>
+          <th>Fecha</th>
         </tr>
       </thead>
       <tbody id="table">
@@ -47,77 +45,65 @@
   <div class="charts">
     <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
       <thead>
-        <h1>Reporte de Horario</h1>
+        <h1 id="2">Reportes de Horario</h1>
         <tr class="rowSelector">
 
-          <th>Total Vendido</th>
-          <th>Costos Totales</th>
-          <th>Utilidad</th>
-          <th>Bebida con Mayor Margen</th>
-          <th>Margen de Ganancias</th>
-          <th>Perdidas</th>
+          <th>Horario mas Ocupado</th>
+          <th>Hora de Mayor Trafico</th>
+          <th>Fecha</th>
+
         </tr>
       </thead>
-      <tbody id="table">
+      <tbody id="table1">
       </tbody>
     </table>
   </div>
   <div class="charts">
     <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
       <thead>
-        <h1>Ventas Proyectadas</h1>
+        <h1 id="3">Reportes de Reorden</h1>
         <tr class="rowSelector">
 
-          <th>Total Vendido</th>
-          <th>Costos Totales</th>
-          <th>Utilidad</th>
-          <th>Bebida con Mayor Margen</th>
-          <th>Margen de Ganancias</th>
-          <th>Perdidas</th>
+          <th>Ingredientes a Reordenar</th>
+          <th>Fecha</th>
+
+
         </tr>
       </thead>
-      <tbody id="table">
+      <tbody id="table2">
       </tbody>
     </table>
   </div>
   <div class="charts">
     <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
       <thead>
-        <h1>Reporte de Costo / Utilidad</h1>
+        <h1 id="3">Ventas por %</h1>
         <tr class="rowSelector">
 
-          <th>Total Vendido</th>
-          <th>Costos Totales</th>
-          <th>Utilidad</th>
-          <th>Bebida con Mayor Margen</th>
-          <th>Margen de Ganancias</th>
-          <th>Perdidas</th>
-        </tr>
-      </thead>
-      <tbody id="table">
-      </tbody>
-    </table>
-  </div>
-  <div class="charts">
-    <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
-      <thead>
-        <h1>Reporte de Costo / Utilidad</h1>
-        <tr class="rowSelector">
+          <th>Fecha</th>
+          <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+            <thead>
+              <h1 id="3">Productos</h1>
+              <tr class="rowSelector">
 
-          <th>Total Vendido</th>
-          <th>Costos Totales</th>
-          <th>Utilidad</th>
-          <th>Bebida con Mayor Margen</th>
-          <th>Margen de Ganancias</th>
-          <th>Perdidas</th>
+                <th>Bebida</th>
+                <th>%</th>
+
+              </tr>
+            </thead>
+            <tbody id="percentTable">
+            </tbody>
+          </table>
+
         </tr>
       </thead>
-      <tbody id="table">
+      <tbody id="table2">
       </tbody>
     </table>
   </div>
 
-  <script id="charts" type="text/x-jquery-tmpl">
+
+  <script id="trans" type="text/x-jquery-tmpl">
 
 
     <tr id="tableRow">
@@ -126,8 +112,30 @@
       <td>${profit}</td>
       <td>${bestProduct}</td>
       <td>${profitMargin}%</td>
-
       <td>${losses}</td>
+      <td>${date}</td>
+    </tr>
+
+  </script>
+  <script id="times" type="text/x-jquery-tmpl">
+
+
+    <tr id="tableRow">
+      <td>${bestRange}</td>
+      <td>${popularHour}</td>
+      <td>${date}</td>
+
+    </tr>
+
+  </script>
+  <script id="inventory" type="text/x-jquery-tmpl">
+
+
+    <tr id="tableRow">
+      <td>${reorder}</td>
+      <td>${date}</td>
+
+
     </tr>
 
   </script>
