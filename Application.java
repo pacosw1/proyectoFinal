@@ -176,18 +176,20 @@ public static void createIngredient() {
 }
 public static void createDrink() {
         boolean end = true;
+        String items[] = {"Cafe, te y otros","Chocolate"};
         ArrayList<Drink> added = new ArrayList<Drink>();
         do {
-                System.out.println("Crear Bebida: ");
-                String name = Lectura.readString("Name");
-                double price = Lectura.readDouble("Price:");
-                System.out.println("Crear receta");
-                Recipe recipe = createRecipe();
-                String size = "";
-                String code = Lectura.readString("Codigo de barras");
-                int quantity = 0;
-                String temp = "";
-                added.add(new Drink(price,code,name,size,recipe,quantity,temp));
+                for (int i = 0; i < items.length; i++) {
+                        System.out.println((i+1) + ". "+items[i]);
+                }
+                int choice = choice(items.length,"Escoge una opcion de la lista");
+                switch (choice-1) {
+                case 1:
+                        added.add(createAll());
+                        break;
+                case 2:
+                        added.add(createChocolate());
+                }
 
                 if (choose("Desea crear otra bebida?"))
                         end = true;
@@ -196,4 +198,37 @@ public static void createDrink() {
         } while(end == true);
         saveDrink(added);
 }
+public static Chocolate createChocolate() {
+        System.out.println("Crear Bebida: ");
+        String name = Lectura.readString("Name");
+        double price = Lectura.readDouble("Price:");
+        System.out.println("Crear receta");
+        Recipe recipe = createRecipe();
+        String size = "";
+        String code = Lectura.readString("Codigo de barras");
+        int quantity = 0;
+        String temp = "";
+        String items[] = {"Chocolate","Vanilla"};
+        for (int i = 0; i < items.length; i++) {
+                System.out.println((i+1) + ". "+items[i]);
+        }
+        int choice = choice(items.length,"Escoge una opcion de la lista");
+        String type = items[choice-1];
+        return new Chocolate(price,code,name,size,recipe,quantity,temp,type);
+
+}
+public static Drink createAll() {
+        System.out.println("Crear Bebida: ");
+        String name = Lectura.readString("Name");
+        double price = Lectura.readDouble("Price:");
+        System.out.println("Crear receta");
+        Recipe recipe = createRecipe();
+        String size = "";
+        String code = Lectura.readString("Codigo de barras");
+        int quantity = 0;
+        String temp = "";
+        return new Drink(price,code,name,size,recipe,quantity,temp);
+
+}
+
 }
