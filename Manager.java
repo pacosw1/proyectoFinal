@@ -55,21 +55,6 @@ public int getClients(){
 public Employee[] getToby(){
         return toby;
 }
-//Methods
-public double employeeMonth(){//Object Array Employee
-        double highest = 0;
-        byte skip = 0;//Determines if the first if has been executed
-        double x = toby[0].getTotalHours();//Obtains the first's Employee hours
-        for(int i = 1; i < numberEmployees; i++) {
-                if(toby[i].getTotalHours() < x && skip = 0) {
-                        highest = toby[i].getTotalHours();
-                        skip = 1;
-                }
-                else if(highest < toby[i].getTotalHours())
-                        highest = toby[i].getTotalHours();
-        }
-        return highest;
-}
 //Method: Access Reports!!!
 //Display
 public String toString(){

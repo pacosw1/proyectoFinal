@@ -61,14 +61,16 @@ class Employee {//On main ask Hours worked per employee
    }
 }
  */
-protected double totalPayment;
+/*protected double totalPayment;
 protected double totalHours;
 protected String name;
 protected String suggestionEmployee;
 protected int numberEmployees;
 protected String[] suggestionClients;
 protected int clients;
-protected double[] payment;
+protected double[] payment;*/
+private double hoursWorkedDaily;
+private
 //Construct
 public Employee(double totalPayment, double totalHours, String name, int numberEmployees, String suggestionEmployee, String[] suggestionClients, int clients, double[] payment){
         setTotalPayment(totalPayment);
@@ -134,6 +136,21 @@ public double[] getPayment(){
 public String employeeReport(){
         return "\nTotal Payment : " + totalPayment + "\nTotal hours worked: " + totalHours + "\nEmployee suggestion: " + suggestionEmployee;
 }
+/*
+public double employeeMonth(){//Object Array Employee
+        double highest = 0;
+        byte skip = 0;//Determines if the first if has been executed
+        double x = toby[0].getTotalHours();//Obtains the first's Employee hours
+        for(int i = 1; i < numberEmployees; i++) {
+                if(toby[i].getTotalHours() < x && skip = 0) {
+                        highest = toby[i].getTotalHours();
+                        skip = 1;
+                }
+                else if(highest < toby[i].getTotalHours())
+                        highest = toby[i].getTotalHours();
+        }
+        return highest;
+}*/
 //Display
 public String toString(){
 String day = " ";

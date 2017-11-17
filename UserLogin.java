@@ -29,5 +29,14 @@ public class UserLogin extends Application {//Tiene que estar en application
 		frame.setLayout(new FlowLayout());
 		frame.getContentPane().add(btnLogin);
 		frame.setVisible(true);
+
+		if(loginDlg.getStatus() == 0) {
+						//admin actions (access reports etc...)
+						managerOptions();
+						TransactionReport report = new TransactionReport(new CurrentDate(),"test","C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
+						System.out.println(report);
+		} else {
+
+		}
 	}
 }

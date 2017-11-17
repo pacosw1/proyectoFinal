@@ -115,7 +115,7 @@ public String checkStatus(int status){
 			return new String(pfPassword.getPassword());
 		}
 		public String getStatus(){
-			return checkStatus();
+			return checkStatus(9);
 		}
 		public boolean isSucceeded() {
 			return succeeded;

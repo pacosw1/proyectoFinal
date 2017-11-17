@@ -1,7 +1,6 @@
 import java.io.*;
 /*
-class PrincipalSalesProyections{
-  public static void main(String[] args){
+public static void main(String[] args){
      double[] currentSales = new double[4];
      double[] predefinedSales = new double[4];
      byte more = 0;
@@ -18,7 +17,7 @@ class PrincipalSalesProyections{
                      double predefinedCoffeeSales = Lectura.readDouble();
                      predefinedCoffeeSales *= 24;//Cafe.total();
                      coffeSalesArray[i][x] = predefinedCoffeeSales;
-                     predefinedSales[i] = coffeSalesArray[i][x];
+                     predefinedSales[i] += coffeSalesArray[i][x];
                      totalSales += predefinedSales[i];
                   }
                   break;
@@ -30,7 +29,7 @@ class PrincipalSalesProyections{
                      double predefinedChocolateSales = Lectura.readDouble();
                      predefinedChocolateSales *= 24;//Chocolate.total();
                      chocolateSalesArray[i][x] = predefinedChocolateSales;
-                     predefinedSales[i] = chocolateSalesArray[i][x];
+                     predefinedSales[i] += chocolateSalesArray[i][x];
                      totalSales += predefinedSales[i];
                   }
                   break;
@@ -42,7 +41,7 @@ class PrincipalSalesProyections{
                      double predefinedTeaSales = Lectura.readDouble();
                      predefinedTeaSales *= 24;//Tea.total();
                      teaSalesArray[i][x] = predefinedTeaSales;
-                     predefinedSales[i] = teaSalesArray[i][x];
+                     predefinedSales[i] += teaSalesArray[i][x];
                      totalSales += predefinedSales[i];
                   }
                   break;
@@ -54,7 +53,7 @@ class PrincipalSalesProyections{
                      double predefinedOthersSales = Lectura.readDouble();
                      predefinedOthersSales *= 24;//Others.total();
                      otherSalesArray[i][x] = predefinedOthersSales;
-                     predefinedSales[i] = otherSalesArray[i][x];
+                     predefinedSales[i] += otherSalesArray[i][x];
                      totalSales += predefinedSales[i];
                   }
                   break;
@@ -71,7 +70,7 @@ class PrincipalSalesProyections{
                      double coffeeSale = Lectura.readDouble();
                      coffeeSale *= 12;//Cafe.total();
                      newCoffeSalesArray[i][x] = coffeeSale;
-                     currentSales[i] = newCoffeSalesArray[i][x];
+                     currentSales[i] += newCoffeSalesArray[i][x];
                      totalSales += currentSales[i];
                   }
                   break;
@@ -83,7 +82,7 @@ class PrincipalSalesProyections{
                      double chocolateSale = Lectura.readDouble();
                      chocolateSale *= 12;//Chocolate.total();
                      newChocolateSalesArray[i][x] = chocolateSale;
-                     currentSales[i] = newChocolateSalesArray[i][x];
+                     currentSales[i] += newChocolateSalesArray[i][x];
                      totalSales += currentSales[i];
                   }
                   break;
@@ -95,7 +94,7 @@ class PrincipalSalesProyections{
                      double teaSale = Lectura.readDouble();
                      teaSale *= 12;//Tea.total();
                      newTeaSalesArray[i][x] = teaSale;
-                     currentSales[i] = newTeaSalesArray[i][x];
+                     currentSales[i] += newTeaSalesArray[i][x];
                      totalSales += currentSales[i];
                   }
                   break;
@@ -107,7 +106,7 @@ class PrincipalSalesProyections{
                      double otherSale = Lectura.readDouble();
                      otherSale *= 12;//Others.total();
                      newOtherSalesArray[i][x] = otherSale;
-                     currentSales[i] = newOtherSalesArray[i][x];
+                     currentSales[i] += newOtherSalesArray[i][x];
                      totalSales += currentSales[i];
                      }
                   break;
@@ -118,12 +117,12 @@ class PrincipalSalesProyections{
       long timeExpected = Lectura.readLong();
       System.out.println("Insert the percentage in change of value of dollars:");
       double economyGrowth = Lectura.readDouble();
-      System.out.println("Remaining inventory for products");
+      System.out.println("Remaining in
+      ventory for products");
       int inventoryProducts = Lectura.readInt();
       SalesProyections tibia = new SalesProyections(timeExpected, economyGrowth, inventoryProducts, currentSales, predefinedSales, totalSales);
       System.out.println(tibia);
    }
-}
 */
 class SalesProyections{
   private long expectedTime;//Time to sell x product
@@ -188,23 +187,68 @@ class SalesProyections{
         return totalSales;
   }
   //Methods
-  public double salesPerClient(){//Self Explanitory, new ones
-    return 2.3;
+  public void totalClientSales(){//Self Explanitory, new ones
+      for(int i = 0; i < 4; i++){
+       switch(i){
+          case 0: System.out.println("Total Coffee Sales: " + currentSales[i]);
+                  break;
+          case 1: System.out.println("Total Chocolate Drink Sales: " + currentSales[i]);
+                  break;
+          case 2: System.out.println("Total Tea Sales: " + currentSales[i]);
+                  break;
+          case 3: System.out.println("Total Other Drinks Sales: " + currentSales[i]);
+                  break;
+          }
+      }
+
   }
-  public double totalSalesProduct(){//Ditto
-    return 5;
+  public void changeOfSales(){//Subtract past and present to know the overall change
+  double change = 0;
+      for(int i = 0; i < 4; i++){
+       switch(i){
+          case 0: change = predefinedSales[i] - currentSales[i];
+                  if(change < 0){
+                     System.out.println("There has been an increase on Coffee sales by $" + (Math.abs(change)));
+                  }
+                  else{
+                     System.out.println("There has been a decrease on Coffee sales by $" + (change * -1));
+                  }
+                  break;
+          case 1: change = predefinedSales[i] - currentSales[i];
+                  if(change < 0){
+                     System.out.println("There has been an increase on Chocolate drink sales by $" + (Math.abs(change)));
+                  }
+                  else{
+                     System.out.println("There has been a decrease on Chocolate drink sales by $" + (change * -1));
+                  }
+                  break;
+          case 2: change = predefinedSales[i] - currentSales[i];
+                  if(change < 0){
+                     System.out.println("There has been an increase on Tea sales by $" + (Math.abs(change)));
+                  }
+                  else{
+                     System.out.println("There has been a decrease on Tea sales by $" + (change * -1));
+                  }
+                  break;
+          case 3: change = predefinedSales[i] - currentSales[i];
+                  if(change < 0){
+                     System.out.println("There has been an increase on Other drinks sales by $" + (Math.abs(change)));
+                  }
+                  else{
+                     System.out.println("There has been a decrease on Other drinks sales by $" + (change * -1));
+                  }
+                  break;
+          }
+      }
   }
-  public double changeOfSales(){//Subtract past and present to know the overall change
-    return 5.8;
-  }
-  public String salesTendencies(){//How much has a product sold, how much is left on the inventory, what to do.
+  /*public String salesTendencies(){//How much has a product sold, how much is left on the inventory, what to do.
     return "Hello";
-  }
-  public String proyectionsReport(){
-    return "Proyections";
-  }
+  }*/
   //Display
   public String toString(){
-    return " ";
+    totalClientSales();
+    changeOfSales();
+
+   return "Sales Proyections Report: \nTotal Client Sales: \nChange of Sales: ";
   }
 }
