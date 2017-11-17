@@ -50,4 +50,7 @@ public String getType(){
 public int getQuantity(){
         return quantity;
 }
+public double total(){
+  return price * quaintity;
+}
 }
