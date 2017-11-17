@@ -102,7 +102,10 @@ public static ArrayList<Ingredient> readIngredients() {
         return f.readIngredients("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
 
 }
-
+public static ArrayList<Employee> readEmployee(){
+        Employee f = new Employee();
+        return f.readEmployees("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
+}
 public static ArrayList<Transaction> readTransactions() { //return list of all transactions from .dat file
         Inventory f = new Inventory();
         return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
