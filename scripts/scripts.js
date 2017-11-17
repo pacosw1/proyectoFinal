@@ -14,13 +14,7 @@ $(document).ready(function() {
         var price = current["price"];
         var quantity = current["quantity"];
         totalCost += current["cost"];
-
-
-
-
-
       }
-
     }
   console.log(totalPrice - totalCost);
 

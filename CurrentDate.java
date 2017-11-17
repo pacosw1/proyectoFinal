@@ -19,14 +19,9 @@ private int hour = now.getHour();
 private int min = now.getMinute();
 private int sec = now.getSecond();
 
-
-
-
 public String toString() {
         return hour + ":"+min+":"+sec+" | "+ day + "/" + month + "/" + year;
 }
-
-
 
 public int getYear() {
         return year;

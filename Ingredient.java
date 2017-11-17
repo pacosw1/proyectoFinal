@@ -11,17 +11,9 @@ public Ingredient(String name,int quantity, double unitaryPrice, String measure)
         this.measure = measure;
         this.quantity = quantity;
 }
-
 public double price() {  // gets total price of ingredient
         return quantity*unitaryPrice;
 }
-
-
-
-
-
-
-
 public String getName() {
         return name;
 }
@@ -58,5 +50,4 @@ public void setMeasure(String measure) {
 public String toString() {
         return "Ingredient [name=" + name + ", unitaryPrice=" + unitaryPrice + ", quantity=" + quantity + ", measure=" + measure + "]";
 }
-
 }

@@ -1,8 +1,9 @@
 class Chocolate extends Drink  {
 //Construct
 private String type;
-public Chocolate(double price,String code, String name,String size, Recipe recipe,String type, int quantity){     //blanco o negro (chocolate)
-        super(price,code,name,size,recipe, quantity);
+
+public Chocolate(double price,String code, String name,String size, Recipe recipe, int quantity,String temp, String type){     //blanco o negro (chocolate)
+        super(price,code,name,size,recipe, quantity,temp);
         setType(type);
 }
 //Set
