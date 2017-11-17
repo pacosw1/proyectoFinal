@@ -13,9 +13,13 @@ public class UserLogin extends Application {//Tiene que estar en application
 						Login loginDlg = new Login(frame);
 						loginDlg.setVisible(true);
 						// if login is successfull
-						if(loginDlg.isSucceeded()){
-							btnLogin.setText(loginDlg.getUsername());
-
+						for(int i = 0; i < 2; i++){
+							if(loginDlg.isSucceeded() == true){
+								btnLogin.setText("Welcome: " + loginDlg.getStatus() + " " + loginDlg.getUsername());
+							}
+							else if(loginDlg.isSucceeded() == false){
+								btnLogin.setText("You ran out of attempts!");
+							}
 						}
 					}
 				});
