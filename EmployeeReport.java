@@ -5,7 +5,9 @@ class EmployeeReport extends Report{
   private double hoursWorkedDaily;
   private double dailyPayment;
   private double totalPayment;
+  private int totalEmployees;
   private String[] suggestions;
+  private double hoursEmployee;
   //Construct
   public EmployeeReport(CurrentDate date, String title, String path){
       super(date, title , path);
@@ -44,42 +46,42 @@ class EmployeeReport extends Report{
     return "EmployeeReport: ";
   }
 
-  public ArrayList<Transaction> data() {
-    Inventory f = new Inventory();
+  public ArrayList<Employee> data() {
+    Employee f = new Employee();
         return f.readTransactions(path + "employee.dat"); //returns data from .dat file as arraylist
   }
   //Methods
   public void totalPayment(){
-  ArrayList<Transaction> data = data();
+  ArrayList<Employee> data = data();
   String day = " ";
-     System.out.println("How many employees are there?");
-     int numberEmployees = Lectura.readInt();
 
-       for(int i = 0; i < numberEmployees; i++){
-       System.out.println("What's the name of employee " + (i + 1) + "?");
-       String name = Lectura.readString();
+    for(int i = 0; i < employee.size();i++){
+     Employee current = employee.get(i);//Gets Employee i from arraylist, current may need to be array
+     totalEmployees += current;
+    }
+       for(int i = 0; i < totalEmployees; i++){
+         for(int x = 0; x < 7; x++){
+            switch(x){
+              case 0: day = "Monday";
+                      break;
+              case 1: day = "Tuesday";
+                      break;
+              case 2: day = "Wednesday";
+                      break;
+              case 3: day = "Thursday";
+                      break;
+              case 4: day = "Friday";
+                      break;
+              case 5: day = "Saturday";
+                      break;
+              case 6: day = "Sunday";
+                      break;
+             }
+           /*System.out.print("How many hours did employee " + current.getName() + " work on " + day + ":");
+           double hours = Lectura.readDouble();*/
+           hoursEmployee = current.getHours();
 
-       for(int x = 0; x < 7; x++){
-          switch(x){
-            case 0: day = "Monday";
-                    break;
-            case 1: day = "Tuesday";
-                    break;
-            case 2: day = "Wednesday";
-                    break;
-            case 3: day = "Thursday";
-                    break;
-            case 4: day = "Friday";
-                    break;
-            case 5: day = "Saturday";
-                    break;
-            case 6: day = "Sunday";
-                    break;
-           }
-           System.out.print("How many hours did employee " + name + " work on " + day + ":");
-           double hours = Lectura.readDouble();
-
-           payment[x] += (hours * salary);
+           payment[x] += (hoursEmployee * salary);
            totalPayment += payment[x];
            System.out.print("\nPayment on " + day + ": " + payment[x]);
         }

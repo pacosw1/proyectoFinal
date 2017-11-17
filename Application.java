@@ -1,10 +1,25 @@
 import java.io.*;
-import java.io.*;
 import java.util.*;
 class Application implements Serializable {
 public static void main(String[] args) {
+<<<<<<< HEAD
+  Start start = new Start();
+	Start.start();//Continues the program after login
+
+  if(loginDlg.getStatus() == 0) {
+          //admin actions (access reports etc...)
+          managerOptions();
+          TransactionReport report = new TransactionReport(new CurrentDate(),"test","C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
+          System.out.println(report);
+  } else {
+
+  }
+        //System.out.println("Login:");
+        CLogin toby = new CLogin();
+=======
 
         CLogin toby = new CLogin();
+>>>>>>> 3d38efde6b89037c6b63d916684cd68813cb42f2
         toby.setUsername(Lectura.readString("Ingresar Usuario"));
         toby.setTypedPassword(Lectura.readString("Ingresar Password"));
         if (toby.loginAttempts()) {
@@ -72,7 +87,14 @@ public static ArrayList<Ingredient> readIngredients() {
         return f.readIngredients("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
 
 }
-
+public static ArrayList<Employee> readEmployee(){
+        Employee f = new Employee();
+        return f.readEmployees("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
+}
+public static void saveEmployee(ArrayList<Employee> employee){
+        Employee f = new Employee();
+        f.saveEmployee(employee,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
+}
 public static ArrayList<Transaction> readTransactions() { //return list of all transactions from .dat file
         Inventory f = new Inventory();
         return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");

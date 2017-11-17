@@ -1,7 +1,6 @@
 import java.io.*;
 class Employee {//On main ask Hours worked per employee
 private double hoursWorkedDaily;
-private double x;
 //Construct
 public Employee(double totalPayment, double totalHours, String name, int numberEmployees, String suggestionEmployee, String[] suggestionClients, int clients, double[] payment){
         setTotalPayment(totalPayment);
