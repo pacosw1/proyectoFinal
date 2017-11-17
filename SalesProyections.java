@@ -1,107 +1,147 @@
 import java.io.*;
 /*
-  main
-  double[][] currentSales = new double[4][];
-  double[][] predefinedSales = new double[4][];
-  byte more = 0;
-  int buyer = 0;
-  //PredefinedSales
-  for(int i = 0; i < 4; i++){
-    case(i){
-    case 0: System.out.println("How many clients had bought coffees?");
-            buyer = Lectura.readInt();
-            for(int x = 0; x < buyer; x++){
-            System.out.println("Total Past Coffee Sales:");
-            double predefinedCoffeeSales = Lectura.readDouble();
-            predefinedCoffeeSales *= Cafe.total();
-            predefinedSales[i][x] = predefinedCoffeeSales;
-            }
-            break;
-    case 1: System.out.println("How many clients had bought chocolate drinks?");
-            buyer = Lectura.readInt();
-            for(int x = 0; x < buyer; x++){
-            System.out.println("Total Past Chocolate Drink Sales:");
-            double predefinedChocolateSales = Lectura.readDouble();
-            predefinedChocolateSales *= Chocolate.total();
-            predefinedSales[i][x] = predefinedChocolateSales;
-            }
-            break;
-    case 2: System.out.println("How many clients had bought teas?");
-            buyer = Lectura.readInt();
-            for(int x = 0; x < buyer; x++){
-            System.out.println("Total Past Tea Sales:");
-            double predefinedTeaSales = Lectura.readDouble();
-            predefinedTeaSales *= Tea.total();
-            predefinedSales[i][x] = predefinedTeaSales;
-            }
-            break;
-    case 3: System.out.println("How many clients had bought Other drinks?");
-            buyer = Lectura.readInt();
-            for(int x = 0; x < buyer; x++){
-            System.out.println("Total Past Other Drinks Sales:");
-            double predefinedOthersSales = Lectura.readDouble();
-            predefinedOthersSales *= Others.total();
-            predefinedSales[i][x] = predefinedOthersSales;
-            }
-            break;
-    }
-}
-  //Current Sales
-  for(int i = 0; i < 4; i++){
-    case(i){
-    case 0: System.out.println("How many clients bought coffees?");
-            buyer = Lectura.readInt();
-            for(int x = 0; x < buyer; x++){
-            System.out.println("How many coffees did client " + (buyer + 1) + " buy?");
-            double coffeeSale = Lectura.readDouble();
-            coffeeSale *= Cafe.total();
-            currentSale[i][x] = coffeeSale;
-            }
-            break;
-    case 1: System.out.println("How many clients bought chocolate drinks?");
-            buyer = Lectura.readInt();
-            for(int x = 0; x < buyer; x++){
-            System.out.println("How many chocolate drinks did client " + (buyer + 1) + " buy?");
-            double chocolateSale = Lectura.readDouble();
-            chocolateSale *= Chocolate.total();
-            currentSale[i][x] = chocolateSale;
-            }
-            break;
-    case 2: System.out.println("How many clients bought teas?");
-            buyer = Lectura.readInt();
-            for(int x = 0; x < buyer; x++){
-            System.out.println("How many teas did client " + (buyer + 1) + " buy?");
-            double teaSale = Lectura.readDouble();
-            teaSale *= Tea.total();
-            currentSale[i][x] = teaSale;
-            }
-            break;
-    case 3: System.out.println("How many clients bought other drinks?");
-            buyer = Lectura.readInt();
-            for(int x = 0; x < buyer; x++){
-            System.out.println("Other products that client " + (buyer + 1) + " bought:");
-            double otherSale = Lectura.readDouble();
-            otherSale *= Others.total();
-            currentSale[i][x] = otherSale;
-            }
-            break;
-  }
+class PrincipalSalesProyections{
+  public static void main(String[] args){
+     double[] currentSales = new double[4];
+     double[] predefinedSales = new double[4];
+     byte more = 0;
+     double totalSales = 0;
+     int buyer = 0;
+     //PredefinedSales
+     for(int i = 0; i < 4; i++){
+       switch(i){
+          case 0: System.out.println("How many clients had bought coffees?");
+                  buyer = Lectura.readInt();
+                  double[][] coffeSalesArray = new double [4][buyer];
+                  for(int x = 0; x < buyer; x++){
+                     System.out.println("Total Past Coffee Sales:");
+                     double predefinedCoffeeSales = Lectura.readDouble();
+                     predefinedCoffeeSales *= 24;//Cafe.total();
+                     coffeSalesArray[i][x] = predefinedCoffeeSales;
+                     predefinedSales[i] = coffeSalesArray[i][x];
+                     totalSales += predefinedSales[i];
+                  }
+                  break;
+          case 1: System.out.println("How many clients had bought chocolate drinks?");
+                  buyer = Lectura.readInt();
+                  double[][] chocolateSalesArray = new double [4][buyer];
+                  for(int x = 0; x < buyer; x++){
+                     System.out.println("Total Past Chocolate Drink Sales:");
+                     double predefinedChocolateSales = Lectura.readDouble();
+                     predefinedChocolateSales *= 24;//Chocolate.total();
+                     chocolateSalesArray[i][x] = predefinedChocolateSales;
+                     predefinedSales[i] = chocolateSalesArray[i][x];
+                     totalSales += predefinedSales[i];
+                  }
+                  break;
+          case 2: System.out.println("How many clients had bought teas?");
+                  buyer = Lectura.readInt();
+                  double[][] teaSalesArray = new double [4][buyer];
+                  for(int x = 0; x < buyer; x++){
+                     System.out.println("Total Past Tea Sales:");
+                     double predefinedTeaSales = Lectura.readDouble();
+                     predefinedTeaSales *= 24;//Tea.total();
+                     teaSalesArray[i][x] = predefinedTeaSales;
+                     predefinedSales[i] = teaSalesArray[i][x];
+                     totalSales += predefinedSales[i];
+                  }
+                  break;
+          case 3: System.out.println("How many clients had bought Other drinks?");
+                  buyer = Lectura.readInt();
+                  double[][] otherSalesArray = new double [4][buyer];
+                  for(int x = 0; x < buyer; x++){
+                     System.out.println("Total Past Other Drinks Sales:");
+                     double predefinedOthersSales = Lectura.readDouble();
+                     predefinedOthersSales *= 24;//Others.total();
+                     otherSalesArray[i][x] = predefinedOthersSales;
+                     predefinedSales[i] = otherSalesArray[i][x];
+                     totalSales += predefinedSales[i];
+                  }
+                  break;
+          }
+   }
+     //Current Sales
+     for(int i = 0; i < 4; i++){
+       switch(i){
+          case 0: System.out.println("How many clients bought coffees?");
+                  buyer = Lectura.readInt();
+                  double[][] newCoffeSalesArray = new double [4][buyer];
+                  for(int x = 0; x < buyer; x++){
+                     System.out.println("How many coffees did client " + (buyer + 1) + " buy?");
+                     double coffeeSale = Lectura.readDouble();
+                     coffeeSale *= 12;//Cafe.total();
+                     newCoffeSalesArray[i][x] = coffeeSale;
+                     currentSales[i] = newCoffeSalesArray[i][x];
+                     totalSales += currentSales[i];
+                  }
+                  break;
+          case 1: System.out.println("How many clients bought chocolate drinks?");
+                  buyer = Lectura.readInt();
+                  double[][] newChocolateSalesArray = new double [4][buyer];
+                  for(int x = 0; x < buyer; x++){
+                     System.out.println("How many chocolate drinks did client " + (buyer + 1) + " buy?");
+                     double chocolateSale = Lectura.readDouble();
+                     chocolateSale *= 12;//Chocolate.total();
+                     newChocolateSalesArray[i][x] = chocolateSale;
+                     currentSales[i] = newChocolateSalesArray[i][x];
+                     totalSales += currentSales[i];
+                  }
+                  break;
+          case 2: System.out.println("How many clients bought teas?");
+                  buyer = Lectura.readInt();
+                  double[][] newTeaSalesArray = new double [4][buyer];
+                  for(int x = 0; x < buyer; x++){
+                     System.out.println("How many teas did client " + (buyer + 1) + " buy?");
+                     double teaSale = Lectura.readDouble();
+                     teaSale *= 12;//Tea.total();
+                     newTeaSalesArray[i][x] = teaSale;
+                     currentSales[i] = newTeaSalesArray[i][x];
+                     totalSales += currentSales[i];
+                  }
+                  break;
+          case 3: System.out.println("How many clients bought other drinks?");
+                  buyer = Lectura.readInt();
+                  double[][] newOtherSalesArray = new double [4][buyer];
+                  for(int x = 0; x < buyer; x++){
+                     System.out.println("Other products that client " + (buyer + 1) + " bought:");
+                     double otherSale = Lectura.readDouble();
+                     otherSale *= 12;//Others.total();
+                     newOtherSalesArray[i][x] = otherSale;
+                     currentSales[i] = newOtherSalesArray[i][x];
+                     totalSales += currentSales[i];
+                     }
+                  break;
+        }
+      }
+
+      System.out.println("Time expected to sell all the products:");
+      long timeExpected = Lectura.readLong();
+      System.out.println("Insert the percentage in change of value of dollars:");
+      double economyGrowth = Lectura.readDouble();
+      System.out.println("Remaining inventory for products");
+      int inventoryProducts = Lectura.readInt();
+      SalesProyections tibia = new SalesProyections(timeExpected, economyGrowth, inventoryProducts, currentSales, predefinedSales, totalSales);
+      System.out.println(tibia);
+   }
 }
 */
 class SalesProyections{
   private long expectedTime;//Time to sell x product
   private double economyGrowthRate;//Changes the cost of dollars
-  private Inventory inventoryProducts;
-  private double[][] currentSales;//Sales per product, Products per Buyer
-  private double[][] predefinedSales;
+  //private Inventory inventoryProducts; <--- How it should be done.
+  private int inventoryProducts;
+  private double[] currentSales;//Sales per product, Products per Buyer
+  private double[] predefinedSales;
+  private double totalSales;
   //Construct
-  public SalesProyections(long expectedTime, double economyGrowthRate, Inventory inventoryProducts,
-  double[][] currentSales, double[][] predefinedSales){
+  public SalesProyections(long expectedTime, double economyGrowthRate, int inventoryProducts,//Inventory inventoryProducts,
+  double[] currentSales, double[] predefinedSales, double totalSales){
     setExpectedTime(expectedTime);
     setEconomyGrowthRate(economyGrowthRate);
     setInventoryProducts(inventoryProducts);
     setCurrentSales(currentSales);
     setPredefinedSales(predefinedSales);
+    setTotalSales(totalSales);
   }
   //Set
     public void setExpectedTime(long expectedTime){
@@ -110,14 +150,20 @@ class SalesProyections{
     public void setEconomyGrowthRate(double economyGrowthRate){
         this.economyGrowthRate = economyGrowthRate;
     }
-    public void setInventoryProducts(Inventory inventoryProducts){
+    /*public void setInventoryProducts(Inventory inventoryProducts){
+        this.inventoryProducts = inventoryProducts;
+    }*/
+    public void setInventoryProducts(int inventoryProducts){
         this.inventoryProducts = inventoryProducts;
     }
-    public void setCurrentSales(double[][] currentSales){
+    public void setCurrentSales(double[] currentSales){
         this.currentSales = currentSales;
     }
-    public void setPredefinedSales(double[][] predefinedSales){
+    public void setPredefinedSales(double[] predefinedSales){
         this.predefinedSales = predefinedSales;
+    }
+    public void setTotalSales(double totalSales){
+        this.totalSales = totalSales;
     }
   //Get
   public long getExpectedTime(){
@@ -126,29 +172,39 @@ class SalesProyections{
   public double getEconomyGrowthRate(){
         return economyGrowthRate;
   }
-  public Inventory getInventoryProducts(){
+  /*public Inventory getInventoryProducts(){
+        return inventoryProducts;
+  }*/
+  public int getInventoryProducts(){
         return inventoryProducts;
   }
-  public double[][] getCurrentSales(){
+  public double[] getCurrentSales(){
         return currentSales;
   }
-  public double[][] getPredefinedSales(){
+  public double[] getPredefinedSales(){
         return predefinedSales;
   }
+  public double getTotalSales(){//Display this
+        return totalSales;
+  }
   //Methods
-  public double salesPerClient(){
+  public double salesPerClient(){//Self Explanitory, new ones
     return 2.3;
   }
-  public double totalSalesCompany(){
-    return 2.2;
-  }
-  public double totalSalesProduct(){
+  public double totalSalesProduct(){//Ditto
     return 5;
   }
-  public double changeOfSales(){
+  public double changeOfSales(){//Subtract past and present to know the overall change
     return 5.8;
   }
   public String salesTendencies(){//How much has a product sold, how much is left on the inventory, what to do.
-    return 3.3;
+    return "Hello";
+  }
+  public String proyectionsReport(){
+    return "Proyections";
+  }
+  //Display
+  public String toString(){
+    return " ";
   }
 }
