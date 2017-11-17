@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.*;
 
 public class Start implements Serializable {
-	public static String start() {
+	public static String start() {//Starts the tab
 
 		final JFrame frame = new JFrame("Login");
 		final JButton btnLogin = new JButton("Press to start");

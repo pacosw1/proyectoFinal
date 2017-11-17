@@ -4,7 +4,7 @@ import java.util.*;
 class Application implements Serializable {
 public static void main(String[] args) {
   Start start = new Start();
-	Start.start();
+	Start.start();//Continues the program after login
 
   if(loginDlg.getStatus() == 0) {
           //admin actions (access reports etc...)

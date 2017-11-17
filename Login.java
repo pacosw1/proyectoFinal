@@ -24,7 +24,7 @@ public boolean checkAccount(String username, String password) {
 				return false;
 
 }
-public String checkStatus(int status){
+public String checkStatus(int status){//Selects status
 				if(status == 0)
 				return "Manager";
 				else
