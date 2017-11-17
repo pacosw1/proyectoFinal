@@ -11,12 +11,13 @@ public void saveReport() {
         Json save = new Json();
         save.saveReport(names(),values(),path); //YA jalo
 }
-
+@Override
 public String toString() {
         findIngredients();
         saveReport();
-        return reorder;
+        return "InventoryReport [reorder=" + reorder + "]";
 }
+
 public void findIngredients() {   //find all ingredients that are lower than 20 in stock // returns string
         ArrayList<Ingredient> ingredients = data(); //returns object list.
         String t = "";
@@ -62,4 +63,6 @@ public ArrayList<String> values() { //and its values
 
         return n;
 }
+
+
 }

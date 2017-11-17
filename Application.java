@@ -3,43 +3,7 @@ import java.io.*;
 import java.util.*;
 class Application implements Serializable {
 public static void main(String[] args) {
-        /*
-           final JFrame frame = new JFrame("Start Session");
-           final JButton btnLogin = new JButton("Click here to start session");
 
-           btnLogin.addActionListener(
-            new ActionListener(){//Starts Event
-              public void actionPerformed(ActionEvent e) {
-                Login loginDlg = new Login(frame);
-                loginDlg.setVisible(true);
-                // if login is successfull
-                for(int i = 0; i < 2; i++){
-                  if(loginDlg.isSucceeded() == true){
-                    btnLogin.setText("Welcome: " + loginDlg.getStatus() + " " + loginDlg.getUsername());
-                  }
-                  else if(loginDlg.isSucceeded() == false){
-                    btnLogin.setText("You ran out of attempts!");
-                  }
-                }
-              }
-            });
-
-           frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-           frame.setSize(300, 100);
-           frame.setLayout(new FlowLayout());
-           frame.getContentPane().add(btnLogin);
-           frame.setVisible(true);
-
-           if(loginDlg.getStatus() == 0) {
-                //admin actions (access reports etc...)
-                managerOptions();
-                TransactionReport report = new TransactionReport(new CurrentDate(),"test","C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
-                System.out.println(report);
-           } else {
-
-           }
-         */
-        //System.out.println("Login:");
         CLogin toby = new CLogin();
         toby.setUsername(Lectura.readString("Ingresar Usuario"));
         toby.setTypedPassword(Lectura.readString("Ingresar Password"));
@@ -47,22 +11,13 @@ public static void main(String[] args) {
                 if (toby.status == 0) { //manage or employee
                         //admin actions (access reports etc...)
                         managerOptions(); //interface
-                        String path = "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\Reports.json";
-                        TimeReport rep = new TimeReport(new CurrentDate(), "time", path);
-                        System.out.println(rep);
-                        TransactionReport report = new TransactionReport(new CurrentDate(),"transactions",path);
-                        System.out.println(report);
-                        InventoryReport rr = new InventoryReport(new CurrentDate(),"inventory",path);
-                        System.out.println(rr);
-                } else {
 
+                } else {
+                        employeeOptions();
                 }
         }
 }
-
 //methods
-
-
 public static void managerOptions() { //uses all other methods to provide interface
         boolean end = true;
         do {
@@ -86,6 +41,7 @@ public static void managerOptions() { //uses all other methods to provide interf
                         showInventory();
                         break;
                 case 5:
+                        generateReports();
                         break;
                 case 6:
                         end = false;
@@ -97,7 +53,16 @@ public static void managerOptions() { //uses all other methods to provide interf
 
 }
 //read and save Methods
-
+public static void generateReports() {
+        String path = "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\Reports.json";
+        TimeReport rep = new TimeReport(new CurrentDate(), "time", path);
+        System.out.println(rep);
+        TransactionReport report = new TransactionReport(new CurrentDate(),"transactions",path);
+        System.out.println(report);
+        InventoryReport rr = new InventoryReport(new CurrentDate(),"inventory",path);
+        System.out.println(rr);
+        System.out.println("Open Index.html to view formatted reports");
+}
 public static void saveIngredient(ArrayList<Ingredient> ingredients) {
         Inventory f = new Inventory();
         f.saveIngredient(ingredients, "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
@@ -203,10 +168,25 @@ public static int choice(int len, String message) { //makes list choice is valid
                 return choice(len, message);
 }
 public static void employeeOptions() {
-        String[] actions = {"Realizar Venta"};
-        for (int i = 0; i < actions.length; i++) {
-                System.out.println(i+". " + actions[i]);
-        }
+        boolean end = true;
+        do {
+                String[] actions = {"Realizar Venta","Cerrar Session"};
+                int[] options = new int[actions.length];
+                for (int i = 0; i < actions.length; i++) {
+                        System.out.println((i+1)+". " + actions[i]);
+                }
+                int choice = choice(options.length,"Escoge una opcion de la lista");
+                switch (choice) {
+                case 1:
+                        sellDrink();
+                        break;
+                case 2:
+                        end = false;
+                        break;
+                        //reports
+                }
+        } while (end == true);
+
 }
 
 public static boolean choose(String message) {   // si o no
@@ -340,9 +320,7 @@ public static void showInventory() { //muestra inventario
 
         } while(end == true);
         Inventory f = new Inventory();
-        f.updateInventory(list,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
-
-        //.setQuantity(
+        f.updateInventory(list,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");    //.setQuantity(
 }
 
 }

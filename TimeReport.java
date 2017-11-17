@@ -13,12 +13,15 @@ public ArrayList<Transaction> data() {
         return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
 }
 
+
+@Override
 public String toString() {
         bestRange();
         bestOverallHour();
         saveReport();
-        return bestRange + "" + popularHour;
+        return "TimeReport [bestRange=" + bestRange + ", popularHour=" + popularHour + "]";
 }
+
 public ArrayList<String> names() {
         ArrayList<String> name = new ArrayList<String>();
         Field[] f = TimeReport.class.getDeclaredFields();
@@ -96,7 +99,5 @@ public int[] hourList() {
         }
         return hours;
 }
-
-
 
 }
