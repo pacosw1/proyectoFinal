@@ -12,81 +12,27 @@ public static void main(String[] args) {
                         managerOptions();
 
                 } else {
-                        //employee actions
-                        //createIngredient();
-
-                        //makeSale();
-                        //System.out.println("Pass");
+                    //employee
                 }
 
-
-//double price,String code, String name,String size, Recipe recipe, int quantity
-
-                /*
-                   public static ArrayList<Drink> saveDrinks() {
-                   SaveToFile f = new SaveToFile();
-                   ArrayList<Drink> drinks = f.saveDrink("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
-                   return drinks;
-                   }
-                   CurrentDate curr = new CurrentDate();
-                   Json save = new Json();
-                   String jPath = "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\data.json";
-                   String path = "C:\\Users\\paco\\Desktop\\ingredients.dat";
-                   String path2 = "C:\\Users\\paco\\Desktop\\transactions.dat";
-                   //path3
-                   SaveToFile f = new SaveToFile();
-                   Ingredient i = new Ingredient("cofee-beans",2,0.23,"kg");
-                   Ingredient i2 = new Ingredient("milk",1,8.23,"Gallon");
-                   ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
-                   ingredients.add(i);
-                   ingredients.add(i2);
-
-                   Recipe recipe = new Recipe(ingredients);
-                   Chocolate ch = new Chocolate(23.23,"232","Hot-Chocolate","venti",recipe,"white",2);
-                   Chocolate nj = new Chocolate(50.23,"232","Hot-Chocolate","venti",recipe,"white",1);
-
-                   ArrayList<Product> pro = new ArrayList<Product>();
-                   pro.add(ch);
-                   pro.add(nj);
-                   Transaction tran = new Transaction("cash",pro,curr);
-                   ArrayList<Transaction> trans =  new ArrayList<Transaction>();
-                   trans.add(tran);
-                   save.addTransaction(trans,jPath);
-                   f.saveTransaction(trans,path2);
-                   //Ingredient gg = new Ingredient("vodka",99,50.52,"1L");
-                   f.saveIngredient(ingredients,path);
-                   ArrayList<Ingredient> m = f.readIngredients(path);
-                   //System.out.println(m);
-                   /*for (int j = 0; j < m.size();j++)
-                   {
-
-                   System.out.println(m.get(j).price());
-                   }
-
-                   double margin = (ch.getPrice() - ch.cost()) / (ch.cost()) * 100;
-                   System.out.println("Name " + ch.getName() + " Recipe cost: "+ ch.cost() + " Price: "+ ch.getPrice() + "profit Margin: "+margin+"%");
-                   System.out.println(tran);
-                   TransactionReport report = new TransactionReport(curr,"test",save,f,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
-                   System.out.println(report);
-                 */
         }
 }
 public static ArrayList<Transaction> readTransactions() {
-        SaveToFile f = new SaveToFile();
+        Inventory f = new Inventory();
         return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
 }
 public static void saveTransactions(ArrayList<Transaction> transactions) {
-        SaveToFile f = new SaveToFile();
+        Inventory f = new Inventory();
         f.saveTransaction(transactions,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
 }
 
 public static ArrayList<Drink> readDrinks() {
-        SaveToFile f = new SaveToFile();
+        Inventory f = new Inventory();
         ArrayList<Drink> drinks = f.readDrinks("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
         return drinks;
 }
 public static void saveDrink(ArrayList<Drink> drinks) {
-        SaveToFile f = new SaveToFile();
+        Inventory f = new Inventory();
         f.saveDrink(drinks,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
 }
 public static void sellDrink() {
@@ -101,7 +47,6 @@ public static void sellDrink() {
                         System.out.println((i+1) + ". "+drinks.get(i));
                         options[i] = i;
                 }
-
                 int choice = choice(options.length,"Escoge una bebida");
                 Drink selected = drinks.get(choice-1);
                 int quantity = Lectura.readInt("Ingresar cantidad");
@@ -121,7 +66,6 @@ public static void sellDrink() {
                         end = true;
                 else
                         end = false;
-
         } while(end == true);
         saveTransactions(transactions);
 }
@@ -147,17 +91,15 @@ public static void managerOptions() {
                         createIngredient();
                         break;
                 case 4:
+                        showInventory();
                         break;
                 case 5:
                         break;
                 case 6:
                         end = false;
                         break;
-                        //reports
                 }
         } while (end == true);
-
-
 }
 public static int choice(int len, String message) {
         int choice = Lectura.readInt(message);
@@ -208,11 +150,11 @@ public static Recipe createRecipe() {
         return (new Recipe(added));
 }
 public static void saveIngredient(ArrayList<Ingredient> ingredients) {
-        SaveToFile f = new SaveToFile();
+        Inventory f = new Inventory();
         f.saveIngredient(ingredients, "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
 }
 public static ArrayList<Ingredient> readIngredients() {
-        SaveToFile f = new SaveToFile();
+        Inventory f = new Inventory();
         return f.readIngredients("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
 
 }
@@ -253,11 +195,11 @@ public static void createDrink() {
                         end = false;
         } while(end == true);
         saveDrink(drinks);
-
 }
-
-
-
-
-
+public static void showInventory() {
+  ArrayList<Ingredient> list = readIngredients();
+  for (int i = 0;i < list.size();i++) {
+    System.out.println(list.get(i));
+  }
+}
 }
