@@ -1,6 +1,7 @@
 import java.lang.reflect.Field;
 import java.io.*;
 import java.util.*;
+import java.text.DecimalFormat;
 class TransactionReport extends Report {
 
 private double totalCost;
@@ -19,8 +20,11 @@ public void saveReport() {
 }
 
 public ArrayList<String> names() {
+
         ArrayList<String> name = new ArrayList<String>();
         Field[] f = TransactionReport.class.getDeclaredFields();
+        name.add("title");
+        name.add("date");
         for (int i = 0; i < f.length; i++) {
                 name.add((String)f[i].getName());
         }
@@ -29,7 +33,6 @@ public ArrayList<String> names() {
 @Override
 public String toString() {
         losses(); bestProduct(); totals(); profits();
-        path += "TransactionReport.json";
         saveReport();
 
         return "TransactionReport [totalCost=" + totalCost + ", totalPrice=" + totalPrice  + ", profit=" + profit + ", bestProduct=" + bestProduct + ", losses=" + losses + ", profitMargin=" + profitMargin + "]";
@@ -38,13 +41,17 @@ public String toString() {
 
 
 public ArrayList<String> values() {
+        DecimalFormat two = new DecimalFormat( "#.##" );
         ArrayList<String> n = new ArrayList<String>();
-        n.add(String.valueOf(totalCost));
-        n.add(String.valueOf(totalPrice));
+        n.add(title);
+        n.add(date.toString());
+        n.add(String.valueOf(two.format(totalCost)));
+        n.add(String.valueOf(two.format(totalPrice)));
         n.add(String.valueOf(bestProduct));
-        n.add(String.valueOf(profit));
-        n.add(String.valueOf(losses));
-        n.add(String.valueOf(profitMargin));
+        n.add(String.valueOf(two.format(profit)));
+        n.add(String.valueOf(two.format(losses)));
+        n.add(String.valueOf(two.format(profitMargin)));
+
         return n;
 }
 
@@ -64,7 +71,7 @@ public void bestProduct() {
 }
 public ArrayList<Transaction> data() {
         Inventory f = new Inventory();
-        return f.readTransactions(path+"transactions.dat"); //returns data from .dat file as arraylist
+        return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
 }
 public void losses() {
         ArrayList<Transaction> data = data();

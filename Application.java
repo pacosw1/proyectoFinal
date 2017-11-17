@@ -3,55 +3,60 @@ import java.io.*;
 import java.util.*;
 class Application implements Serializable {
 public static void main(String[] args) {
-  final JFrame frame = new JFrame("Start Session");
-  final JButton btnLogin = new JButton("Click here to start session");
+        /*
+           final JFrame frame = new JFrame("Start Session");
+           final JButton btnLogin = new JButton("Click here to start session");
 
-  btnLogin.addActionListener(
-      new ActionListener(){//Starts Event
-        public void actionPerformed(ActionEvent e) {
-          Login loginDlg = new Login(frame);
-          loginDlg.setVisible(true);
-          // if login is successfull
-          for(int i = 0; i < 2; i++){
-            if(loginDlg.isSucceeded() == true){
-              btnLogin.setText("Welcome: " + loginDlg.getStatus() + " " + loginDlg.getUsername());
-            }
-            else if(loginDlg.isSucceeded() == false){
-              btnLogin.setText("You ran out of attempts!");
-            }
-          }
-        }
-      });
+           btnLogin.addActionListener(
+            new ActionListener(){//Starts Event
+              public void actionPerformed(ActionEvent e) {
+                Login loginDlg = new Login(frame);
+                loginDlg.setVisible(true);
+                // if login is successfull
+                for(int i = 0; i < 2; i++){
+                  if(loginDlg.isSucceeded() == true){
+                    btnLogin.setText("Welcome: " + loginDlg.getStatus() + " " + loginDlg.getUsername());
+                  }
+                  else if(loginDlg.isSucceeded() == false){
+                    btnLogin.setText("You ran out of attempts!");
+                  }
+                }
+              }
+            });
 
-  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  frame.setSize(300, 100);
-  frame.setLayout(new FlowLayout());
-  frame.getContentPane().add(btnLogin);
-  frame.setVisible(true);
+           frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+           frame.setSize(300, 100);
+           frame.setLayout(new FlowLayout());
+           frame.getContentPane().add(btnLogin);
+           frame.setVisible(true);
 
-  if(loginDlg.getStatus() == 0) {
-          //admin actions (access reports etc...)
-          managerOptions();
-          TransactionReport report = new TransactionReport(new CurrentDate(),"test","C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
-          System.out.println(report);
-  } else {
+           if(loginDlg.getStatus() == 0) {
+                //admin actions (access reports etc...)
+                managerOptions();
+                TransactionReport report = new TransactionReport(new CurrentDate(),"test","C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
+                System.out.println(report);
+           } else {
 
-  }
+           }
+         */
         //System.out.println("Login:");
-        /*CLogin toby = new CLogin();
+        CLogin toby = new CLogin();
         toby.setUsername(Lectura.readString("Ingresar Usuario"));
         toby.setTypedPassword(Lectura.readString("Ingresar Password"));
         if (toby.loginAttempts()) {
                 if (toby.status == 0) { //manage or employee
                         //admin actions (access reports etc...)
                         managerOptions(); //interface
-                        TimeReport rep = new TimeReport(new CurrentDate(), "time", "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
+                        String path = "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\Reports.json";
+                        TimeReport rep = new TimeReport(new CurrentDate(), "time", path);
                         System.out.println(rep);
-                        TransactionReport report = new TransactionReport(new CurrentDate(),"test","C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
+                        TransactionReport report = new TransactionReport(new CurrentDate(),"transactions",path);
                         System.out.println(report);
+                        InventoryReport rr = new InventoryReport(new CurrentDate(),"inventory",path);
+                        System.out.println(rr);
                 } else {
 
-                }*/
+                }
         }
 }
 
@@ -61,7 +66,7 @@ public static void main(String[] args) {
 public static void managerOptions() { //uses all other methods to provide interface
         boolean end = true;
         do {
-                String[] actions = {"Realizar Venta","Agregar Nueva Bebida","Agregar Nuevo Ingrediente","Ver Inventario","Ver Reportes","Cerrar Session"};
+                String[] actions = {"Realizar Venta","Agregar Nueva Bebida","Agregar Nuevo Ingrediente","Inventario","Generar Reportes","Cerrar Session"};
                 int[] options = new int[actions.length];
                 for (int i = 0; i < actions.length; i++) {
                         System.out.println((i+1)+". " + actions[i]);
@@ -191,7 +196,7 @@ public static void sellDrink() { //Drink sale
 }
 
 public static int choice(int len, String message) { //makes list choice is valid.
-        int choice = Lectura.readInt(message);
+        int choice = Lectura.getInt(message);
         if (choice <= len && choice >= 1)
                 return choice;
         else
