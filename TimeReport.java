@@ -28,6 +28,8 @@ public ArrayList<String> names() {
 }
 public ArrayList<String> values() {
         ArrayList<String> n = new ArrayList<String>();
+        n.add(String.valueOf(bestRange));
+        n.add(String.valueOf(popularHour));
         return n;
 }
 

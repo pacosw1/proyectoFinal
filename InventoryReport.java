@@ -20,4 +20,10 @@ class InventoryReport extends Report{
             }
             return name;
     }
+    public ArrayList<String> values() {
+            ArrayList<String> n = new ArrayList<String>();
+            n.add(String.valueOf(reorderIngredients));
+            n.add(String.valueOf(mostUsedIngredients));
+            return n;
+    }
 }

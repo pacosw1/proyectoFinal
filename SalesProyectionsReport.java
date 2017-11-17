@@ -25,4 +25,14 @@ class SalesProyectionsReport extends Report{
             }
             return name;
     }
+    public ArrayList<String> values() {
+            ArrayList<String> n = new ArrayList<String>();
+            n.add(String.valueOf(expectedTime));
+            n.add(String.valueOf(economyGrowthRate));
+            n.add(String.valueOf(inventoryProducts));
+            n.add(String.valueOf(currentSales));
+            n.add(String.valueOf(predefinedSales));
+            n.add(String.valueOf(totalSales));
+            return n;
+    }
 }

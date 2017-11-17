@@ -18,6 +18,12 @@ class ManagerReport extends Report{
           }
           return name;
   }
+  public ArrayList<String> values() {
+          ArrayList<String> n = new ArrayList<String>();
+          n.add(String.valueOf(toby));
+          n.add(String.valueOf(employeeMonth));
+          return n;
+  }
   public void employeeMonth(){//Object Array Employee
           double highest = 0;
           byte skip = 0;//Determines if the first if has been executed
