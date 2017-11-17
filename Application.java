@@ -3,7 +3,6 @@ import java.io.*;
 import java.util.*;
 class Application implements Serializable {
 public static void main(String[] args) {
-<<<<<<< HEAD
   final JFrame frame = new JFrame("Start Session");
   final JButton btnLogin = new JButton("Click here to start session");
 
@@ -38,10 +37,8 @@ public static void main(String[] args) {
   } else {
 
   }
-
-=======
         //System.out.println("Login:");
-        CLogin toby = new CLogin();
+        /*CLogin toby = new CLogin();
         toby.setUsername(Lectura.readString("Ingresar Usuario"));
         toby.setTypedPassword(Lectura.readString("Ingresar Password"));
         if (toby.loginAttempts()) {
@@ -54,8 +51,7 @@ public static void main(String[] args) {
                         System.out.println(report);
                 } else {
 
-                }
->>>>>>> d19ba093e56b1af290072495c9861af9b3fb7cf6
+                }*/
         }
 }
 

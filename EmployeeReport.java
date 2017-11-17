@@ -1,3 +1,6 @@
+import java.io.*;
+import java.util.*;
+import java.lang.reflect.Field;
 class EmployeeReport extends Report{
   private double hoursWorkedDaily;
   //Construct
@@ -12,14 +15,14 @@ class EmployeeReport extends Report{
     save.saveReport(names(),values(),path);
   }
 
-  /*public ArrayList<String> names(){
+  public ArrayList<String> names(){
           ArrayList<String> name = new ArrayList<String>();
-          Field[] f = TransactionReport.class.getDeclaredFields();
+          Field[] f = EmployeeReport.class.getDeclaredFields();
           for (int i = 0; i < f.length; i++) {
                   name.add((String)f[i].getName());
           }
           return name;
-  }*/
+  }
   @Override
   public String toString() {
     //Values
