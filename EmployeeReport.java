@@ -50,8 +50,8 @@ class EmployeeReport extends Report{
   }
   //Methods
   public void totalPayment(){
+  ArrayList<Transaction> data = data();
   String day = " ";
-
      System.out.println("How many employees are there?");
      int numberEmployees = Lectura.readInt();
 

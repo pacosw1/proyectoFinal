@@ -64,43 +64,9 @@ public double[] getPayment(){
         return payment;
 }
 //Methods
-public ArrayList<Employee> readEmployees(String path){//Adds employees
-        FileInputStream fis = null;
-        ArrayList<Employee> numberEmployees = new ArrayList<Employee>();//Number of working employees
-        boolean cont = true;
-        try{
-                fis = new FileInputStream(path);
-                ObjectInputStream input = new ObjectInputStream(fis);
-                while(cont) {
-                        Employee obj = (Employee)input.readObject(); //reads objects from file and adds them to an arraylist which is then returned
-                        if(obj != null)
-                                objectsList.add(obj);
-                        else
-                                cont = false;
-                }
-        }catch(Exception e) {
-                //System.out.println(e.printStackTrace());
-        }
-        return objectsList;
-}
 public String employeeReport(){
         return "\nTotal Payment : " + totalPayment + "\nTotal hours worked: " + totalHours + "\nEmployee suggestion: " + suggestionEmployee;
 }
-/*
-public double employeeMonth(){//Object Array Employee
-        double highest = 0;
-        byte skip = 0;//Determines if the first if has been executed
-        double x = toby[0].getTotalHours();//Obtains the first's Employee hours
-        for(int i = 1; i < numberEmployees; i++) {
-                if(toby[i].getTotalHours() < x && skip = 0) {
-                        highest = toby[i].getTotalHours();
-                        skip = 1;
-                }
-                else if(highest < toby[i].getTotalHours())
-                        highest = toby[i].getTotalHours();
-        }
-        return highest;
-}*/
 //Display
 public String toString(){
 String day = " ";
