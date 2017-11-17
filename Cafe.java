@@ -52,3 +52,6 @@ class Cafe extends Drink {//Test
     return price * quaintity;
   }
 }
+
+
+}

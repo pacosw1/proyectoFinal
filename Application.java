@@ -1,4 +1,5 @@
 import java.io.*;
+import java.io.*;
 import java.util.*;
 class Application implements Serializable {
 public static void main(String[] args) {
@@ -10,12 +11,11 @@ public static void main(String[] args) {
                 if (toby.status == 0) {
                         //admin actions (access reports etc...)
                         managerOptions();
-                } else {
-<<<<<<< HEAD
-                    //employee
-=======
 
->>>>>>> 6ac8885784f9f67521c68e7f27638a0b454bd62d
+                        TransactionReport report = new TransactionReport(new CurrentDate(),"test","C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
+                        System.out.println(report);
+                } else {
+
                 }
 
         }
@@ -38,7 +38,35 @@ public static void saveDrink(ArrayList<Drink> drinks) {
         Inventory f = new Inventory();
         f.saveDrink(drinks,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
 }
+
+public static boolean changeStock(Recipe recipe,int q) {
+  boolean end = true;
+  ArrayList<Ingredient> selected = recipe.getIngredients();
+  ArrayList<Ingredient> ingredients = readIngredients();
+  for (int j = 0;j < selected.size();j++) {
+    for (int i = 0; i < ingredients.size();i++) {
+      if (selected.get(j).getName().equals(ingredients.get(i).getName())) {
+          Ingredient curr = ingredients.get(i);
+          if (curr.getQuantity() - (selected.get(j).getQuantity() * q) < 0) {
+            end = false;
+            break;
+          }
+          else {
+              curr.setQuantity(curr.getQuantity() - (selected.get(j).getQuantity() * q));
+              end = true;
+          }
+
+      }
+
+    }
+  }
+  Inventory f = new Inventory();
+  f.updateInventory(ingredients,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
+  return end;
+
+}
 public static void sellDrink() {
+
         ArrayList<Transaction> transactions = readTransactions();
         ArrayList<Drink> drinks = readDrinks();
         System.out.println("Agrega una bebida");
@@ -47,31 +75,34 @@ public static void sellDrink() {
         do {
                 for (int i = 0; i < drinks.size(); i++) {
                         System.out.println((i+1) + ". "+drinks.get(i));
-<<<<<<< HEAD
-                        options[i] = i;
-                }
-                int choice = choice(options.length,"Escoge una bebida");
-=======
 
                 }
                 int choice = choice(drinks.size(),"Escoge una bebida");
->>>>>>> 6ac8885784f9f67521c68e7f27638a0b454bd62d
                 Drink selected = drinks.get(choice-1);
+
                 int quantity = Lectura.getInt("Ingresar cantidad");
                 selected.setQuantity(quantity);
-                String[] sizes = {"small","medium","venti"};
-                for (int i = 0; i < sizes.length; i++) {
-                        System.out.println((i+1) + ". " + sizes[i]);
+                if (changeStock(selected.getRecipe(), selected.getQuantity())) {
+
+                  String[] sizes = {"small","medium","venti"};
+                  for (int i = 0; i < sizes.length; i++) {
+                          System.out.println((i+1) + ". " + sizes[i]);
+                  }
+                  choice = choice(sizes.length,"Escoge una tamano");
+                  selected.setSize(sizes[choice-1]);
+                  added.add(selected);
+                  transactions.add(new Transaction("cash", added, new CurrentDate()));
+                } else {
+                  System.out.println("Uno o mas Ingredientes se han agotado, Escoga otro producto");
                 }
-                choice = choice(sizes.length,"Escoge una tamano");
-                selected.setSize(sizes[choice-1]);
-                added.add(selected);
-                transactions.add(new Transaction("cash", added, new CurrentDate()));
+
+
 
                 if (choose("Desea hacer otra transaccion?"))
                         end = true;
                 else
                         end = false;
+
         } while(end == true);
         saveTransactions(transactions);
 }
@@ -96,15 +127,18 @@ public static void managerOptions() {
                         createIngredient();
                         break;
                 case 4:
-                        showInventory();
+                    showInventory();
                         break;
                 case 5:
                         break;
                 case 6:
                         end = false;
                         break;
+                        //reports
                 }
         } while (end == true);
+
+
 }
 public static int choice(int len, String message) {
         int choice = Lectura.readInt(message);
@@ -168,7 +202,8 @@ public static void createIngredient() {
         ArrayList<Ingredient> added = new  ArrayList<Ingredient>();
         while (end == true) {
                 System.out.println("Crear Ingrediente: ");
-                String name = Lectura.readString("Name: "); int quantity=0;
+                String name = Lectura.readString("Name: ");
+                int quantity = Lectura.getInt("Ingresar Cantidad");
                 double unitaryPrice = Lectura.readDouble("Price");
                 String measure = Lectura.readString("Measure Unit: ");
                 added.add(new Ingredient(name,quantity,unitaryPrice,measure));
@@ -203,16 +238,6 @@ public static void createDrink() {
                 else
                         end = false;
         } while(end == true);
-<<<<<<< HEAD
-        saveDrink(drinks);
-}
-public static void showInventory() {
-  ArrayList<Ingredient> list = readIngredients();
-  for (int i = 0;i < list.size();i++) {
-    System.out.println(list.get(i));
-  }
-}
-=======
         saveDrink(added);
 }
 public static Chocolate createChocolate() {
@@ -247,6 +272,11 @@ public static Drink createAll() {
         return new Drink(price,code,name,size,recipe,quantity,temp);
 
 }
+public static void showInventory() {
+  ArrayList<Ingredient> list = readIngredients();
+  for (int i = 0;i < list.size();i++) {
+    System.out.println(list.get(i));
+  }
 
->>>>>>> 6ac8885784f9f67521c68e7f27638a0b454bd62d
+}
 }
