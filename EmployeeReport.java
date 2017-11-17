@@ -17,7 +17,7 @@ class EmployeeReport extends Report{
 
   public ArrayList<String> names(){
           ArrayList<String> name = new ArrayList<String>();
-          Field[] f = EmployeeReport.class.getDeclaredFields();
+          Field[] f = TransactionReport.class.getDeclaredFields();
           for (int i = 0; i < f.length; i++) {
                   name.add((String)f[i].getName());
           }

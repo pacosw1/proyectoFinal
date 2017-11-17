@@ -129,7 +129,7 @@ class SalesProyections{
   private double economyGrowthRate;//Changes the cost of dollars
   //private Inventory inventoryProducts; <--- How it should be done.
   private int inventoryProducts;
-  private double[] currentSales;//Sales per product, Products per Buyer
+  private double[] currentSales;//Total Sales per product
   private double[] predefinedSales;
   private double totalSales;
   //Construct

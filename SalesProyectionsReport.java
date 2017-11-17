@@ -1,11 +1,16 @@
 import java.io.*;
 import java.util.*;
 import java.lang.reflect.Field;
-class InventoryReport extends Report{
-    private String reorderIngredients;
-    private String mostUsedIngredients;
-    public InventoryReport(CurrentDate date, String title, String path){
-          super(date, title, path);
+private long expectedTime;//Time to sell x product
+private double economyGrowthRate;//Changes the cost of dollars
+//private Inventory inventoryProducts; <--- How it should be done.
+private int inventoryProducts;
+private double[] currentSales;//Total Sales per product
+private double[] predefinedSales;
+private double totalSales;
+class SalesProyectionsReport extends Report{
+    public SalesProyectionsReport(CurrentDate date, String title, String path){
+          public(date, title, path);
     }
     public void saveReport() {
             Json save = new Json();
