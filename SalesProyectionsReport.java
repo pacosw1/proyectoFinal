@@ -35,4 +35,8 @@ class SalesProyectionsReport extends Report{
             n.add(String.valueOf(totalSales));
             return n;
     }
+    public ArrayList<Transaction> data() {
+            Inventory f = new Inventory();
+            return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
+    }
 }
