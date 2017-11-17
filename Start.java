@@ -7,8 +7,8 @@ import java.util.*;
 public class Start implements Serializable {
 	public static String start() {
 
-		final JFrame frame = new JFrame("Iniciar sesion");
-		final JButton btnLogin = new JButton("Presione aqui para iniciar sesion");
+		final JFrame frame = new JFrame("Login");
+		final JButton btnLogin = new JButton("Press to start");
 
     btnLogin.addActionListener(
         new ActionListener(){//Starts Event
