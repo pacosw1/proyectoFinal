@@ -48,6 +48,6 @@ public void setMeasure(String measure) {
 
 @Override
 public String toString() {
-        return "Ingredient [name=" + name + ", unitaryPrice=" + unitaryPrice + ", quantity=" + quantity + ", measure=" + measure + "]";
+        return name + ""+"      ||Qnty: " + quantity + "      ||Unidad: "+measure;
 }
 }

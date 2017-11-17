@@ -1,7 +1,7 @@
 import java.lang.reflect.Field;
 import java.io.*;
 import java.util.*;
- class TransactionReport extends Report {
+class TransactionReport extends Report {
 
 private double totalCost;
 private double totalPrice;
@@ -13,10 +13,9 @@ public TransactionReport(CurrentDate date, String title, String path) {
         super(date, title, path);
 }
 
-
 public void saveReport() {
-   Json save = new Json();
-  save.saveReport(names(),values(),path);
+        Json save = new Json();
+        save.saveReport(names(),values(),path);
 }
 
 public ArrayList<String> names() {
@@ -29,12 +28,11 @@ public ArrayList<String> names() {
 }
 @Override
 public String toString() {
-  losses(); bestProduct(); totals(); profits();
-  path += "TransactionReport" +reportCount +".json";
-  saveReport();
-  reportCount++;
+        losses(); bestProduct(); totals(); profits();
+        path += "TransactionReport.json";
+        saveReport();
 
-  return "TransactionReport [totalCost=" + totalCost + ", totalPrice=" + totalPrice  + ", profit=" + profit + ", bestProduct=" + bestProduct + ", losses=" + losses + ", profitMargin=" + profitMargin + "]";
+        return "TransactionReport [totalCost=" + totalCost + ", totalPrice=" + totalPrice  + ", profit=" + profit + ", bestProduct=" + bestProduct + ", losses=" + losses + ", profitMargin=" + profitMargin + "]";
 }
 
 
@@ -51,7 +49,7 @@ public ArrayList<String> values() {
 }
 
 public void bestProduct() {
-  ArrayList<Transaction> data = data();
+        ArrayList<Transaction> data = data();
         double best = 0.0; double profit = 0.0; //var declaration
         for (int i = 0; i < data.size(); i++) { //transaction array
                 ArrayList<Drink> curr = data.get(i).getProducts(); //product array
@@ -65,11 +63,11 @@ public void bestProduct() {
         }
 }
 public ArrayList<Transaction> data() {
-  Inventory f = new Inventory();
-      return f.readTransactions(path+"transactions.dat"); //returns data from .dat file as arraylist
+        Inventory f = new Inventory();
+        return f.readTransactions(path+"transactions.dat"); //returns data from .dat file as arraylist
 }
 public void losses() {
-  ArrayList<Transaction> data = data();
+        ArrayList<Transaction> data = data();
         for (int i = 0; i < data.size(); i++) {
                 ArrayList<Drink> curr = data.get(i).getProducts();
                 for (int j = 0; j < curr.size(); j++) {
@@ -80,7 +78,7 @@ public void losses() {
         }
 }
 public void totals() {
-        ArrayList<Transaction> data = data();
+        ArrayList<Transaction> data = data(); //list of transactions
         double cost = 0.0; double price = 0.0;
         for (int i = 0; i < data.size(); i++) {
                 totalCost += data.get(i).cost(); //totals per transactions. Declared in transaction class

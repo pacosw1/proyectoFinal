@@ -3,6 +3,7 @@ import java.io.*;
 import java.util.*;
 class Application implements Serializable {
 public static void main(String[] args) {
+<<<<<<< HEAD
   final JFrame frame = new JFrame("Start Session");
   final JButton btnLogin = new JButton("Click here to start session");
 
@@ -38,96 +39,30 @@ public static void main(String[] args) {
 
   }
 
+=======
+        //System.out.println("Login:");
+        CLogin toby = new CLogin();
+        toby.setUsername(Lectura.readString("Ingresar Usuario"));
+        toby.setTypedPassword(Lectura.readString("Ingresar Password"));
+        if (toby.loginAttempts()) {
+                if (toby.status == 0) { //manage or employee
+                        //admin actions (access reports etc...)
+                        managerOptions(); //interface
+                        TimeReport rep = new TimeReport(new CurrentDate(), "time", "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
+                        System.out.println(rep);
+                        TransactionReport report = new TransactionReport(new CurrentDate(),"test","C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
+                        System.out.println(report);
+                } else {
+
+                }
+>>>>>>> d19ba093e56b1af290072495c9861af9b3fb7cf6
         }
 }
-public static ArrayList<Transaction> readTransactions() {
-        Inventory f = new Inventory();
-        return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
-}
-public static void saveTransactions(ArrayList<Transaction> transactions) {
-        Inventory f = new Inventory();
-        f.saveTransaction(transactions,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
-}
 
-public static ArrayList<Drink> readDrinks() {
-        Inventory f = new Inventory();
-        ArrayList<Drink> drinks = f.readDrinks("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
-        return drinks;
-}
-public static void saveDrink(ArrayList<Drink> drinks) {
-        Inventory f = new Inventory();
-        f.saveDrink(drinks,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
-}
-
-public static boolean changeStock(Recipe recipe,int q) {
-  boolean end = true;
-  ArrayList<Ingredient> selected = recipe.getIngredients();
-  ArrayList<Ingredient> ingredients = readIngredients();
-  for (int j = 0;j < selected.size();j++) {
-    for (int i = 0; i < ingredients.size();i++) {
-      if (selected.get(j).getName().equals(ingredients.get(i).getName())) {
-          Ingredient curr = ingredients.get(i);
-          if (curr.getQuantity() - (selected.get(j).getQuantity() * q) < 0) {
-            end = false;
-            break;
-          }
-          else {
-              curr.setQuantity(curr.getQuantity() - (selected.get(j).getQuantity() * q));
-              end = true;
-          }
-
-      }
-
-    }
-  }
-  Inventory f = new Inventory();
-  f.updateInventory(ingredients,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
-  return end;
-
-}
-public static void sellDrink() {
-
-        ArrayList<Transaction> transactions = readTransactions();
-        ArrayList<Drink> drinks = readDrinks();
-        System.out.println("Agrega una bebida");
-        ArrayList<Drink> added = new ArrayList<Drink>();
-        boolean end = true;
-        do {
-                for (int i = 0; i < drinks.size(); i++) {
-                        System.out.println((i+1) + ". "+drinks.get(i));
-
-                }
-                int choice = choice(drinks.size(),"Escoge una bebida");
-                Drink selected = drinks.get(choice-1);
-
-                int quantity = Lectura.getInt("Ingresar cantidad");
-                selected.setQuantity(quantity);
-                if (changeStock(selected.getRecipe(), selected.getQuantity())) {
-
-                  String[] sizes = {"small","medium","venti"};
-                  for (int i = 0; i < sizes.length; i++) {
-                          System.out.println((i+1) + ". " + sizes[i]);
-                  }
-                  choice = choice(sizes.length,"Escoge una tamano");
-                  selected.setSize(sizes[choice-1]);
-                  added.add(selected);
-                  transactions.add(new Transaction("cash", added, new CurrentDate()));
-                } else {
-                  System.out.println("Uno o mas Ingredientes se han agotado, Escoga otro producto");
-                }
+//methods
 
 
-
-                if (choose("Desea hacer otra transaccion?"))
-                        end = true;
-                else
-                        end = false;
-
-        } while(end == true);
-        saveTransactions(transactions);
-}
-
-public static void managerOptions() {
+public static void managerOptions() { //uses all other methods to provide interface
         boolean end = true;
         do {
                 String[] actions = {"Realizar Venta","Agregar Nueva Bebida","Agregar Nuevo Ingrediente","Ver Inventario","Ver Reportes","Cerrar Session"};
@@ -147,7 +82,7 @@ public static void managerOptions() {
                         createIngredient();
                         break;
                 case 4:
-                    showInventory();
+                        showInventory();
                         break;
                 case 5:
                         break;
@@ -160,7 +95,106 @@ public static void managerOptions() {
 
 
 }
-public static int choice(int len, String message) {
+//read and save Methods
+
+public static void saveIngredient(ArrayList<Ingredient> ingredients) {
+        Inventory f = new Inventory();
+        f.saveIngredient(ingredients, "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
+}
+public static ArrayList<Ingredient> readIngredients() {
+        Inventory f = new Inventory();
+        return f.readIngredients("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
+
+}
+
+public static ArrayList<Transaction> readTransactions() { //return list of all transactions from .dat file
+        Inventory f = new Inventory();
+        return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
+}
+public static void saveTransactions(ArrayList<Transaction> transactions) { //saves given transaction arrayList
+        Inventory f = new Inventory();
+        f.saveTransaction(transactions,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
+}
+
+public static ArrayList<Drink> readDrinks() {
+        Inventory f = new Inventory();
+        ArrayList<Drink> drinks = f.readDrinks("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
+        return drinks;
+}
+public static void saveDrink(ArrayList<Drink> drinks) {
+        Inventory f = new Inventory();
+        f.saveDrink(drinks,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
+}
+
+public static boolean changeStock(Recipe recipe,int q) { //during sale, substracts recipe quantities from inventory
+        boolean end = true;
+        ArrayList<Ingredient> selected = recipe.getIngredients();
+        ArrayList<Ingredient> ingredients = readIngredients();
+        for (int j = 0; j < selected.size(); j++) {
+                for (int i = 0; i < ingredients.size(); i++) {
+                        if (selected.get(j).getName().equals(ingredients.get(i).getName())) {
+                                Ingredient curr = ingredients.get(i);
+                                if (curr.getQuantity() - (selected.get(j).getQuantity() * q) < 0) {
+                                        end = false;
+                                        break;
+                                }
+                                else {
+                                        curr.setQuantity(curr.getQuantity() - (selected.get(j).getQuantity() * q));
+                                        end = true;
+                                }
+
+                        }
+
+                }
+        }
+        Inventory f = new Inventory();
+        f.updateInventory(ingredients,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
+        return end;
+
+}
+public static void sellDrink() { //Drink sale
+
+        ArrayList<Transaction> transactions = readTransactions();
+        ArrayList<Drink> drinks = readDrinks();
+        System.out.println("Agrega una bebida");
+        ArrayList<Drink> added = new ArrayList<Drink>();
+        boolean end = true;
+        do {
+                for (int i = 0; i < drinks.size(); i++) {             //displays options from drink list
+                        System.out.println((i+1) + ". "+drinks.get(i));
+
+                }
+                int choice = choice(drinks.size(),"Escoge una bebida");
+                Drink selected = drinks.get(choice-1);
+
+                int quantity = Lectura.getInt("Ingresar cantidad");
+                selected.setQuantity(quantity);
+                if (changeStock(selected.getRecipe(), selected.getQuantity())) { //checks to see if quantity is > 0 to make drink
+
+                        String[] sizes = {"small","medium","venti"};
+                        for (int i = 0; i < sizes.length; i++) {
+                                System.out.println((i+1) + ". " + sizes[i]);
+                        }
+                        choice = choice(sizes.length,"Escoge una tamano");
+                        selected.setSize(sizes[choice-1]);
+                        added.add(selected);
+                        transactions.add(new Transaction("cash", added, new CurrentDate()));
+                } else {
+                        System.out.println("Uno o mas Ingredientes se han agotado, Escoga otro producto");
+                }
+
+
+
+                if (choose("Desea hacer otra transaccion?"))
+                        end = true;
+                else
+                        end = false;
+
+        } while(end == true);
+        saveTransactions(transactions);
+}
+
+public static int choice(int len, String message) { //makes list choice is valid.
         int choice = Lectura.readInt(message);
         if (choice <= len && choice >= 1)
                 return choice;
@@ -174,7 +208,7 @@ public static void employeeOptions() {
         }
 }
 
-public static boolean choose(String message) {
+public static boolean choose(String message) {   // si o no
         String n = Lectura.readString(message+"?  (si || no)");
         if (n.equals("si")) {
                 return true;
@@ -183,7 +217,7 @@ public static boolean choose(String message) {
         else
                 return choose(message);
 }
-public static Recipe createRecipe() {
+public static Recipe createRecipe() {     //creates recipe
         ArrayList<Ingredient> ingredients = readIngredients();
         System.out.println("Agrega un Ingrediente");
         ArrayList<Ingredient> added = new ArrayList<Ingredient>();
@@ -196,7 +230,7 @@ public static Recipe createRecipe() {
                 }
                 int choice = choice(options.length,"Escoge una opcion de la lista");
                 Ingredient selected = ingredients.get(choice-1);
-                int quantity = Lectura.readInt("Ingresar cantidad en " + selected.getMeasure());
+                int quantity = Lectura.getInt("Ingresar cantidad en " + selected.getMeasure());
                 selected.setQuantity(quantity);
                 added.add(selected);
 
@@ -208,23 +242,15 @@ public static Recipe createRecipe() {
         } while(end == true);
         return (new Recipe(added));
 }
-public static void saveIngredient(ArrayList<Ingredient> ingredients) {
-        Inventory f = new Inventory();
-        f.saveIngredient(ingredients, "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
-}
-public static ArrayList<Ingredient> readIngredients() {
-        Inventory f = new Inventory();
-        return f.readIngredients("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
 
-}
-public static void createIngredient() {
+public static void createIngredient() {  //add new ingredient to inventory
         boolean end = true;
         ArrayList<Ingredient> added = new  ArrayList<Ingredient>();
         while (end == true) {
                 System.out.println("Crear Ingrediente: ");
                 String name = Lectura.readString("Name: ");
                 int quantity = Lectura.getInt("Ingresar Cantidad");
-                double unitaryPrice = Lectura.readDouble("Price");
+                double unitaryPrice = Lectura.getFloat("Price");
                 String measure = Lectura.readString("Measure Unit: ");
                 added.add(new Ingredient(name,quantity,unitaryPrice,measure));
 
@@ -260,10 +286,10 @@ public static void createDrink() {
         } while(end == true);
         saveDrink(added);
 }
-public static Chocolate createChocolate() {
+public static Chocolate createChocolate() { //creates subclass Drink
         System.out.println("Crear Bebida: ");
         String name = Lectura.readString("Name");
-        double price = Lectura.readDouble("Price:");
+        double price = Lectura.getFloat("Price:");
         System.out.println("Crear receta");
         Recipe recipe = createRecipe();
         String size = "";
@@ -279,10 +305,10 @@ public static Chocolate createChocolate() {
         return new Chocolate(price,code,name,size,recipe,quantity,temp,type);
 
 }
-public static Drink createAll() {
+public static Drink createAll() { //creates Drink type
         System.out.println("Crear Bebida: ");
         String name = Lectura.readString("Name");
-        double price = Lectura.readDouble("Price:");
+        double price = Lectura.getFloat("Price:");
         System.out.println("Crear receta");
         Recipe recipe = createRecipe();
         String size = "";
@@ -292,11 +318,30 @@ public static Drink createAll() {
         return new Drink(price,code,name,size,recipe,quantity,temp);
 
 }
-public static void showInventory() {
-  ArrayList<Ingredient> list = readIngredients();
-  for (int i = 0;i < list.size();i++) {
-    System.out.println(list.get(i));
-  }
+public static void showInventory() { //muestra inventario
+        //displays updated inventory list
+        ArrayList<Ingredient> list = readIngredients();
+        boolean end = true;
+        do {
+                for (int i = 0; i < list.size(); i++) {
+                        System.out.println((i+1)+". " + list.get(i));
+                }
+                int choice = choice(list.size(),"Escoge que ingrediente repostar");
+                Ingredient curr = list.get(choice-1);
+                int q = Lectura.getInt("Cantidad a repostar, en "+ curr.getMeasure());
+                curr.setQuantity(curr.getQuantity() + q);
+                Inventory f = new Inventory();
 
+                if (choose("Desea repostar otro ingrediente?"))
+                        end = true;
+                else
+                        end = false;
+
+        } while(end == true);
+        Inventory f = new Inventory();
+        f.updateInventory(list,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
+
+        //.setQuantity(
 }
+
 }

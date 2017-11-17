@@ -35,11 +35,12 @@ public JSONArray getData(String path) {
 public void saveReport(ArrayList<String> names, ArrayList<String> values, String path) {
         JSONArray data = getData(path);
         FileWriter file = null;
+        JSONObject tran = new JSONObject();
         for (int i = 0; i < names.size(); i++) {
-                JSONObject tran = new JSONObject(); //new object to add
+                //new object to add
                 tran.put(names.get(i),values.get(i));
-                data.add(tran);
         }
+        data.add(tran);
 
         try { //write updated array to file
                 file = new FileWriter(path);
@@ -61,32 +62,32 @@ public void addTransaction(ArrayList<Transaction> transaction, String path) {
         JSONArray productsObj = new JSONArray();
         JSONArray recipe = new JSONArray();
         for (int i = 0; i < transaction.size(); i++) {
-          double cost = 0;
-          ArrayList<Product> products = transaction.get(i).getProducts();
-          for (int j = 0; j < products.size();j++) {
-            Drink curr = (Drink)products.get(j);
-            for (int m = 0; m < curr.getRecipe().getIngredients().size();m++) {
-              JSONObject ingredient = new JSONObject();
-              Ingredient currI = curr.getRecipe().getIngredients().get(m);
-              ingredient.put("name", currI.getName());
-              ingredient.put("quantity", currI.getQuantity());
-              ingredient.put("unitaryPrice", currI.getUnitaryPrice());
-              ingredient.put("name", currI.getName());
-              ingredient.put("name", currI.getMeasure());
+                double cost = 0;
+                ArrayList<Drink> products = transaction.get(i).getProducts();
+                for (int j = 0; j < products.size(); j++) {
+                        Drink curr = (Drink)products.get(j);
+                        for (int m = 0; m < curr.getRecipe().getIngredients().size(); m++) {
+                                JSONObject ingredient = new JSONObject();
+                                Ingredient currI = curr.getRecipe().getIngredients().get(m);
+                                ingredient.put("name", currI.getName());
+                                ingredient.put("quantity", currI.getQuantity());
+                                ingredient.put("unitaryPrice", currI.getUnitaryPrice());
+                                ingredient.put("name", currI.getName());
+                                ingredient.put("name", currI.getMeasure());
 
-                recipe.add(ingredient);
-            }
-                cost += curr.getRecipe().cost();
-                JSONObject product = new JSONObject();
-                product.put("price", curr.getPrice());
-                product.put("code", curr.getCode());
-                product.put("name", curr.getName());
-                product.put("size", curr.getSize());
-                product.put("recipe", recipe);
-                product.put("quantity", curr.getQuantity());
-                product.put("cost", curr.getRecipe().cost());
-                productsObj.add(product);
-          }
+                                recipe.add(ingredient);
+                        }
+                        cost += curr.getRecipe().cost();
+                        JSONObject product = new JSONObject();
+                        product.put("price", curr.getPrice());
+                        product.put("code", curr.getCode());
+                        product.put("name", curr.getName());
+                        product.put("size", curr.getSize());
+                        product.put("recipe", recipe);
+                        product.put("quantity", curr.getQuantity());
+                        product.put("cost", curr.getRecipe().cost());
+                        productsObj.add(product);
+                }
 
                 JSONObject tran = new JSONObject(); //new object to add
 
