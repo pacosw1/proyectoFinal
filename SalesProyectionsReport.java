@@ -203,4 +203,12 @@ class SalesProyectionsReport extends Report{
               }
           }
     }
+    public void expectedTime(){
+        System.out.println("What's the expected time to sell all products?");
+        long expectedTime = Lectura.readLong();
+    }
+    public void economyGrowth(){
+        System.out.println("What's the percentage rate of the change of the value of the dollar?");
+        double economyGrowth = Lectura.readDouble();
+    }
 }
