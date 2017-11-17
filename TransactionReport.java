@@ -9,12 +9,13 @@ private String bestProduct;
 private double profit;
 private double losses;
 private double profitMargin;
-public TransactionReport(CurrentDate date, String title, Json save, SaveToFile f, String path) {
-        super(date, title, save, f, path);
+public TransactionReport(CurrentDate date, String title, String path) {
+        super(date, title, path);
 }
 
 
 public void saveReport() {
+   Json save = new Json();
   save.saveReport(names(),values(),path);
 }
 
@@ -29,7 +30,7 @@ public ArrayList<String> names() {
 @Override
 public String toString() {
   losses(); bestProduct(); totals(); profits();
-  path += "TransactionReport" +reportCount +".dat";
+  path += "TransactionReport" +reportCount +".json";
   saveReport();
   reportCount++;
 
@@ -53,7 +54,7 @@ public void bestProduct() {
   ArrayList<Transaction> data = data();
         double best = 0.0; double profit = 0.0; //var declaration
         for (int i = 0; i < data.size(); i++) { //transaction array
-                ArrayList<Product> curr = data.get(i).getProducts(); //product array
+                ArrayList<Drink> curr = data.get(i).getProducts(); //product array
                 for (int j = 0; j < curr.size(); j++) {
                         Drink product = (Drink)curr.get(j);
                         profit = product.total() - product.cost();
@@ -64,12 +65,13 @@ public void bestProduct() {
         }
 }
 public ArrayList<Transaction> data() {
-      return f.readTransactions("C:\\Users\\paco\\Desktop\\transactions.dat"); //returns data from .dat file as arraylist
+  Inventory f = new Inventory();
+      return f.readTransactions(path+"transactions.dat"); //returns data from .dat file as arraylist
 }
 public void losses() {
   ArrayList<Transaction> data = data();
         for (int i = 0; i < data.size(); i++) {
-                ArrayList<Product> curr = data.get(i).getProducts();
+                ArrayList<Drink> curr = data.get(i).getProducts();
                 for (int j = 0; j < curr.size(); j++) {
                         Drink product = (Drink)curr.get(j);
                         if (product.total() - product.cost() < 0) //checks if there are any losses in products.

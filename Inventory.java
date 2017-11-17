@@ -6,8 +6,6 @@ class Inventory implements Serializable {
 public Inventory() {
 }
 
-
-
 public ArrayList<Ingredient> readIngredients(String path) {
         FileInputStream fis = null;
         ArrayList<Ingredient> objectsList = new ArrayList<Ingredient>(); //Ingredient specified as type
@@ -80,6 +78,30 @@ public void saveIngredient(ArrayList<Ingredient>ingredients, String path) {     
                 for (int j = 0; j< current.size(); j++) //writes all old and new Objects to file from the arrayList;
                 {
                         f2.writeObject(current.get(j));
+                }
+
+        }
+        catch(IOException e) {System.out.println("No se almaceno");}
+        finally {
+                try {
+                        f2.close();
+                        f1.close();
+                }
+                catch(IOException e) {System.out.println("Error al cerrar el archivo");}
+        }
+}
+public void updateInventory(ArrayList<Ingredient>ingredients, String path) {     //saves ingredient object to .dat file.
+
+       //uses the read method tu get all saved objects from the file.
+
+        FileOutputStream f1 = null;
+        ObjectOutputStream f2=null;
+        try {
+                f1 = new FileOutputStream(path);
+                f2 = new ObjectOutputStream(f1);
+                for (int j = 0; j< ingredients.size(); j++) //writes all old and new Objects to file from the arrayList;
+                {
+                        f2.writeObject(ingredients.get(j));
                 }
 
         }
