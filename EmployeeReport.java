@@ -12,9 +12,6 @@ class EmployeeReport extends Report{
   public EmployeeReport(CurrentDate date, String title, String path){
       super(date, title , path);
   }
-  //Set
-  //Get
-  //Methods
   public void saveReport() {
      Json save = new Json();
     save.saveReport(names(),values(),path);
@@ -40,6 +37,8 @@ class EmployeeReport extends Report{
   public String toString() {
     //Values
     path += "EmployeeReport" +reportCount +".json";
+    totalPayment();
+    suggestions();
     saveReport();
     reportCount++;
 
@@ -52,7 +51,7 @@ class EmployeeReport extends Report{
   }
   //Methods
   public void totalPayment(){
-  ArrayList<Employee> data = data();
+  ArrayList<Employee> employee= data();
   String day = " ";
 
     for(int i = 0; i < employee.size();i++){
@@ -77,8 +76,7 @@ class EmployeeReport extends Report{
               case 6: day = "Sunday";
                       break;
              }
-           /*System.out.print("How many hours did employee " + current.getName() + " work on " + day + ":");
-           double hours = Lectura.readDouble();*/
+
            hoursEmployee = current.getHours();
 
            payment[x] += (hoursEmployee * salary);
@@ -89,28 +87,34 @@ class EmployeeReport extends Report{
       }
     }
     public void suggestions(){
-      System.out.println("How many client suggestions did you get?");
-      int clients = Lectura.readInt();
+      ArrayList<Employee> employee= data();
+
+      for(int i = 0; i < employee.size();i++){
+       Employee current = employee.get(i);//Gets Employee i from arraylist, current may need to be array
+       totalEmployees += current;
+      }
+
+      for(int x = 0; x < totalEmployees; x++){//Clients Served
+         clients += current.getClients();
+      }
 
       String[] suggestions = new String[clients];
 
       for(int y = 0; y < clients; y++){
-        System.out.println("What was the suggestion of client:");
-        String secretSuggestion = Lectura.readString();
-        suggestions[y] = secretSuggestion;
+        suggestions[y] = current.getClientsSuggestions();
       }
-      System.out.println("Is there a suggestion you would like to make?");
-      String suggestionEmployee = Lectura.readString();
+      /*System.out.println("Is there a suggestion you would like to make?");
+      String suggestionEmployee = Lectura.readString();*/
 
       if(clients > 0){
          System.out.println("Client's Suggestions Report: ");
          for(int i = 0; i < clients; i++) {
                  System.out.println("Suggestion of Client " + (i + 1) + ": " + suggestions[i]);
          }
-         System.out.println("The employee's suggestion is: " + suggestionEmployee);
+         System.out.println("The employee's suggestion is: " + current.getEmployeeSuggestion());
       }
       else
-        System.out.println("The employee's suggestion is: " + suggestionEmployee);
+        System.out.println("The employee's suggestion is: " + current.getEmployeeSuggestion());
     }
   }
 }

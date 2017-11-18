@@ -9,7 +9,7 @@ public InventoryReport(CurrentDate date, String title, String path){
 }
 public void saveReport() {
         Json save = new Json();
-        save.saveReport(names(),values(),path); //YA jalo
+        save.saveReport(names(),values(),path);
 }
 @Override
 public String toString() {
