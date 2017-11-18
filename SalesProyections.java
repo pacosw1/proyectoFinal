@@ -124,67 +124,8 @@ public static void main(String[] args){
       System.out.println(tibia);
    }
 */
-class SalesProyections{
-  private long expectedTime;//Time to sell x product
-  private double economyGrowthRate;//Changes the cost of dollars
-  //private Inventory inventoryProducts; <--- How it should be done.
-  private int inventoryProducts;
-  private double[] currentSales;//Total Sales per product
-  private double[] predefinedSales;
-  private double totalSales;
-  //Construct
-  public SalesProyections(long expectedTime, double economyGrowthRate, int inventoryProducts,//Inventory inventoryProducts,
-  double[] currentSales, double[] predefinedSales, double totalSales){
-    setExpectedTime(expectedTime);
-    setEconomyGrowthRate(economyGrowthRate);
-    setInventoryProducts(inventoryProducts);
-    setCurrentSales(currentSales);
-    setPredefinedSales(predefinedSales);
-    setTotalSales(totalSales);
-  }
-  //Set
-    public void setExpectedTime(long expectedTime){
-        this.expectedTime = expectedTime;
-    }
-    public void setEconomyGrowthRate(double economyGrowthRate){
-        this.economyGrowthRate = economyGrowthRate;
-    }
-    /*public void setInventoryProducts(Inventory inventoryProducts){
-        this.inventoryProducts = inventoryProducts;
-    }*/
-    public void setInventoryProducts(int inventoryProducts){
-        this.inventoryProducts = inventoryProducts;
-    }
-    public void setCurrentSales(double[] currentSales){
-        this.currentSales = currentSales;
-    }
-    public void setPredefinedSales(double[] predefinedSales){
-        this.predefinedSales = predefinedSales;
-    }
-    public void setTotalSales(double totalSales){
-        this.totalSales = totalSales;
-    }
-  //Get
-  public long getExpectedTime(){
-        return expectedTime;
-  }
-  public double getEconomyGrowthRate(){
-        return economyGrowthRate;
-  }
-  /*public Inventory getInventoryProducts(){
-        return inventoryProducts;
-  }*/
-  public int getInventoryProducts(){
-        return inventoryProducts;
-  }
-  public double[] getCurrentSales(){
-        return currentSales;
-  }
-  public double[] getPredefinedSales(){
-        return predefinedSales;
-  }
-  public double getTotalSales(){//Display this
-        return totalSales;
+class SalesProyections implements Serializable{
+  public SalesProyections(){
   }
   //Methods
   public void totalClientSales(){//Self Explanitory, new ones
@@ -241,13 +182,14 @@ class SalesProyections{
           }
       }
   }
-  /*public String salesTendencies(){//How much has a product sold, how much is left on the inventory, what to do.
-    return "Hello";
-  }*/
+  public void salesTendencies(){
+    //How much has a product sold, how much is left on the inventory, what to do.
+  }
   //Display
   public String toString(){
     totalClientSales();
     changeOfSales();
+    salesTendencies();
 
    return "Sales Proyections Report: \nTotal Client Sales: \nChange of Sales: ";
   }
