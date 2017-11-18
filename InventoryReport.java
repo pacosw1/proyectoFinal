@@ -60,7 +60,6 @@ public ArrayList<String> values() { //and its values
         n.add(date.toString());
         n.add(reorder);
 
-
         return n;
 }
 

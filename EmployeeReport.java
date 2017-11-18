@@ -2,12 +2,11 @@ import java.io.*;
 import java.util.*;
 import java.lang.reflect.Field;
 class EmployeeReport extends Report{
-  private double hoursWorkedDaily;
-  private double dailyPayment;
-  private double totalPayment;
+  private String day;
   private int totalEmployees;
-  private String[] suggestions;
+  private int clients;
   private double hoursEmployee;
+  private String[] suggestions;
   //Construct
   public EmployeeReport(CurrentDate date, String title, String path){
       super(date, title , path);
@@ -17,7 +16,7 @@ class EmployeeReport extends Report{
     save.saveReport(names(),values(),path);
   }
 
-  public ArrayList<String> names(){
+  public ArrayList<String> names(){//Not sure if this is right xD
           ArrayList<String> name = new ArrayList<String>();
           Field[] f = TransactionReport.class.getDeclaredFields();
           for (int i = 0; i < f.length; i++) {
@@ -27,10 +26,13 @@ class EmployeeReport extends Report{
   }
   public ArrayList<String> values() {
           ArrayList<String> n = new ArrayList<String>();
-          n.add(String.valueOf(hoursWorkedDaily));
-          n.add(String.valueOf(totalPayment));
-          n.add(String.valueOf(totalPayment));
-          n.add(String.valueOf(suggestions));
+          n.add(title);
+          n.add(date.toString());
+          n.add(day);
+          n.add(totalEmployees);
+          n.add(clients);
+          n.add(suggestions);
+          n.add(hoursEmployee);
           return n;
   }
   @Override
@@ -52,7 +54,7 @@ class EmployeeReport extends Report{
   //Methods
   public void totalPayment(){
   ArrayList<Employee> employee= data();
-  String day = " ";
+  day = " ";
 
     for(int i = 0; i < employee.size();i++){
      Employee current = employee.get(i);//Gets Employee i from arraylist, current may need to be array
@@ -98,13 +100,11 @@ class EmployeeReport extends Report{
          clients += current.getClients();
       }
 
-      String[] suggestions = new String[clients];
+      suggestions = new String[clients];
 
       for(int y = 0; y < clients; y++){
         suggestions[y] = current.getClientsSuggestions();
       }
-      /*System.out.println("Is there a suggestion you would like to make?");
-      String suggestionEmployee = Lectura.readString();*/
 
       if(clients > 0){
          System.out.println("Client's Suggestions Report: ");
