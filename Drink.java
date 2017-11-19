@@ -12,43 +12,7 @@ public Drink(double price,String code, String name,String size, Recipe recipe, i
         this.temp = temp;
 }
 //Set
-public void setSize(String size) {
-        this.size = size;
-}
-public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-}
-public void setName(String name) {
-        this.name = name;
-}
-public void setCode(String code) {
-        this.code = code;
-}
-public void setPrice(double price){
-        this.price = price;
-}
-public void setQuantity(int quantity){
-        this.quantity = quantity;
-}
-//Get
-public String getSize() {
-        return size;
-}
-public Recipe getRecipe() {
-        return recipe;
-}
-public String getName() {
-        return name;
-}
-public String getCode() {
-        return code;
-}
-public double getPrice(){
-        return price;
-}
-public int getQuantity(){
-        return quantity;
-}
+
 //Methods
 //Obtains the cost for each recipe
 public double cost() {
@@ -60,5 +24,37 @@ public double total() {
 //Displays
 public String toString() {
         return name + "   "+"$"+price;
+}
+
+public String getSize() {
+        return size;
+}
+
+public Recipe getRecipe() {
+        return recipe;
+}
+
+public String getName() {
+        return name;
+}
+
+public String getTemp() {
+        return temp;
+}
+
+public void setSize(String size) {
+        this.size = size;
+}
+
+public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+}
+
+public void setName(String name) {
+        this.name = name;
+}
+
+public void setTemp(String temp) {
+        this.temp = temp;
 }
 }

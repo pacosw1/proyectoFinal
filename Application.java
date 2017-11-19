@@ -196,6 +196,17 @@ public static boolean changeStock(Recipe recipe,int q) {         //during sale, 
         return end;
 
 }
+public static double sizePrice(int choice) {
+        if (choice == 0) {
+                return 0.23;
+        }
+        else if (choice == 1) {
+                return 0.89;
+        } else {
+                return 1.23;
+        }
+
+}
 public static void sellDrink() {         //Drink sale
 
         ArrayList<Transaction> transactions = readTransactions();
@@ -214,15 +225,29 @@ public static void sellDrink() {         //Drink sale
                 int quantity = Lectura.getInt("Ingresar cantidad");
                 selected.setQuantity(quantity);
                 if (changeStock(selected.getRecipe(), selected.getQuantity())) {         //checks to see if quantity is > 0 to make drink
+                        for (int m = 0; m < quantity; m++) {
+                                System.out.println("Drink#:"+ (m+1)+"\n");
+                                String[] sizes = {"small","medium","venti"};
+                                for (int i = 0; i < sizes.length; i++) {
+                                        System.out.println((i+1) + ". " + sizes[i]);
+                                }
+                                choice = choice(sizes.length,"Escoge una tamano");
+                                selected.setPrice(selected.getPrice() + sizePrice(choice-1));
 
-                        String[] sizes = {"small","medium","venti"};
-                        for (int i = 0; i < sizes.length; i++) {
-                                System.out.println((i+1) + ". " + sizes[i]);
+                                selected.setSize(sizes[choice-1]);
+                                String[] temp = {"Caliente","Frio"};
+                                for (int i = 0; i < temp.length; i++) {
+                                        System.out.println((i+1) + ". " + temp[i]);
+                                }
+                                choice = choice(temp.length,"Escoge una temperatura");
+                                selected.setTemp(temp[choice-1]);
+
                         }
-                        choice = choice(sizes.length,"Escoge una tamano");
-                        selected.setSize(sizes[choice-1]);
+
                         added.add(selected);
-                        transactions.add(new Transaction("cash", added, new CurrentDate()));
+                        Transaction curr = new Transaction("cash", added, new CurrentDate());
+                        transactions.add(curr);
+                        System.out.println("Total: "+ curr.getTotal());
                 } else {
                         System.out.println("Uno o mas Ingredientes se han agotado, Escoga otro producto");
                 }
@@ -330,7 +355,7 @@ public static void createDrink() {
                         System.out.println((i+1) + ". "+items[i]);
                 }
                 int choice = choice(items.length,"Escoge una opcion de la lista");
-                switch (choice-1) {
+                switch (choice) {
                 case 1:
                         added.add(createAll());
                         break;

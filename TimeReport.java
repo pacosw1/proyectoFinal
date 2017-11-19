@@ -86,7 +86,7 @@ public void bestOverallHour() {
                 }
         }
 
-        popularHour = String.valueOf(hours[ind]);
+
 
 
 }
