@@ -9,7 +9,7 @@ public InventoryReport(CurrentDate date, String title, String path){
 }
 public void saveReport() {
         Json save = new Json();
-        save.saveReport(names(),values(),path); //YA jalo
+        save.saveReport(names(),values(),path);
 }
 @Override
 public String toString() {
@@ -59,7 +59,6 @@ public ArrayList<String> values() { //and its values
         n.add(title);
         n.add(date.toString());
         n.add(reorder);
-
 
         return n;
 }

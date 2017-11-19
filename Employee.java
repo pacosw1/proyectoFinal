@@ -1,67 +1,6 @@
 import java.io.*;
-class Employee {//On main ask Hours worked per employee
-private double hoursWorkedDaily;
-private double x;
-//Construct
-public Employee(double totalPayment, double totalHours, String name, int numberEmployees, String suggestionEmployee, String[] suggestionClients, int clients, double[] payment){
-        setTotalPayment(totalPayment);
-        setName(name);
-        setTotalHours(totalHours);
-        setNumberEmployees(numberEmployees);
-        setSuggestionEmployee(suggestionEmployee);
-        setSuggestionClients(suggestionClients);
-        setClients(clients);
-        setPayment(payment);
-}
-//Set
-public void setTotalPayment(double totalPayment){
-        this.totalPayment = totalPayment;
-}
-public void setTotalHours(double totalHours){
-        this.totalHours = totalHours;
-}
-public void setName(String name){
-        this.name = name;
-}
-public void setNumberEmployees(int numberEmployees){
-        this.numberEmployees = numberEmployees;
-}
-public void setSuggestionEmployee(String suggestionEmployee){
-        this.suggestionEmployee = suggestionEmployee;
-}
-public void setSuggestionClients(String[] suggestionClients){
-        this.suggestionClients = suggestionClients;
-}
-public void setClients(int clients){
-        this.clients = clients;
-}
-public void setPayment(double[] payment){
-        this.payment = payment;
-}
-//Get
-public double getTotalPayment(){
-        return totalPayment;
-}
-public double getTotalHours(){
-        return totalHours;
-}
-public String getName(){
-        return name;
-}
-public int getNumberEmployees(){
-        return numberEmployees;
-}
-public String getSuggestionEmployee(){
-        return suggestionEmployee;
-}
-public String[] getSuggestionsClients(){
-        return suggestionClients;
-}
-public int getClients(){
-        return clients;
-}
-public double[] getPayment(){
-        return payment;
+class Employee implements Serializable{
+public Employee(){
 }
 //Methods
 public String employeeReport(){
