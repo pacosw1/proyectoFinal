@@ -72,21 +72,27 @@ class SalesProyectionsReport extends Report{
       }
     }
     public void totalClientSales(){
+      ArrayList<Transaction> transactions = data();
+
+      for(int i = 0; i < transactions.getSize(); i++){
+          SalesProyections current = transactions.get(i);
+      }
+
       for(int i = 0; i < 4; i++){
        switch(i){
-          case 0: System.out.println("Total Coffee Sales: " + currentSales[i]);
+          case 0: System.out.println("Total Coffee Sales: " + current.getCoffeeSales());
                   break;
-          case 1: System.out.println("Total Chocolate Drink Sales: " + currentSales[i]);
+          case 1: System.out.println("Total Chocolate Drink Sales: " + current.getChocolateSales());
                   break;
-          case 2: System.out.println("Total Tea Sales: " + currentSales[i]);
+          case 2: System.out.println("Total Tea Sales: " + current.getTeaSales());
                   break;
-          case 3: System.out.println("Total Other Drinks Sales: " + currentSales[i]);
+          case 3: System.out.println("Total Other Drinks Sales: " + current.getOtherSales());
                   break;
           }
       }
 
    }
-    public void changeOfSales(){
+    public void changeOfSales(){//Compares Predefined Sales with Current Sales
       double change = 0;
           for(int i = 0; i < 4; i++){
            switch(i){
@@ -126,11 +132,11 @@ class SalesProyectionsReport extends Report{
           }
     }
     public void expectedTime(){
-        System.out.println("What's the expected time to sell all products?");
-        long expectedTime = Lectura.readLong();
+        ArrayList<Inventory> inventory = data();
+        Inventory current = inventory.getExpectedSaleTime();
     }
     public void economyGrowth(){
-        System.out.println("What's the percentage rate of the change of the value of the dollar?");
-        double economyGrowth = Lectura.readDouble();
+      ArrayList<Transaction> transaction = data();
+      Inventory current = transaction.getEconomyGrowth();
     }
 }

@@ -42,7 +42,7 @@ class ManagerReport extends Report{
     ArrayList<Employee> employee= data();
 
     for(int i = 0; i < employee.size();i++){
-       Employee current = employee.get(i);//Gets Employee i from arraylist, current may need to be array
+       Manager current = employee.get(i);//Gets Employee i from arraylist, current may need to be array
        totalEmployees += current;
     }
 
