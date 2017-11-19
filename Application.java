@@ -1,22 +1,94 @@
 import java.io.*;
 import java.io.*;
 import java.util.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 class Application implements Serializable {
 public static void main(String[] args) {
+        CLogin user = new CLogin();
+        JFrame frame = new JFrame("Demo application");
+        frame.setSize(300, 150);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        CLogin toby = new CLogin();
-        toby.setUsername(Lectura.readString("Ingresar Usuario"));
-        toby.setTypedPassword(Lectura.readString("Ingresar Password"));
-        if (toby.loginAttempts()) {
-                if (toby.status == 0) { //manage or employee
-                        //admin actions (access reports etc...)
-                        managerOptions(); //interface
+        JPanel panel = new JPanel();
+        frame.add(panel);
+        panel.setLayout(null);
+        JLabel attempts = new JLabel("Attempts: " +user.getAttempts());
+        attempts.setBounds(10, 100, 100, 25);
+        panel.add(attempts);
 
-                } else {
-                        employeeOptions();
-                }
-        }
+        JLabel userLabel = new JLabel("User");
+        userLabel.setBounds(10, 10, 80, 25);
+        panel.add(userLabel);
+
+        JTextField userText = new JTextField(20);
+        userText.setBounds(100, 10, 160, 25);
+        panel.add(userText);
+
+        JLabel passwordLabel = new JLabel("Password");
+        passwordLabel.setBounds(10, 40, 80, 25);
+        panel.add(passwordLabel);
+
+        JPasswordField passwordText = new JPasswordField(20);
+        passwordText.setBounds(100, 40, 160, 25);
+        panel.add(passwordText);
+
+        JButton loginButton = new JButton("login");
+        loginButton.setBounds(10, 80, 80, 25);
+        panel.add(loginButton);
+
+        frame.setVisible(true);
+
+        loginButton.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+
+                                user.setUsername(userText.getText());
+                                user.setTypedPassword( passwordText.getText());
+
+                                if (user.getAttempts() == 1) {
+                                        attempts.setText("Ran out of tries Try Again Later");
+                                }
+                                else if (user.checkAccount()) {
+                                        frame.dispose();
+                                        if (user.getStatus() == 0) {           //manage or employee
+                                                //admin actions (access reports etc...)
+                                                managerOptions();           //interface
+
+                                        } else if (user.getStatus() == 1) {
+                                                employeeOptions();
+                                        }
+                                        else {
+                                                System.out.println("Error");
+                                        }
+
+                                }
+
+                                else {
+                                        userText.setText("");
+                                        passwordText.setText("");
+                                        attempts.setText("Attempts: " + user.getAttempts());
+                                }
+
+
+                        };
+                });
+
+
+
+
+
+
+
+
 }
+
+
 //methods
 public static void managerOptions() { //uses all other methods to provide interface
         boolean end = true;

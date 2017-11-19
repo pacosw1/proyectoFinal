@@ -3,11 +3,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 public class CLogin extends Application {
-private int attempts = 2;//2+initial
+private int attempts = 3;//2+initial
 private String username;
 private String typedPassword;
-protected int status;
-private JPasswordField password;//Hides password
+protected int status = 5;
 
 public CLogin() {
         setUsername(username);
@@ -22,6 +21,7 @@ public boolean checkAccount() {
                 setStatus(1); //employee
                 return true;
         }else {
+                attempts--;
                 return false;
         }
 }
@@ -35,29 +35,20 @@ public String stringPassword(char[] pass) {
 //char[] password = console.readPassword("Enter password");
 //Arrays.fill(password, ' ');
 public boolean loginAttempts() {//Recursive function to test for login attempts
-        if(checkAccount()) {
-                //log in status to true;
-                if (status == 0) {
-                        System.out.println("Logging in as Admin");
-                        return true;
-                }
-                else {
-                        System.out.println("Logging in as floor employee");
-                        return true;
-                }
+
+        //log in status to true;
+        if (status == 0) {
+                System.out.println("Logging in as Admin");
+                return true;
         }
-        else if (attempts > 0) {
+        else if (status == 1) {
+                System.out.println("Logging in as floor employee");
+                return true;
+        }
+        else {
+                return false;
+        }
 
-                System.out.println("Attempts: " + (attempts));
-
-                setUsername(Lectura.readString("Username"));
-                setTypedPassword(Lectura.readString("Password"));
-                checkAccount();
-                attempts--;
-                return loginAttempts();
-        } else
-                System.out.println("Attempts Depleted, Try Again Later");
-        return false;
 }
 public String toString() {
         return loginAttempts() + "";
