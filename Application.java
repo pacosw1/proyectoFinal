@@ -1,5 +1,4 @@
 import java.io.*;
-import java.io.*;
 import java.util.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 class Application implements Serializable {
 public static void main(String[] args) {
+
         CLogin user = new CLogin();
         JFrame frame = new JFrame("Demo application");
         frame.setSize(300, 150);
@@ -50,17 +50,17 @@ public static void main(String[] args) {
 
                                 user.setUsername(userText.getText());
                                 user.setTypedPassword( passwordText.getText());
-
-                                if (user.getAttempts() == 1) {
-                                        attempts.setText("Ran out of tries Try Again Later");
-                                }
-                                else if (user.checkAccount()) {
+                                if (user.checkAccount()) {
                                         frame.dispose();
-                                        if (user.getStatus() == 0) {           //manage or employee
+                                        if (user.getStatus() == 0) {          //manage or employee
                                                 //admin actions (access reports etc...)
-                                                managerOptions();           //interface
+                                                managerOptions();          //interface
 
-                                        } else if (user.getStatus() == 1) {
+                                        }
+                                        else if (user.getAttempts() == 1) {
+                                                attempts.setText("Ran out of tries Try Again Later");
+                                        }
+                                        else if (user.getStatus() == 1) {
                                                 employeeOptions();
                                         }
                                         else {
@@ -83,14 +83,12 @@ public static void main(String[] args) {
 
 
 
-
-
-
 }
 
 
+
 //methods
-public static void managerOptions() { //uses all other methods to provide interface
+public static void managerOptions() {         //uses all other methods to provide interface
         boolean end = true;
         do {
                 String[] actions = {"Realizar Venta","Agregar Nueva Bebida","Agregar Nuevo Ingrediente","Inventario","Generar Reportes","Cerrar Session"};
@@ -144,12 +142,20 @@ public static ArrayList<Ingredient> readIngredients() {
         return f.readIngredients("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
 
 }
-
-public static ArrayList<Transaction> readTransactions() { //return list of all transactions from .dat file
+/*public static ArrayList<Employee> readEmployee(){
+        Employee f = new Employee();
+        return f.readEmployees("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
+   }
+   public static void saveEmployee(ArrayList<Employee> employee){
+        Employee f = new Employee();
+        f.saveEmployee(employee,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
+   }
+ */
+public static ArrayList<Transaction> readTransactions() {         //return list of all transactions from .dat file
         Inventory f = new Inventory();
         return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
 }
-public static void saveTransactions(ArrayList<Transaction> transactions) { //saves given transaction arrayList
+public static void saveTransactions(ArrayList<Transaction> transactions) {         //saves given transaction arrayList
         Inventory f = new Inventory();
         f.saveTransaction(transactions,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
 }
@@ -164,7 +170,7 @@ public static void saveDrink(ArrayList<Drink> drinks) {
         f.saveDrink(drinks,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
 }
 
-public static boolean changeStock(Recipe recipe,int q) { //during sale, substracts recipe quantities from inventory
+public static boolean changeStock(Recipe recipe,int q) {         //during sale, substracts recipe quantities from inventory
         boolean end = true;
         ArrayList<Ingredient> selected = recipe.getIngredients();
         ArrayList<Ingredient> ingredients = readIngredients();
@@ -190,7 +196,7 @@ public static boolean changeStock(Recipe recipe,int q) { //during sale, substrac
         return end;
 
 }
-public static void sellDrink() { //Drink sale
+public static void sellDrink() {         //Drink sale
 
         ArrayList<Transaction> transactions = readTransactions();
         ArrayList<Drink> drinks = readDrinks();
@@ -207,7 +213,7 @@ public static void sellDrink() { //Drink sale
 
                 int quantity = Lectura.getInt("Ingresar cantidad");
                 selected.setQuantity(quantity);
-                if (changeStock(selected.getRecipe(), selected.getQuantity())) { //checks to see if quantity is > 0 to make drink
+                if (changeStock(selected.getRecipe(), selected.getQuantity())) {         //checks to see if quantity is > 0 to make drink
 
                         String[] sizes = {"small","medium","venti"};
                         for (int i = 0; i < sizes.length; i++) {
@@ -232,7 +238,7 @@ public static void sellDrink() { //Drink sale
         saveTransactions(transactions);
 }
 
-public static int choice(int len, String message) { //makes list choice is valid.
+public static int choice(int len, String message) {         //makes list choice is valid.
         int choice = Lectura.getInt(message);
         if (choice <= len && choice >= 1)
                 return choice;
@@ -261,7 +267,7 @@ public static void employeeOptions() {
 
 }
 
-public static boolean choose(String message) {   // si o no
+public static boolean choose(String message) {         // si o no
         String n = Lectura.readString(message+"?  (si || no)");
         if (n.equals("si")) {
                 return true;
@@ -270,7 +276,7 @@ public static boolean choose(String message) {   // si o no
         else
                 return choose(message);
 }
-public static Recipe createRecipe() {     //creates recipe
+public static Recipe createRecipe() {         //creates recipe
         ArrayList<Ingredient> ingredients = readIngredients();
         System.out.println("Agrega un Ingrediente");
         ArrayList<Ingredient> added = new ArrayList<Ingredient>();
@@ -296,7 +302,7 @@ public static Recipe createRecipe() {     //creates recipe
         return (new Recipe(added));
 }
 
-public static void createIngredient() {  //add new ingredient to inventory
+public static void createIngredient() {         //add new ingredient to inventory
         boolean end = true;
         ArrayList<Ingredient> added = new  ArrayList<Ingredient>();
         while (end == true) {
@@ -339,7 +345,7 @@ public static void createDrink() {
         } while(end == true);
         saveDrink(added);
 }
-public static Chocolate createChocolate() { //creates subclass Drink
+public static Chocolate createChocolate() {         //creates subclass Drink
         System.out.println("Crear Bebida: ");
         String name = Lectura.readString("Name");
         double price = Lectura.getFloat("Price:");
@@ -358,7 +364,7 @@ public static Chocolate createChocolate() { //creates subclass Drink
         return new Chocolate(price,code,name,size,recipe,quantity,temp,type);
 
 }
-public static Drink createAll() { //creates Drink type
+public static Drink createAll() {         //creates Drink type
         System.out.println("Crear Bebida: ");
         String name = Lectura.readString("Name");
         double price = Lectura.getFloat("Price:");
@@ -371,7 +377,7 @@ public static Drink createAll() { //creates Drink type
         return new Drink(price,code,name,size,recipe,quantity,temp);
 
 }
-public static void showInventory() { //muestra inventario
+public static void showInventory() {         //muestra inventario
         //displays updated inventory list
         ArrayList<Ingredient> list = readIngredients();
         boolean end = true;
@@ -392,7 +398,7 @@ public static void showInventory() { //muestra inventario
 
         } while(end == true);
         Inventory f = new Inventory();
-        f.updateInventory(list,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");    //.setQuantity(
+        f.updateInventory(list,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");         //.setQuantity(
 }
 
 }
