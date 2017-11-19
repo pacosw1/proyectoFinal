@@ -132,11 +132,19 @@ class SalesProyectionsReport extends Report{
           }
     }
     public void expectedTime(){
-        ArrayList<Inventory> inventory = data();
-        Inventory current = inventory.getExpectedSaleTime();
+      ArrayList<Inventory> inventory = data();
+      Inventory current = inventory.getExpectedSaleTime();
     }
     public void economyGrowth(){
       ArrayList<Transaction> transaction = data();
       Inventory current = transaction.getEconomyGrowth();
+    }
+    public void salesTendencies(){
+      //How much has a product sold, how much is left on the inventory, what to do.
+      ArrayList<Transaction> transaction = data();
+      Transaction coffeeSales = transaction.getCoffeeSales();
+      Transaction chocolateSales = transaction.getChocolateSales();
+      Transaction teaSales = transaction.getTeaSales();
+      Transaction otherSales = transaction.getOtherSales();
     }
 }

@@ -1,16 +1,14 @@
 import java.io.*;
 import java.util.*;
 import java.lang.reflect.Field;
+class TendencyReport extends Report{
 private int totalHot;
 private int totalCold;
 private int totalSmall;
 private int totalMedium;
 private int totalVenti;
-private int totalCoffee;
-private int totalChocolate;
-private int totalTea;
-private int totalOther;
-class TendencyReport extends Report{
+private double totalCost;
+private double totalPrice;
     public TendencyReport(CurrentDate date, String title, String path){
           super(date, title, path);
     }
@@ -33,27 +31,35 @@ class TendencyReport extends Report{
             n.add(String.valueOf(products));*/
             return n;
     }
+    @Override
+    public String toString(){
+      return " ";
+    }
     public ArrayList<Transaction> data() {
             Inventory f = new Inventory();
-            return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
+            return f.readTransactions("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
     }
 
     public void displayReport(){
-      ArrayList<Transaction> transactions = data();
-
-      for (int i = 0; i < transactions.size(); i++) {
-              Ingredient current = transactions.get(i);
+    ArrayList<Transaction> data = data(); //list of transactions
+   // ArrayList<Drink> product = name(); //Needs to get name from x product sold
+    
+      double cost = 0.0; double price = 0.0;
+      for (int i = 0; i < data.size(); i++) {
+              totalCost += data.get(i).cost(); //totals per transactions. Declared in transaction class
+              totalPrice += data.get(i).total();
       }
 
-      for(int x = 0; x < current.getSales(); x++){//Determines the most selled "temperature" drink
-            if(current.getTemperature().equals("Hot")){
-                totalHot += 1;
+      
+      for(int x = 0; x < totalPrice; x++){//Determines the most selled "temperature" drink
+            if(data.getProduct().equals("Other")){
+                totalCold += 1;
             }
             else
-                totalCold +=1;
+                totalHot +=1;
       }
 
-      for(int x = 0; x < current.getSales(); x++){//Determines the most selled size
+      for(int y = 0; y < totalPrice; y++){//Determines the most selled size
             if(current.getDrinkSize().equals("small")){
                 totalSmall += 1;
             }
@@ -64,21 +70,26 @@ class TendencyReport extends Report{
             else
                 totalVenti += 1;
       }
+}
 
-      for(int y = 0; y < current.getSales(); y++){
-           if(current.getProduct().equals("Coffee")){
-                totalCoffee += 1;
-           }
-           else
-           if(current.getProduct().equals("Chocolate")){
-                totalChocolate += 1;
-           }
-           else
-           if(current.getTea().equals("Tea")){
-                totalTea += 1;
-           }
-           else
-                totalOther += 1;
+   public void bestProduct() {
+      ArrayList<Transaction> data = data();
+      double best = 0.0; double profit = 0.0; //var declaration
+      for (int i = 0; i < data.size(); i++) { //transaction array
+      
+         ArrayList<Drink> curr = data.get(i).getProducts(); //product array
+         
+         for (int j = 0; j < curr.size(); j++) {
+            Drink product = (Drink)curr.get(j);
+            profit = product.total() - product.cost();
+            
+            if (profit > best) { //checks for highest profit of all products (saves name and profit)
+               bestProduct = product.getName();
+            }
+            
+         }
       }
-  }
+   }
+    
+
 }

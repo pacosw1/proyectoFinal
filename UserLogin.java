@@ -33,7 +33,7 @@ public class UserLogin extends Application {//Tiene que estar en application
 		if(loginDlg.getStatus() == 0) {
 						//admin actions (access reports etc...)
 						managerOptions();
-						TransactionReport report = new TransactionReport(new CurrentDate(),"test","C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
+						TransactionReport report = new TransactionReport(new CurrentDate(),"test","C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\");
 						System.out.println(report);
 		} else {
 

@@ -124,7 +124,7 @@ public static void managerOptions() {         //uses all other methods to provid
 }
 //read and save Methods
 public static void generateReports() {
-        String path = "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\Reports.json";
+        String path = "C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\Reports.json";
         TimeReport rep = new TimeReport(new CurrentDate(), "time", path);
         System.out.println(rep);
         TransactionReport report = new TransactionReport(new CurrentDate(),"transactions",path);
@@ -135,39 +135,39 @@ public static void generateReports() {
 }
 public static void saveIngredient(ArrayList<Ingredient> ingredients) {
         Inventory f = new Inventory();
-        f.saveIngredient(ingredients, "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
+        f.saveIngredient(ingredients, "C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
 }
 public static ArrayList<Ingredient> readIngredients() {
         Inventory f = new Inventory();
-        return f.readIngredients("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
+        return f.readIngredients("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
 
 }
-/*public static ArrayList<Employee> readEmployee(){
+public static ArrayList<Employee> readEmployee(){
         Employee f = new Employee();
-        return f.readEmployees("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
+        return f.readEmployee("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
    }
    public static void saveEmployee(ArrayList<Employee> employee){
         Employee f = new Employee();
-        f.saveEmployee(employee,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
+        f.saveEmployee(employee,"C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
    }
- */
+
 public static ArrayList<Transaction> readTransactions() {         //return list of all transactions from .dat file
         Inventory f = new Inventory();
-        return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
+        return f.readTransactions("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
 }
 public static void saveTransactions(ArrayList<Transaction> transactions) {         //saves given transaction arrayList
         Inventory f = new Inventory();
-        f.saveTransaction(transactions,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
+        f.saveTransaction(transactions,"C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
 }
 
 public static ArrayList<Drink> readDrinks() {
         Inventory f = new Inventory();
-        ArrayList<Drink> drinks = f.readDrinks("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
+        ArrayList<Drink> drinks = f.readDrinks("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
         return drinks;
 }
 public static void saveDrink(ArrayList<Drink> drinks) {
         Inventory f = new Inventory();
-        f.saveDrink(drinks,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
+        f.saveDrink(drinks,"C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
 }
 
 public static boolean changeStock(Recipe recipe,int q) {         //during sale, substracts recipe quantities from inventory
@@ -192,7 +192,7 @@ public static boolean changeStock(Recipe recipe,int q) {         //during sale, 
                 }
         }
         Inventory f = new Inventory();
-        f.updateInventory(ingredients,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
+        f.updateInventory(ingredients,"C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
         return end;
 
 }
@@ -398,7 +398,7 @@ public static void showInventory() {         //muestra inventario
 
         } while(end == true);
         Inventory f = new Inventory();
-        f.updateInventory(list,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");         //.setQuantity(
+        f.updateInventory(list,"C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");         //.setQuantity(
 }
 
 }

@@ -1,8 +1,8 @@
 import java.io.*;
 import java.util.*;
+class Time{
 private String bestRange;
 private String popularHour;
-class Time{
     //Construct
     public Time(String bestRange, String popularHour){
           setBestRange(bestRange);

@@ -35,7 +35,7 @@ public void findIngredients() {   //find all ingredients that are lower than 20 
 
 public ArrayList<Ingredient> data() {//Brings all the data from transactions
         Inventory f = new Inventory();
-        return f.readIngredients("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat"); //returns data from .dat file as arraylist
+        return f.readIngredients("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat"); //returns data from .dat file as arraylist
 }
 
 

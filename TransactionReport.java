@@ -6,7 +6,7 @@ class TransactionReport extends Report {
 
 private double totalCost;
 private double totalPrice;
-private String bestProduct;
+//private String bestProduct;
 private double profit;
 private double losses;
 private double profitMargin;
@@ -32,10 +32,10 @@ public ArrayList<String> names() {
 }
 @Override
 public String toString() {
-        losses(); bestProduct(); totals(); profits();
+        losses(); totals(); profits(); //bestProduct();
         saveReport();
 
-        return "TransactionReport [totalCost=" + totalCost + ", totalPrice=" + totalPrice  + ", profit=" + profit + ", bestProduct=" + bestProduct + ", losses=" + losses + ", profitMargin=" + profitMargin + "]";
+        return "TransactionReport [totalCost=" + totalCost + ", totalPrice=" + totalPrice  + ", profit=" + profit + ", losses=" + losses + ", profitMargin=" + profitMargin + "]";
 }
 
 
@@ -47,7 +47,7 @@ public ArrayList<String> values() {
         n.add(date.toString());
         n.add(String.valueOf(two.format(totalCost)));
         n.add(String.valueOf(two.format(totalPrice)));
-        n.add(String.valueOf(bestProduct));
+        //n.add(String.valueOf(bestProduct));
         n.add(String.valueOf(two.format(profit)));
         n.add(String.valueOf(two.format(losses)));
         n.add(String.valueOf(two.format(profitMargin)));
@@ -55,7 +55,7 @@ public ArrayList<String> values() {
         return n;
 }
 
-public void bestProduct() {
+/*public void bestProduct() {//This needs to be on Tendency Report
         ArrayList<Transaction> data = data();
         double best = 0.0; double profit = 0.0; //var declaration
         for (int i = 0; i < data.size(); i++) { //transaction array
@@ -68,10 +68,10 @@ public void bestProduct() {
                         }
                 }
         }
-}
+}*/
 public ArrayList<Transaction> data() {
         Inventory f = new Inventory();
-        return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
+        return f.readTransactions("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
 }
 public void losses() {
         ArrayList<Transaction> data = data();

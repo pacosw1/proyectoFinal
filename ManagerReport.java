@@ -20,7 +20,7 @@ class ManagerReport extends Report{
   }
 
   public ArrayList<Employee> data() {
-        return f.readEmployees("C:\\Users\\paco\\Desktop\\employee.dat"); //returns data from .dat file as arraylist
+        return f.readEmployees("C:\\Users\\Mario\\Desktop\\employee.dat"); //returns data from .dat file as arraylist
   }
   public ArrayList<String> names() {
           ArrayList<String> name = new ArrayList<String>();
