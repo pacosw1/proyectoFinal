@@ -1,39 +1,94 @@
 import java.io.*;
 import java.util.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 class Application implements Serializable {
 public static void main(String[] args) {
-<<<<<<< HEAD
-  Start start = new Start();
-	Start.start();//Continues the program after login
 
-  if(loginDlg.getStatus() == 0) {
-          //admin actions (access reports etc...)
-          managerOptions();
-          TransactionReport report = new TransactionReport(new CurrentDate(),"test","C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
-          System.out.println(report);
-  } else {
+        CLogin user = new CLogin();
+        JFrame frame = new JFrame("Demo application");
+        frame.setSize(300, 150);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-  }
-        //System.out.println("Login:");
-        CLogin toby = new CLogin();
-=======
+        JPanel panel = new JPanel();
+        frame.add(panel);
+        panel.setLayout(null);
+        JLabel attempts = new JLabel("Attempts: " +user.getAttempts());
+        attempts.setBounds(10, 100, 100, 25);
+        panel.add(attempts);
 
-        CLogin toby = new CLogin();
->>>>>>> 3d38efde6b89037c6b63d916684cd68813cb42f2
-        toby.setUsername(Lectura.readString("Ingresar Usuario"));
-        toby.setTypedPassword(Lectura.readString("Ingresar Password"));
-        if (toby.loginAttempts()) {
-                if (toby.status == 0) { //manage or employee
-                        //admin actions (access reports etc...)
-                        managerOptions(); //interface
+        JLabel userLabel = new JLabel("User");
+        userLabel.setBounds(10, 10, 80, 25);
+        panel.add(userLabel);
 
-                } else {
-                        employeeOptions();
-                }
-        }
+        JTextField userText = new JTextField(20);
+        userText.setBounds(100, 10, 160, 25);
+        panel.add(userText);
+
+        JLabel passwordLabel = new JLabel("Password");
+        passwordLabel.setBounds(10, 40, 80, 25);
+        panel.add(passwordLabel);
+
+        JPasswordField passwordText = new JPasswordField(20);
+        passwordText.setBounds(100, 40, 160, 25);
+        panel.add(passwordText);
+
+        JButton loginButton = new JButton("login");
+        loginButton.setBounds(10, 80, 80, 25);
+        panel.add(loginButton);
+
+        frame.setVisible(true);
+
+        loginButton.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+
+                                user.setUsername(userText.getText());
+                                user.setTypedPassword( passwordText.getText());
+                                if (user.checkAccount()) {
+                                        frame.dispose();
+                                        if (user.getStatus() == 0) {          //manage or employee
+                                                //admin actions (access reports etc...)
+                                                managerOptions();          //interface
+
+                                        }
+                                        else if (user.getAttempts() == 1) {
+                                                attempts.setText("Ran out of tries Try Again Later");
+                                        }
+                                        else if (user.getStatus() == 1) {
+                                                employeeOptions();
+                                        }
+                                        else {
+                                                System.out.println("Error");
+                                        }
+
+                                }
+
+                                else {
+                                        userText.setText("");
+                                        passwordText.setText("");
+                                        attempts.setText("Attempts: " + user.getAttempts());
+                                }
+
+
+                        };
+                });
+
+
+
+
+
 }
+
+
+
 //methods
-public static void managerOptions() { //uses all other methods to provide interface
+public static void managerOptions() {         //uses all other methods to provide interface
         boolean end = true;
         do {
                 String[] actions = {"Realizar Venta","Agregar Nueva Bebida","Agregar Nuevo Ingrediente","Inventario","Generar Reportes","Cerrar Session"};
@@ -87,19 +142,20 @@ public static ArrayList<Ingredient> readIngredients() {
         return f.readIngredients("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
 
 }
-public static ArrayList<Employee> readEmployee(){
+/*public static ArrayList<Employee> readEmployee(){
         Employee f = new Employee();
         return f.readEmployees("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
-}
-public static void saveEmployee(ArrayList<Employee> employee){
+   }
+   public static void saveEmployee(ArrayList<Employee> employee){
         Employee f = new Employee();
         f.saveEmployee(employee,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
-}
-public static ArrayList<Transaction> readTransactions() { //return list of all transactions from .dat file
+   }
+ */
+public static ArrayList<Transaction> readTransactions() {         //return list of all transactions from .dat file
         Inventory f = new Inventory();
         return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
 }
-public static void saveTransactions(ArrayList<Transaction> transactions) { //saves given transaction arrayList
+public static void saveTransactions(ArrayList<Transaction> transactions) {         //saves given transaction arrayList
         Inventory f = new Inventory();
         f.saveTransaction(transactions,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
 }
@@ -114,7 +170,7 @@ public static void saveDrink(ArrayList<Drink> drinks) {
         f.saveDrink(drinks,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
 }
 
-public static boolean changeStock(Recipe recipe,int q) { //during sale, substracts recipe quantities from inventory
+public static boolean changeStock(Recipe recipe,int q) {         //during sale, substracts recipe quantities from inventory
         boolean end = true;
         ArrayList<Ingredient> selected = recipe.getIngredients();
         ArrayList<Ingredient> ingredients = readIngredients();
@@ -140,7 +196,7 @@ public static boolean changeStock(Recipe recipe,int q) { //during sale, substrac
         return end;
 
 }
-public static void sellDrink() { //Drink sale
+public static void sellDrink() {         //Drink sale
 
         ArrayList<Transaction> transactions = readTransactions();
         ArrayList<Drink> drinks = readDrinks();
@@ -157,7 +213,7 @@ public static void sellDrink() { //Drink sale
 
                 int quantity = Lectura.getInt("Ingresar cantidad");
                 selected.setQuantity(quantity);
-                if (changeStock(selected.getRecipe(), selected.getQuantity())) { //checks to see if quantity is > 0 to make drink
+                if (changeStock(selected.getRecipe(), selected.getQuantity())) {         //checks to see if quantity is > 0 to make drink
 
                         String[] sizes = {"small","medium","venti"};
                         for (int i = 0; i < sizes.length; i++) {
@@ -182,7 +238,7 @@ public static void sellDrink() { //Drink sale
         saveTransactions(transactions);
 }
 
-public static int choice(int len, String message) { //makes list choice is valid.
+public static int choice(int len, String message) {         //makes list choice is valid.
         int choice = Lectura.getInt(message);
         if (choice <= len && choice >= 1)
                 return choice;
@@ -211,7 +267,7 @@ public static void employeeOptions() {
 
 }
 
-public static boolean choose(String message) {   // si o no
+public static boolean choose(String message) {         // si o no
         String n = Lectura.readString(message+"?  (si || no)");
         if (n.equals("si")) {
                 return true;
@@ -220,7 +276,7 @@ public static boolean choose(String message) {   // si o no
         else
                 return choose(message);
 }
-public static Recipe createRecipe() {     //creates recipe
+public static Recipe createRecipe() {         //creates recipe
         ArrayList<Ingredient> ingredients = readIngredients();
         System.out.println("Agrega un Ingrediente");
         ArrayList<Ingredient> added = new ArrayList<Ingredient>();
@@ -246,7 +302,7 @@ public static Recipe createRecipe() {     //creates recipe
         return (new Recipe(added));
 }
 
-public static void createIngredient() {  //add new ingredient to inventory
+public static void createIngredient() {         //add new ingredient to inventory
         boolean end = true;
         ArrayList<Ingredient> added = new  ArrayList<Ingredient>();
         while (end == true) {
@@ -289,7 +345,7 @@ public static void createDrink() {
         } while(end == true);
         saveDrink(added);
 }
-public static Chocolate createChocolate() { //creates subclass Drink
+public static Chocolate createChocolate() {         //creates subclass Drink
         System.out.println("Crear Bebida: ");
         String name = Lectura.readString("Name");
         double price = Lectura.getFloat("Price:");
@@ -308,7 +364,7 @@ public static Chocolate createChocolate() { //creates subclass Drink
         return new Chocolate(price,code,name,size,recipe,quantity,temp,type);
 
 }
-public static Drink createAll() { //creates Drink type
+public static Drink createAll() {         //creates Drink type
         System.out.println("Crear Bebida: ");
         String name = Lectura.readString("Name");
         double price = Lectura.getFloat("Price:");
@@ -321,7 +377,7 @@ public static Drink createAll() { //creates Drink type
         return new Drink(price,code,name,size,recipe,quantity,temp);
 
 }
-public static void showInventory() { //muestra inventario
+public static void showInventory() {         //muestra inventario
         //displays updated inventory list
         ArrayList<Ingredient> list = readIngredients();
         boolean end = true;
@@ -342,7 +398,7 @@ public static void showInventory() { //muestra inventario
 
         } while(end == true);
         Inventory f = new Inventory();
-        f.updateInventory(list,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");    //.setQuantity(
+        f.updateInventory(list,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");         //.setQuantity(
 }
 
 }
