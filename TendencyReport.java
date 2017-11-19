@@ -1,12 +1,15 @@
 import java.io.*;
 import java.util.*;
 import java.lang.reflect.Field;
-private double[] sales;
-private int[] temperature;
-private int[] size;
-private int drinkSize;
-private String displayReport;
-private String reportInput;
+private int totalHot;
+private int totalCold;
+private int totalSmall;
+private int totalMedium;
+private int totalVenti;
+private int totalCoffee;
+private int totalChocolate;
+private int totalTea;
+private int totalOther;
 class TendencyReport extends Report{
     public TendencyReport(CurrentDate date, String title, String path){
           super(date, title, path);
@@ -26,131 +29,56 @@ class TendencyReport extends Report{
     }
     public ArrayList<String> values() {
             ArrayList<String> n = new ArrayList<String>();
-            n.add(String.valueOf(productsSales));
-            n.add(String.valueOf(products));
+            /*n.add(String.valueOf(productsSales));
+            n.add(String.valueOf(products));*/
             return n;
     }
     public ArrayList<Transaction> data() {
             Inventory f = new Inventory();
             return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
     }
-    public void reportInput(){
-     double[] sales = new double[4];
-     int[] temperature = new int[2];
-     int[] size = new int[3];
-     int drinkSize = 0;
-       for(int x = 0; x < 4; x++){
-           switch(x){
 
-             case 0: System.out.println("How many sales were there for Coffee?");
-                     double coffeeSales = Lectura.readDouble();
-                     sales[x] += coffeeSales;
-                     for(int i = 0; i < coffeeSales; i++){
-                        System.out.println("Enter the price of the size chosen (small = 10, medium = 20, = venti = 30) for sale " + (i + 1));
-                        drinkSize = Lectura.readInt();
-
-                        if(drinkSize == 10){
-                         size[0] += 1;
-                        }
-                        else if(drinkSize == 20){
-                         size[1] += 1;
-                        }
-                        else{
-                          size[2] += 1;
-                        }
-                     }
-                     temperature[0] += 1;
-                     break;
-             case 1: System.out.println("How many sales were there for Chocolate?");
-                     double chocolateSales = Lectura.readDouble();
-                     sales[x] += chocolateSales;
-                     for(int i = 0; i < chocolateSales; i++){
-                        System.out.println("Enter the price of the size chosen (small = 10, medium = 20, = venti = 30) for sale " + (i + 1));
-                        drinkSize = Lectura.readInt();
-
-                        if(drinkSize == 10){
-                         size[0] += 1;
-                        }
-                        else if(drinkSize == 20){
-                         size[1] += 1;
-                        }
-                        else{
-                          size[2] += 1;
-                        }
-                     }
-                     temperature[0] += 1;
-                     break;
-             case 2: System.out.println("How many sales were there for Tea?");
-                     double teaSales = Lectura.readDouble();
-                     sales[x] += teaSales;
-                     for(int i = 0; i < teaSales; i++){
-                        System.out.println("Enter the price of the size chosen (small = 10, medium = 20, = venti = 30) for sale " + (i + 1));
-                        drinkSize = Lectura.readInt();
-
-                        if(drinkSize == 10){
-                         size[0] += 1;
-                        }
-                        else if(drinkSize == 20){
-                         size[1] += 1;
-                        }
-                        else{
-                          size[2] += 1;
-                        }
-                     }
-                     temperature[0] += 1;
-                     break;
-             case 3: System.out.println("How many sales were there for Other drinks?");
-                     double otherSales = Lectura.readDouble();
-                     sales[x] += otherSales;
-                     for(int i = 0; i < otherSales; i++){
-                        System.out.println("Enter the price of the size chosen (small = 10, medium = 20, = venti = 30) for sale " + (i + 1));
-                        drinkSize = Lectura.readInt();
-
-                        if(drinkSize == 10){
-                         size[0] += 1;
-                        }
-                        else if(drinkSize == 20){
-                         size[1] += 1;
-                        }
-                        else{
-                          size[2] += 1;
-                        }
-                     }
-                     temperature[0] += 1;
-                     break;
-          }
-        }
-    }
     public void displayReport(){
-      if(temperature[0] > temperature[1])
-         System.out.println("Popular temperature bought: Hot!");
-      else
-         System.out.println("Popular temperature bought: Cold!");
+      ArrayList<Transaction> transactions = data();
 
-      if(size[0] > size[1] && size[0] > size[2]){
-         System.out.println("Popular size bought: Small!");
-      }
-      else if(size[1] > size[0] && size[1] > size[2]){
-         System.out.println("Popular size bought: Medium!");
-      }
-      else if(size[2] > size[0] && size[2] > size[1]){
-         System.out.println("Popular size bought: Venti!");
+      for (int i = 0; i < transactions.size(); i++) {
+              Ingredient current = transactions.get(i);
       }
 
-      if(sales[0] > sales[1] && sales[0] > sales[2] && sales[0] > sales[3]){
-         System.out.println("Highest Product: Coffee!");
+      for(int x = 0; x < current.getSales(); x++){//Determines the most selled "temperature" drink
+            if(current.getTemperature().equals("Hot")){
+                totalHot += 1;
+            }
+            else
+                totalCold +=1;
       }
-      else
-      if(sales[1] > sales[0] && sales[1] > sales[2] && sales[1] > sales[3]){
-         System.out.println("Highest Product: Chocolate Drink!");
+
+      for(int x = 0; x < current.getSales(); x++){//Determines the most selled size
+            if(current.getDrinkSize().equals("small")){
+                totalSmall += 1;
+            }
+            else
+            if(current.getDrinkSize().equals("medium")){
+                totalMedium += 1;
+            }
+            else
+                totalVenti += 1;
       }
-      else
-      if(sales[2] > sales[0] && sales[2] > sales[1] && sales[2] > sales[3]){
-         System.out.println("Highest Product: Tea!");
+
+      for(int y = 0; y < current.getSales(); y++){
+           if(current.getProduct().equals("Coffee")){
+                totalCoffee += 1;
+           }
+           else
+           if(current.getProduct().equals("Chocolate")){
+                totalChocolate += 1;
+           }
+           else
+           if(current.getTea().equals("Tea")){
+                totalTea += 1;
+           }
+           else
+                totalOther += 1;
       }
-      else
-      if(sales[3] > sales[0] && sales[3] > sales[1] && sales[3] > sales[2]){
-         System.out.println("Highest Product: Others!");
-      }
-    }
+  }
 }
