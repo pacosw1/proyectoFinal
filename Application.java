@@ -160,7 +160,7 @@ public static void saveTransactions(ArrayList<Transaction> transactions) {      
         f.saveTransaction(transactions,"C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
 }
 
-public static ArrayList<Drink> readDrinks() {
+public static ArrayList<Drink> readDrinks(){
         Inventory f = new Inventory();
         ArrayList<Drink> drinks = f.readDrinks("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
         return drinks;
@@ -196,7 +196,7 @@ public static boolean changeStock(Recipe recipe,int q) {         //during sale, 
         return end;
 
 }
-public static void sellDrink() {         //Drink sale
+public static void sellDrink() {//Drink sale
 
         ArrayList<Transaction> transactions = readTransactions();
         ArrayList<Drink> drinks = readDrinks();
@@ -245,6 +245,7 @@ public static int choice(int len, String message) {         //makes list choice 
         else
                 return choice(len, message);
 }
+
 public static void employeeOptions() {
         boolean end = true;
         do {
@@ -276,6 +277,7 @@ public static boolean choose(String message) {         // si o no
         else
                 return choose(message);
 }
+
 public static Recipe createRecipe() {         //creates recipe
         ArrayList<Ingredient> ingredients = readIngredients();
         System.out.println("Agrega un Ingrediente");
@@ -321,6 +323,7 @@ public static void createIngredient() {         //add new ingredient to inventor
         }
         saveIngredient(added);
 }
+
 public static void createDrink() {
         boolean end = true;
         String items[] = {"Cafe, te y otros","Chocolate"};
@@ -345,6 +348,7 @@ public static void createDrink() {
         } while(end == true);
         saveDrink(added);
 }
+
 public static Chocolate createChocolate() {         //creates subclass Drink
         System.out.println("Crear Bebida: ");
         String name = Lectura.readString("Name");
@@ -364,6 +368,7 @@ public static Chocolate createChocolate() {         //creates subclass Drink
         return new Chocolate(price,code,name,size,recipe,quantity,temp,type);
 
 }
+
 public static Drink createAll() {         //creates Drink type
         System.out.println("Crear Bebida: ");
         String name = Lectura.readString("Name");
@@ -377,7 +382,8 @@ public static Drink createAll() {         //creates Drink type
         return new Drink(price,code,name,size,recipe,quantity,temp);
 
 }
-public static void showInventory() {         //muestra inventario
+
+public static void showInventory(){//muestra inventario
         //displays updated inventory list
         ArrayList<Ingredient> list = readIngredients();
         boolean end = true;

@@ -4,8 +4,8 @@ import java.util.*;
 import java.text.DecimalFormat;
 class SalesReport extends Report {
 
-private
-private String[][] sales = new String;
+//private
+private String[][] sales;
 
 public SalesReport(CurrentDate date, String title, String path) {
         super(date, title, path);
@@ -16,7 +16,7 @@ public void saveReport() {
         save.saveReport(names(),values(),path);
 }
 
-public ArrayList<String> names() {
+public ArrayList<String> names(){
 
         ArrayList<String> name = new ArrayList<String>();
         Field[] f = SalesReport.class.getDeclaredFields();
@@ -28,32 +28,36 @@ public ArrayList<String> names() {
         return name;
 }
 
-public toString() {
-        sales = getPercent();
+/*public String toString() {
+        sales = getPercent();?
 
-}
+}*/
 
-public void getList() {
+public void getList(){//Gets the percent method
         ArrayList<Drink> drinks = getPercent();
 
 }
 
-public int getTotalSales() {
+public int getTotalSales(){
         int sum = 0;
         ArrayList<Transaction> transactions = data();
-        for (int i = 0; i < transactions.size(); ++) {
+        
+        for (int i = 0; i < transactions.size(); i++) {
                 ArrayList<Drink> drink = transactions.get(i).getProducts(); //gets products list
-                for (int j = 0; j < drink.size(); j++) { //add quantity of drink oer transaction;
+                
+                for (int j = 0; j < drink.size(); j++) { //add quantity of drink per transaction;
                         Drink curr = drink.get(j);
                         sum+= curr.getQuantity();
                 }
         }
+        
         return sum;
+}
+
+public void fill(){
 
 }
-public void fill() {
 
-}
 public ArrayList<Drink> getPercent() {
         ArrayList<Transaction> transactions = data();
         ArrayList<Drink> drinks = drinks();
@@ -61,14 +65,15 @@ public ArrayList<Drink> getPercent() {
         for (int i = 0; i < drinks.size(); i++) { //goes over drinks one by one
                 Drink currD = drinks.get(i);
                 for (int j = 0; j < drinks.size(); j++) {
-                        ArrayList<Drink> currP = transactions.get(j).getProducts(); //current drink
+                        ArrayList<Drink> currP = transactions.get(j).getProducts(); //current drink, doesn't compile
                         for (int m = 0; m < currP.size(); m++) {
-                                if (currD.getName().equals(currP.getName())) //if transaction drink equals list Drink , add quantity to drink in list
+                                if (currD.getName().equals(currP.getName())) //if transaction drink equals list Drink , add quantity to drink in list, doesn't compile
                                         currD.setQuantity(currD.getQuantity() + currP.getQuantity());
                         }
                 }
         }
 }
+
 @Override
 public String toString() {
         losses(); bestProduct(); totals(); profits();
@@ -76,6 +81,7 @@ public String toString() {
 
         return "TransactionReport [totalCost=" + totalCost + ", totalPrice=" + totalPrice  + ", profit=" + profit + ", bestProduct=" + bestProduct + ", losses=" + losses + ", profitMargin=" + profitMargin + "]";
 }
+
 public ArrayList<String> values() {
         DecimalFormat two = new DecimalFormat( "#.##" );
         ArrayList<String> n = new ArrayList<String>();
@@ -89,7 +95,8 @@ public ArrayList<Transaction> data() {
         Inventory f = new Inventory();
         return f.readTransactions("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
 }
-public ArrayList<Drink> drinks() {
+
+public ArrayList<Drink> drinks() {//Check where's the product name here, if not, find another way
         Inventory f = new Inventory();
         return f.readDrinks("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat"); //returns data from .dat file as arraylist
 }

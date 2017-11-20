@@ -9,7 +9,7 @@ protected Json save;
 protected Inventory f;
 protected String path;
 
-public Report(CurrentDate date, String title,String path) {
+public Report(CurrentDate date, String title, String path){
         this.date = date;
         this.title = title;
         this.path = path;
@@ -21,7 +21,7 @@ public abstract ArrayList<String> names();
 
 
 
-public CurrentDate getDate() {
+public CurrentDate getDate(){
         return date;
 }
 

@@ -38,12 +38,13 @@ class EmployeeReport extends Report{
   }
 
   public ArrayList<Employee> data() {
+  path = "C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat";
     Employee f = new Employee();
-        return f.readTransactions(path + "employee.dat"); //returns data from .dat file as arraylist
+        return f.readTransactions(path); //returns data from .dat file as arraylist
   }
   //Methods
-  public void totalPayment(){
-  ArrayList<Employee> employee= data();
+  public void totalPayment(){//Needs to get x transactions and relate them to x employee
+  ArrayList<Employee> employee = data();
   String day = " ";
   int totalEmployees = 0;
   

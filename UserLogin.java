@@ -2,7 +2,7 @@ package jdialogdemo;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class UserLogin extends Application {//Tiene que estar en application
+public class UserLogin extends Application{
 	public static void main(String[] args) {
 		final JFrame frame = new JFrame("Start Session");
 		final JButton btnLogin = new JButton("Click here to start session");

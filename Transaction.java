@@ -6,7 +6,7 @@ private String payment;
 private ArrayList<Drink> product;
 private CurrentDate datetime;
 //private Database data;
-
+//Differentiate products
 public Transaction(String payment, ArrayList<Drink> product, CurrentDate datetime) {
 
         this.payment = payment;

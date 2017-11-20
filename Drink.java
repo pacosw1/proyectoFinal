@@ -4,6 +4,7 @@ protected Recipe recipe;
 protected String name;
 protected String temp;
 //Construct
+//Name?
 public Drink(double price,String code, String name,String size, Recipe recipe, int quantity, String temp) {
         super(price,code,quantity);
         setSize(size);

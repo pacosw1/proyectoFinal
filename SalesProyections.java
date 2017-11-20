@@ -8,8 +8,6 @@ class SalesProyections implements Serializable{
   }
   //Display
   public String toString(){
-    totalClientSales();
-    changeOfSales();
     salesTendencies();
 
    return "Sales Proyections Report: \nTotal Client Sales: \nChange of Sales: ";

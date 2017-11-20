@@ -42,17 +42,18 @@ private double totalPrice;
 
     public void displayReport(){
     ArrayList<Transaction> data = data(); //list of transactions
-   // ArrayList<Drink> product = name(); //Needs to get name from x product sold
+    ArrayList<Drink> product; //Needs to get name from x product sold, where to get product name?
     
       double cost = 0.0; double price = 0.0;
-      for (int i = 0; i < data.size(); i++) {
+      
+      for (int i = 0; i < data.size(); i++){
               totalCost += data.get(i).cost(); //totals per transactions. Declared in transaction class
               totalPrice += data.get(i).total();
       }
 
       
       for(int x = 0; x < totalPrice; x++){//Determines the most selled "temperature" drink
-            if(data.getProduct().equals("Other")){
+            if(product.getName().equals("Other")){
                 totalCold += 1;
             }
             else
@@ -60,11 +61,11 @@ private double totalPrice;
       }
 
       for(int y = 0; y < totalPrice; y++){//Determines the most selled size
-            if(current.getDrinkSize().equals("small")){
+            if(data.getSize().equals("small")){
                 totalSmall += 1;
             }
             else
-            if(current.getDrinkSize().equals("medium")){
+            if(current.getSize().equals("medium")){
                 totalMedium += 1;
             }
             else
@@ -72,7 +73,7 @@ private double totalPrice;
       }
 }
 
-   public void bestProduct() {
+   public void bestProduct(){
       ArrayList<Transaction> data = data();
       double best = 0.0; double profit = 0.0; //var declaration
       for (int i = 0; i < data.size(); i++) { //transaction array
