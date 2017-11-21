@@ -12,7 +12,7 @@ class Application implements Serializable {
 public static void main(String[] args) {
 
         CLogin user = new CLogin();
-        JFrame frame = new JFrame("Demo application");
+        JFrame frame = new JFrame("Cafe Inc Login");
         frame.setSize(300, 150);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -52,14 +52,16 @@ public static void main(String[] args) {
                                 user.setTypedPassword( passwordText.getText());
                                 if (user.checkAccount()) {
                                         frame.dispose();
-                                        if (user.getStatus() == 0) {          //manage or employee
+                                        if (user.getStatus() == 0) {
+                                              
+
+
+                                                //manage or employee
                                                 //admin actions (access reports etc...)
                                                 managerOptions();          //interface
 
                                         }
-                                        else if (user.getAttempts() == 1) {
-                                                attempts.setText("Ran out of tries Try Again Later");
-                                        }
+
                                         else if (user.getStatus() == 1) {
                                                 employeeOptions();
                                         }
@@ -69,7 +71,9 @@ public static void main(String[] args) {
 
                                 }
 
-                                else {
+                                else if (user.getAttempts() < 1) {
+                                        attempts.setText("Try Again Later");
+                                } else {
                                         userText.setText("");
                                         passwordText.setText("");
                                         attempts.setText("Attempts: " + user.getAttempts());
@@ -125,6 +129,7 @@ public static void managerOptions() {         //uses all other methods to provid
 //read and save Methods
 public static void generateReports() {
         String path = "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\Reports.json";
+
         TimeReport rep = new TimeReport(new CurrentDate(), "time", path);
         System.out.println(rep);
         TransactionReport report = new TransactionReport(new CurrentDate(),"transactions",path);
@@ -132,6 +137,9 @@ public static void generateReports() {
         InventoryReport rr = new InventoryReport(new CurrentDate(),"inventory",path);
         System.out.println(rr);
         System.out.println("Open Index.html to view formatted reports");
+
+        SalesReport salesR = new SalesReport(new CurrentDate(),"sales",path);
+        System.out.println(salesR);
 }
 public static void saveIngredient(ArrayList<Ingredient> ingredients) {
         Inventory f = new Inventory();

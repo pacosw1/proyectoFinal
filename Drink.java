@@ -26,6 +26,8 @@ public String toString() {
         return name + "   "+"$"+price;
 }
 
+
+
 public String getSize() {
         return size;
 }
@@ -41,6 +43,7 @@ public String getName() {
 public String getTemp() {
         return temp;
 }
+
 
 public void setSize(String size) {
         this.size = size;

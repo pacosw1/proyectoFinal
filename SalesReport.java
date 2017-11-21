@@ -4,8 +4,9 @@ import java.util.*;
 import java.text.DecimalFormat;
 class SalesReport extends Report {
 
-private
-private String[][] sales = new String;
+
+private ArrayList<String> drinkName = new ArrayList<String>();
+private ArrayList<String> drinkPercent = new ArrayList<String>();
 
 public SalesReport(CurrentDate date, String title, String path) {
         super(date, title, path);
@@ -13,7 +14,7 @@ public SalesReport(CurrentDate date, String title, String path) {
 
 public void saveReport() {
         Json save = new Json();
-        save.saveReport(names(),values(),path);
+        save.saveReport(names(),values(),drinkName,drinkPercent,path);
 }
 
 public ArrayList<String> names() {
@@ -22,14 +23,13 @@ public ArrayList<String> names() {
         Field[] f = SalesReport.class.getDeclaredFields();
         name.add("title");
         name.add("date");
-        for (int i = 0; i < f.length; i++) {
-                name.add((String)f[i].getName());
-        }
         return name;
 }
 
-public toString() {
-        sales = getPercent();
+public String toString() {
+        sales();
+        saveReport();
+        return "Drinks: "+ drinkName + "Perc: " + drinkPercent;
 
 }
 
@@ -37,11 +37,21 @@ public void getList() {
         ArrayList<Drink> drinks = getPercent();
 
 }
+public void sales() {
 
+        int totalSales = getTotalSales();
+        ArrayList<Drink> drinks = getPercent();
+        int len = drinks.size();
+        for (int i = 0; i < len; i++) {
+                Drink curr = drinks.get(i);
+                drinkName.add(curr.getName());
+                drinkPercent.add(String.valueOf(curr.getQuantity() / totalSales));
+        }
+}
 public int getTotalSales() {
         int sum = 0;
         ArrayList<Transaction> transactions = data();
-        for (int i = 0; i < transactions.size(); ++) {
+        for (int i = 0; i < transactions.size(); i++) {
                 ArrayList<Drink> drink = transactions.get(i).getProducts(); //gets products list
                 for (int j = 0; j < drink.size(); j++) { //add quantity of drink oer transaction;
                         Drink curr = drink.get(j);
@@ -60,28 +70,21 @@ public ArrayList<Drink> getPercent() {
 
         for (int i = 0; i < drinks.size(); i++) { //goes over drinks one by one
                 Drink currD = drinks.get(i);
-                for (int j = 0; j < drinks.size(); j++) {
+                for (int j = 0; j < transactions.size(); j++) {
                         ArrayList<Drink> currP = transactions.get(j).getProducts(); //current drink
                         for (int m = 0; m < currP.size(); m++) {
-                                if (currD.getName().equals(currP.getName())) //if transaction drink equals list Drink , add quantity to drink in list
-                                        currD.setQuantity(currD.getQuantity() + currP.getQuantity());
+                                if (currD.getName().equals(currP.get(j).getName())) //if transaction drink equals list Drink , add quantity to drink in list
+                                        currD.setQuantity(currD.getQuantity() + currP.get(j).getQuantity());
                         }
                 }
         }
-}
-@Override
-public String toString() {
-        losses(); bestProduct(); totals(); profits();
-        saveReport();
-
-        return "TransactionReport [totalCost=" + totalCost + ", totalPrice=" + totalPrice  + ", profit=" + profit + ", bestProduct=" + bestProduct + ", losses=" + losses + ", profitMargin=" + profitMargin + "]";
+        return drinks;
 }
 public ArrayList<String> values() {
         DecimalFormat two = new DecimalFormat( "#.##" );
         ArrayList<String> n = new ArrayList<String>();
         n.add(title);
         n.add(date.toString());
-        n.add(String.valueOf(sales));
         return n;
 }
 
