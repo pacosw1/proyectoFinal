@@ -32,21 +32,21 @@ public String toString() {
         return "Drinks: "+ drinkName + "Perc: " + drinkPercent;
 
 }
-*/
+
 
 public void getList(){//Gets the percent method
         ArrayList<Drink> drinks = getPercent();
 
 }
 public void sales() {
-
-        int totalSales = getTotalSales();
+      DecimalFormat two = new DecimalFormat( "#.##" );
+        double totalSales = getTotalSales();
         ArrayList<Drink> drinks = getPercent();
         int len = drinks.size();
         for (int i = 0; i < len; i++) {
                 Drink curr = drinks.get(i);
                 drinkName.add(curr.getName());
-                drinkPercent.add(String.valueOf(curr.getQuantity() / totalSales));
+                drinkPercent.add(String.valueOf(two.format((curr.getQuantity() / totalSales) * 100)));
         }
 }
 public int getTotalSales() {
@@ -77,8 +77,8 @@ public ArrayList<Drink> getPercent() {
                 for (int j = 0; j < transactions.size(); j++) {
                         ArrayList<Drink> currP = transactions.get(j).getProducts(); //current drink
                         for (int m = 0; m < currP.size(); m++) {
-                                if (currD.getName().equals(currP.get(j).getName())) //if transaction drink equals list Drink , add quantity to drink in list
-                                        currD.setQuantity(currD.getQuantity() + currP.get(j).getQuantity());
+                                if (currD.getName().equals(currP.get(m).getName())) //if transaction drink equals list Drink , add quantity to drink in list
+                                        currD.setQuantity(currD.getQuantity() + currP.get(m).getQuantity());
                         }
                 }
         }
@@ -95,12 +95,12 @@ public ArrayList<String> values() {
 
 public ArrayList<Transaction> data() {
         Inventory f = new Inventory();
-        return f.readTransactions("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
+        return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
 }
 
 public ArrayList<Drink> drinks() {//Check where's the product name here, if not, find another way
         Inventory f = new Inventory();
-        return f.readDrinks("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat"); //returns data from .dat file as arraylist
+        return f.readDrinks("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat"); //returns data from .dat file as arraylist
 }
 
 }

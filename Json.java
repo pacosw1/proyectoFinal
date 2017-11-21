@@ -64,11 +64,13 @@ public void saveReport(ArrayList<String> names, ArrayList<String> values,ArrayLi
         JSONArray percent = new JSONArray();
         for (int i =0; i < n1.size(); i++) {
                 JSONObject curr = new JSONObject();
-                curr.put(n1.get(i),n2.get(i));
+                curr.put("name",n1.get(i));
+                curr.put("data",n2.get(i));
                 percent.add(curr);
         }
+        tran.put("array",percent);
         data.add(tran);
-        data.add(percent);
+
 
         try { //write updated array to file
                 file = new FileWriter(path);

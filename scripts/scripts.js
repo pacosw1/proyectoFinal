@@ -5,6 +5,12 @@ $(document).ready(function() {
      $.getJSON( "data/Reports.json", function( data ) { //json request
 
      //console.log(data);
+
+     var sales = getObjs("sales",data);
+     var percent = extractArray(sales,"array");
+
+
+     console.log(percent);
      var reorder = getObjs("inventory",data);
      console.log(reorder);
      var time = getObjs("time",data);
@@ -26,6 +32,14 @@ $( "#3" ).one("click",function() {
       .appendTo("#table2");
     $('#tables').footable();
 });
+$( "#4" ).one("click",function() {
+  $("#sales").tmpl(sales)  //table template
+      .appendTo("#date");
+    $('#tables').footable();
+    $("#percent").tmpl(sales)  //table template
+        .appendTo("#percentTable");
+      $('#tables').footable();
+});
 
 
 
@@ -36,7 +50,13 @@ $( "#3" ).one("click",function() {
       });
 });
 
-
+function extractArray(data, field) {
+  var extracted = [data.length];
+  for (var i = 0;i < data.length;i++) {
+    extracted[i] = data[i][field];
+  }
+  return extracted;
+}
 function getObjs(title, data) { //couples reports by type
   var store = [];
   for (var i = 0;i <data.length;i++) {

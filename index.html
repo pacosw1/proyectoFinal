@@ -74,32 +74,36 @@
       </tbody>
     </table>
   </div>
-  <div class="charts">
-    <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+  <div class="charts">  <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
       <thead>
-        <h1 id="3">Ventas por %</h1>
+        <h1 id="4">Reporte de Porcentajes</h1>
         <tr class="rowSelector">
 
           <th>Fecha</th>
-          <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
-            <thead>
-              <h1 id="3">Productos</h1>
-              <tr class="rowSelector">
 
-                <th>Bebida</th>
-                <th>%</th>
-
-              </tr>
-            </thead>
-            <tbody id="percentTable">
-            </tbody>
-          </table>
 
         </tr>
+        <tr id="date">
+        </tr>
+        <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+          <thead>
+
+            <tr class="rowSelector">
+
+              <th>Bebida</th>
+              <th>%</th>
+
+            </tr>
+          </thead>
+          <tbody id="percentTable">
+          </tbody>
+        </table>
       </thead>
-      <tbody id="table2">
+      <tbody id="salesTable">
       </tbody>
-    </table>
+
+
+
   </div>
 
 
@@ -137,6 +141,24 @@
 
 
     </tr>
+
+  </script>
+  <script id="sales" type="text/x-jquery-tmpl">
+
+
+      <tr id="tableRow">
+      <td>${date}</td>
+        </tr>
+
+  </script>
+  <script id="percent" type="text/x-jquery-tmpl">
+
+     {{each array}}
+    <tr id="tableRow">
+      <td>${this.name}</td>
+      <td>${data}</td>
+    </tr>
+    {{/each}}
 
   </script>
 </body>
