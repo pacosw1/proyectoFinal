@@ -128,7 +128,8 @@ public static void managerOptions() {         //uses all other methods to provid
 }
 //read and save Methods
 public static void generateReports() {
-        String path = "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\Reports.json";
+        String name = "paco";
+        String path = "C:\\Users\\"+name+"\\Documents\\GitHub\\proyectoFinal\\data\\Reports.json";
 
         TimeReport rep = new TimeReport(new CurrentDate(), "time", path);
         System.out.println(rep);
@@ -137,7 +138,15 @@ public static void generateReports() {
         InventoryReport rr = new InventoryReport(new CurrentDate(),"inventory",path);
         System.out.println(rr);
         System.out.println("Open Index.html to view formatted reports");
-
+        SalesProyectionsReport rf = new SalesProyectionsReport(new CurrentDate(),"salesp",path);
+        System.out.println(rf);
+        EmployeeReport er = new EmployeeReport(new CurrentDate(),"employee",path);
+        System.out.println(er);
+        ManagerReport mr = new ManagerReport(new CurrentDate(),"manager",path);
+        System.out.println(mr);//Te puse los de empleado y manager, haber si jalan
+        //Me da miedo dar push porque ya le cambiaste y no jalo un merge ahorita :(
+        //Hubieras dejado abierto en el Tendency
+        //Minimo un push
         SalesReport salesR = new SalesReport(new CurrentDate(),"sales",path);
         System.out.println(salesR);
 }
@@ -150,15 +159,15 @@ public static ArrayList<Ingredient> readIngredients() {
         return f.readIngredients("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
 
 }
-/*public static ArrayList<Employee> readEmployee(){
-        Employee f = new Employee();
-        return f.readEmployees("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
+public static ArrayList<Employee> readEmployee(){
+        Inventory f = new Inventory();
+        return f.readEmployee("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
    }
    public static void saveEmployee(ArrayList<Employee> employee){
-        Employee f = new Employee();
+        Inventory f = new Inventory();
         f.saveEmployee(employee,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
    }
- */
+
 public static ArrayList<Transaction> readTransactions() {         //return list of all transactions from .dat file
         Inventory f = new Inventory();
         return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
