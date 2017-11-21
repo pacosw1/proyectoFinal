@@ -2,7 +2,7 @@ package jdialogdemo;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class UserLogin extends Application {//Tiene que estar en application
+public class UserLogin extends Application{
 	public static void main(String[] args) {
 		final JFrame frame = new JFrame("Start Session");
 		final JButton btnLogin = new JButton("Click here to start session");
@@ -33,7 +33,7 @@ public class UserLogin extends Application {//Tiene que estar en application
 		if(loginDlg.getStatus() == 0) {
 						//admin actions (access reports etc...)
 						managerOptions();
-						TransactionReport report = new TransactionReport(new CurrentDate(),"test","C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\");
+						TransactionReport report = new TransactionReport(new CurrentDate(),"test","C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\");
 						System.out.println(report);
 		} else {
 

@@ -11,13 +11,13 @@ public static String start() { //Starts the tab
 								final JButton btnLogin = new JButton("Press to start");
 
 								Login loginDlg = new Login(frame);
-								loginDlg.setVisible(true);
+								loginDlg.setVisible(true);//Doesn't find setVisible
 								// if login is successfull
 								for(int i = 0; i < 2; i++) {
-																if(loginDlg.isSucceeded() == true) {
+																if(loginDlg.isSucceeded() == true){//isSucceeded() doesn't exist in Login
 																								dispose();
 																}
-																else if(loginDlg.isSucceeded() == false) {
+																else if(loginDlg.isSucceeded() == false){
 																								btnLogin.setText("You ran out of attempts!");
 																								dispose();
 																}

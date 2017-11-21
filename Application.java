@@ -53,7 +53,7 @@ public static void main(String[] args) {
                                 if (user.checkAccount()) {
                                         frame.dispose();
                                         if (user.getStatus() == 0) {
-                                              
+
 
 
                                                 //manage or employee

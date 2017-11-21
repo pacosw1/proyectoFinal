@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 import java.lang.reflect.Field;
+class SalesProyectionsReport extends Report{
 private long expectedTime;//Time to sell x product
 private double economyGrowthRate;//Changes the cost of dollars
 private Inventory inventoryProducts;
@@ -8,11 +9,10 @@ private double[] currentSales;//Total Sales per product
 private double[] predefinedSales;
 private double totalClientSales;
 private double changeOfSales;
-
 private int buyer;
-class SalesProyectionsReport extends Report{
+    //Construct
     public SalesProyectionsReport(CurrentDate date, String title, String path){
-          public(date, title, path);
+          super(date, title, path);
     }
     public void saveReport() {
             Json save = new Json();
@@ -27,6 +27,12 @@ class SalesProyectionsReport extends Report{
             }
             return name;
     }
+    
+    public ArrayList<Drink> drinks() {
+        Inventory f = new Inventory();
+        return f.readDrinks("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat"); //returns data from .dat file as arraylist
+    }
+    
     public ArrayList<String> values() {
             ArrayList<String> n = new ArrayList<String>();
             n.add(String.valueOf(expectedTime));
@@ -40,24 +46,27 @@ class SalesProyectionsReport extends Report{
     }
     public ArrayList<Transaction> data() {
             Inventory f = new Inventory();
-            return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
+            return f.readTransactions("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
     }
     public void predefinedSales(){//Gets from existing .dat
-      for(int x = 0; c < current.getCoffeeSales(); c++){
+    ArrayList<Transaction> current = data();
+      /*for(int x = 0; x < current.getCoffeeSales(); x++){
 
       }
-      for(int y = 0; c < current.getChocolateSales(); c++){
+      for(int y = 0; y < current.getChocolateSales(); y++){
 
       }
-      for(int z = 0; c < current.getTeaSales(); c++){
+      for(int z = 0; z < current.getTeaSales(); z++){
 
       }
-      for(int a = 0; c < current.getOtherSales(); c++){
+      for(int a = 0; a < current.getOtherSales(); a++){
 
-      }
+      }*/
 
     }
     public void currentSales(){//Gets new sales
+    ArrayList<Transaction> data = data();
+    /*
       for(int x = 0; c < current.getCoffeeSales(); c++){
 
       }
@@ -69,24 +78,40 @@ class SalesProyectionsReport extends Report{
       }
       for(int a = 0; c < current.getOtherSales(); c++){
 
-      }
+      }*/
     }
-    public void totalClientSales(){
+    public ArrayList<Drink> totalClientSales(){
       ArrayList<Transaction> transactions = data();
-
-      for(int i = 0; i < transactions.getSize(); i++){
-          SalesProyections current = transactions.get(i);
+      ArrayList<Drink> drinks = new ArrayList<Drink>();//Which class get names
+      int coffeeSales = 0;
+      int chocolateSales = 0;
+      int teaSales = 0;
+      int otherSales = 0;
+      
+      for(int x = 0; x < transactions.size(); x++){//Needs to getName for each sale
+         if(drinks.getName().equals("Coffee")){
+            coffeeSales += 1;
+         }
+         else
+         if(drinks.getName().equals("Chocolate")){
+            chocolateSales += 1;
+         }
+         else
+         if(drinks.getName().equals("Tea")){
+            teaSales += 1;
+         }
+         else
+            otherSales += 1;
       }
-
-      for(int i = 0; i < 4; i++){
+      for(int i = 0; i < 4; i++){//Create methods for x product for sales
        switch(i){
-          case 0: System.out.println("Total Coffee Sales: " + current.getCoffeeSales());
+          case 0: System.out.println("Total Coffee Sales: " + transactions.getCoffeeSales());
                   break;
-          case 1: System.out.println("Total Chocolate Drink Sales: " + current.getChocolateSales());
+          case 1: System.out.println("Total Chocolate Drink Sales: " + transactions.getChocolateSales());
                   break;
-          case 2: System.out.println("Total Tea Sales: " + current.getTeaSales());
+          case 2: System.out.println("Total Tea Sales: " + transactions.getTeaSales());
                   break;
-          case 3: System.out.println("Total Other Drinks Sales: " + current.getOtherSales());
+          case 3: System.out.println("Total Other Drinks Sales: " + transactions.getOtherSales());
                   break;
           }
       }
@@ -132,11 +157,19 @@ class SalesProyectionsReport extends Report{
           }
     }
     public void expectedTime(){
-        ArrayList<Inventory> inventory = data();
-        Inventory current = inventory.getExpectedSaleTime();
+      ArrayList<Inventory> inventory = data();
+      Inventory current = inventory.getExpectedSaleTime();
     }
     public void economyGrowth(){
       ArrayList<Transaction> transaction = data();
       Inventory current = transaction.getEconomyGrowth();
+    }
+    public void salesTendencies(){
+      //How much has a product sold, how much is left on the inventory, what to do.
+      ArrayList<Transaction> transaction = data();
+      Transaction coffeeSales = transaction.getCoffeeSales();
+      Transaction chocolateSales = transaction.getChocolateSales();
+      Transaction teaSales = transaction.getTeaSales();
+      Transaction otherSales = transaction.getOtherSales();
     }
 }

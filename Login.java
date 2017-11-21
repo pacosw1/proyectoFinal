@@ -13,8 +13,9 @@ private String username;
 private String typedPassword;
 private int attempts;
 private int status;
+private JFrame frame;
 
-public Login() {
+public Login(JFrame frame) {
 
 }
 
@@ -28,8 +29,8 @@ public boolean checkAccount() {
 								}
 }
 
-public int loginAttempts(int attempts) {   //recursive function to test for login attempts
-								int attempts;
+public int loginAttempts(int attempts) {//recursive function to test for login attempts
+								attempts = 0;
 
 
 								JFrame frame = new JFrame("Demo application");
@@ -39,9 +40,9 @@ public int loginAttempts(int attempts) {   //recursive function to test for logi
 								JPanel panel = new JPanel();
 								frame.add(panel);
 								panel.setLayout(null);
-								JLabel attempts = new JLabel("Attempts: ");
-								attempts.setBounds(10, 100, 100, 25);
-								panel.add(attempts);
+								JLabel attemptsLabel = new JLabel("Attempts: ");
+								attemptsLabel.setBounds(10, 100, 100, 25);
+								panel.add(attemptsLabel);
 
 								JLabel userLabel = new JLabel("User");
 								userLabel.setBounds(10, 10, 80, 25);
@@ -83,10 +84,10 @@ public int loginAttempts(int attempts) {   //recursive function to test for logi
 
 
 
-
+return 0;//Not sure this needs a return but it needs one as is
 }
 public String toString() {
-								loginAttempts();
+								loginAttempts(0);//Parameter
 								return "";
 }
 

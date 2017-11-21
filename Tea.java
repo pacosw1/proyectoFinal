@@ -1,7 +1,7 @@
 class Tea extends Drink{
   private String type;
-  public Tea(double price,String code, String name,String size, Recipe recipe,String type, int quantity){     //blanco o negro (chocolate)
-          super(price,code,name,size,recipe, quantity);
+  public Tea(double price,String code, String name,String size, Recipe recipe, int quantity, String temp,String type){     //blanco o negro (chocolate)
+          super(price,code,name,size,recipe, quantity, temp);
           setType(type);
   }
   //Set
@@ -26,6 +26,9 @@ class Tea extends Drink{
   public void setQuantity(int quantity){
           this.quantity = quantity;
   }
+  public void setTemp(String temp){
+          this.temp = temp;
+  }
   //Get
   public double getPrice(){
           return price;
@@ -48,7 +51,11 @@ class Tea extends Drink{
   public int getQuantity(){
           return quantity;
   }
+  public String getTemp(){
+          return temp;
+  }
+  //Method
   public double total(){
-    return price * quaintity;
+    return price * quantity;
   }
 }

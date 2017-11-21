@@ -4,12 +4,13 @@ protected Recipe recipe;
 protected String name;
 protected String temp;
 //Construct
+//Name?
 public Drink(double price,String code, String name,String size, Recipe recipe, int quantity, String temp) {
         super(price,code,quantity);
         setSize(size);
         setRecipe(recipe);
         setName(name);
-        this.temp = temp;
+        setTemp(temp);
 }
 //Set
 
@@ -25,9 +26,10 @@ public double total() {
 public String toString() {
         return name + "   "+"$"+price;
 }
-
-
-
+public void setTemp(String temp){
+        this.temp = temp;
+}
+//Get
 public String getSize() {
         return size;
 }
@@ -40,17 +42,17 @@ public String getName() {
         return name;
 }
 
-public String getTemp() {
-        return temp;
-}
-
 
 public void setSize(String size) {
         this.size = size;
 }
-
-public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
+public String getTemp(){
+        return temp;
+}
+//Methods
+//Obtains the cost for each recipe
+public double cost() {
+        return recipe.cost() * quantity;
 }
 
 public void setName(String name) {

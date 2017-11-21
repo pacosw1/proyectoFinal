@@ -10,7 +10,7 @@ public TimeReport(CurrentDate date, String title, String path) {
 }
 public ArrayList<Transaction> data() {
         Inventory f = new Inventory();
-        return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
+        return f.readTransactions("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
 }
 
 
@@ -78,7 +78,7 @@ public void bestOverallHour() {
                 }
         }
         int h = 0;
-        int ind = 0; //finds highest number;
+        int ind = 0; //finds highest number
         for (int i = 0; i < count.length; i++) {
                 if (count[i] > h) {
                         h = count[i];

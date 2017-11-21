@@ -28,6 +28,9 @@ public void setType(String type){
 public void setQuantity(int quantity){
         this.quantity = quantity;
 }
+public void setTemp(String temp){
+        this.temp = temp;
+}
 //Get
 public double getPrice(){
         return price;
@@ -50,6 +53,10 @@ public String getType(){
 public int getQuantity(){
         return quantity;
 }
+public String getTemp(){
+        return temp;
+}
+//Method
 public double total(){
         return price * quantity;
 }

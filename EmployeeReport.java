@@ -2,11 +2,6 @@ import java.io.*;
 import java.util.*;
 import java.lang.reflect.Field;
 class EmployeeReport extends Report{
-  private String day;
-  private int totalEmployees;
-  private int clients;
-  private double hoursEmployee;
-  private String[] suggestions;
   //Construct
   public EmployeeReport(CurrentDate date, String title, String path){
       super(date, title , path);
@@ -28,11 +23,6 @@ class EmployeeReport extends Report{
           ArrayList<String> n = new ArrayList<String>();
           n.add(title);
           n.add(date.toString());
-          n.add(day);
-          n.add(totalEmployees);
-          n.add(clients);
-          n.add(suggestions);
-          n.add(hoursEmployee);
           return n;
   }
   @Override
@@ -48,14 +38,16 @@ class EmployeeReport extends Report{
   }
 
   public ArrayList<Employee> data() {
+  path = "C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat";
     Employee f = new Employee();
-        return f.readTransactions(path + "employee.dat"); //returns data from .dat file as arraylist
+        return f.readTransactions(path); //returns data from .dat file as arraylist
   }
   //Methods
-  public void totalPayment(){
-  ArrayList<Employee> employee= data();
-  day = " ";
-
+  public void totalPayment(){//Needs to get x transactions and relate them to x employee
+  ArrayList<Employee> employee = data();
+  String day = " ";
+  int totalEmployees = 0;
+  
     for(int i = 0; i < employee.size();i++){
      Employee current = employee.get(i);//Gets Employee i from arraylist, current may need to be array
      totalEmployees += current;
@@ -89,6 +81,8 @@ class EmployeeReport extends Report{
       }
     }
     public void suggestions(){
+    int clients = 0;
+    
       ArrayList<Employee> employee= data();
 
       for(int i = 0; i < employee.size();i++){
@@ -100,7 +94,7 @@ class EmployeeReport extends Report{
          clients += current.getClients();
       }
 
-      suggestions = new String[clients];
+      String[] suggestions = new String[clients];
 
       for(int y = 0; y < clients; y++){
         suggestions[y] = current.getClientsSuggestions();
@@ -116,5 +110,5 @@ class EmployeeReport extends Report{
       else
         System.out.println("The employee's suggestion is: " + current.getEmployeeSuggestion());
     }
-  }
 }
+

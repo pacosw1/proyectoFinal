@@ -6,7 +6,7 @@ private String payment;
 private ArrayList<Drink> product;
 private CurrentDate datetime;
 //private Database data;
-
+//Differentiate products
 public Transaction(String payment, ArrayList<Drink> product, CurrentDate datetime) {
 
         this.payment = payment;
@@ -16,7 +16,7 @@ public Transaction(String payment, ArrayList<Drink> product, CurrentDate datetim
         //this.data = data;
 }
 
-public double total() {
+public double total() {//Price * How many?
         double sum = 0;
         for(int i = 0; i < product.size(); i++)
         {

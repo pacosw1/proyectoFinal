@@ -3,10 +3,21 @@ import java.io.*;
 import java.util.*;
 class ManagerReport extends Report{
   private int totalEmployees;
-  private double highestHours;
   private byte skip;//Determines if the first 'if' has been executed
-  public ManagerReport(CurrentDate date, String title, Json save, SaveToFile f, String path) {
-          super(date, title, save, f, path);
+  private Json save;
+  private SaveToFile f;
+  //Construct
+  public ManagerReport(CurrentDate date, String title, String path) {
+          super(date, title, path);
+          setSave(save);
+          setF(f);
+  }
+  //Set
+  public void setSave(Json save){
+          this.save = save;
+  }
+  public void setF(SaveToFile f){
+          this.f = f;
   }
   public void saveReport() {
           Json save = new Json();
@@ -20,7 +31,8 @@ class ManagerReport extends Report{
   }
 
   public ArrayList<Employee> data() {
-        return f.readEmployees("C:\\Users\\paco\\Desktop\\employee.dat"); //returns data from .dat file as arraylist
+  Employee f = new Employee();
+        return f.readEmployee(path + "C:\\Users\\Mario\\Desktop\\employee.dat"); //returns data from .dat file as arraylist
   }
   public ArrayList<String> names() {
           ArrayList<String> name = new ArrayList<String>();
@@ -34,28 +46,29 @@ class ManagerReport extends Report{
           ArrayList<String> n = new ArrayList<String>();
           n.add(title);
           n.add(date.toString());
-          n.add(totalEmployees);
-          n.add(highestHours);
           return n;
   }
   public void employeeMonth(){//Object Array Employee
-    ArrayList<Employee> employee= data();
-
+    ArrayList<Employee> employee = data();
+    Employee current = employee.get(0);
+    
     for(int i = 0; i < employee.size();i++){
-       Manager current = employee.get(i);//Gets Employee i from arraylist, current may need to be array
-       totalEmployees += current;
+       current = employee.get(i);//Gets Employee i from arraylist, current may need to be array
+       totalEmployees += 1;
     }
-
-    double initial = current.getTotalHours();//Obtains the first's Employee hours
-
-    for(int i = 1; i < totalEmployees; i++) {
-      if(toby[i].getTotalHours() < x && skip = 0) {
-          highestHours = current.getTotalHours();
+    
+    double initial = current.getHours();//Obtains the first's Employee hours...Employee hours doesn't exist in .dat
+    double highestHours = 0;
+    
+    for(int j = 1; j < totalEmployees; j++) {
+      if(current.getHours() < initial && skip == 0) {
+          highestHours = current.getHours();
           skip = 1;
     }
-    else if(highest < current.getTotalHours())
-      highestHours = current.getTotalHours();
+    else if(highestHours < current.getHours())
+      highestHours = current.getHours();
     }
+
   }
 
 }

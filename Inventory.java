@@ -116,7 +116,7 @@ public void updateInventory(ArrayList<Ingredient>ingredients, String path) {    
 }
 public void saveDrink(ArrayList<Drink> drinks, String path) {     //saves ingredient object to .dat file.
 
-        ArrayList<Drink> current = readDrinks(path); //uses the read method tu get all saved objects from the file.
+        ArrayList<Drink> current = readDrinks(path); //uses the read method to get all saved objects from the file.
         for (int j = 0; j< drinks.size(); j++) //adds the ingredient array to arraylist.
         {
                 current.add(drinks.get(j));
