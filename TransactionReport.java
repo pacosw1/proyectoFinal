@@ -57,7 +57,7 @@ public ArrayList<String> values() {
 
 /*public void bestProduct() {//This needs to be on Tendency Report
         ArrayList<Transaction> data = data();
-        double best = 0.0; double profit = 0.0; //var declaration
+        double best = 0.0; double profit = 0.0;//var declaration
         for (int i = 0; i < data.size(); i++) { //transaction array
                 ArrayList<Drink> curr = data.get(i).getProducts(); //product array
                 for (int j = 0; j < curr.size(); j++) {

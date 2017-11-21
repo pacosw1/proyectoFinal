@@ -36,18 +36,27 @@ private int buyer;
     public ArrayList<String> values() {
             ArrayList<String> n = new ArrayList<String>();
             n.add(String.valueOf(expectedTime));
-            n.add(String.valueOf(economyGrowthRate));
-            n.add(String.valueOf(inventoryProducts));
-            n.add(String.valueOf(currentSales));
-            n.add(String.valueOf(predefinedSales));
+            /*n.add(String.valueOf(currentSales));
+            n.add(String.valueOf(predefinedSales));*/
             n.add(String.valueOf(totalClientSales));
             n.add(String.valueOf(changeOfSales));
             return n;
     }
+    
     public ArrayList<Transaction> data() {
             Inventory f = new Inventory();
             return f.readTransactions("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
     }
+    
+    @Override
+    public String toString() {
+        //predefinedSales();currentSales();
+        totalClientSales();
+        changeOfSales();
+        expectedTime();
+        return "SalesProyectionsReport [totalClientSales=" + totalClientSales + ", changeOfSales=" + changeOfSales + ", expectedSalesTime=" + expectedTime + "]";
+    }
+
     public void predefinedSales(){//Gets from existing .dat
     ArrayList<Transaction> current = data();
       /*for(int x = 0; x < current.getCoffeeSales(); x++){
@@ -82,41 +91,45 @@ private int buyer;
     }
     public ArrayList<Drink> totalClientSales(){
       ArrayList<Transaction> transactions = data();
-      ArrayList<Drink> drinks = new ArrayList<Drink>();//Which class get names
+      ArrayList<Drink> drinks = drinks();
       int coffeeSales = 0;
       int chocolateSales = 0;
       int teaSales = 0;
       int otherSales = 0;
       
-      for(int x = 0; x < transactions.size(); x++){//Needs to getName for each sale
-         if(drinks.getName().equals("Coffee")){
+      for(int x = 0; x < transactions.size(); x++){
+         Drink currD = drinks.get(x);
+         
+         if(currD.getName().equals("Coffee")){
             coffeeSales += 1;
          }
          else
-         if(drinks.getName().equals("Chocolate")){
+         if(currD.getName().equals("Chocolate")){
             chocolateSales += 1;
          }
          else
-         if(drinks.getName().equals("Tea")){
+         if(currD.getName().equals("Tea")){
             teaSales += 1;
          }
          else
             otherSales += 1;
       }
-      for(int i = 0; i < 4; i++){//Create methods for x product for sales
+      
+      for(int i = 0; i < 4; i++){
        switch(i){
-          case 0: System.out.println("Total Coffee Sales: " + transactions.getCoffeeSales());
+          case 0: System.out.println("Total Coffee Sales: " + coffeeSales);
                   break;
-          case 1: System.out.println("Total Chocolate Drink Sales: " + transactions.getChocolateSales());
+          case 1: System.out.println("Total Chocolate Drink Sales: " + chocolateSales);
                   break;
-          case 2: System.out.println("Total Tea Sales: " + transactions.getTeaSales());
+          case 2: System.out.println("Total Tea Sales: " + teaSales);
                   break;
-          case 3: System.out.println("Total Other Drinks Sales: " + transactions.getOtherSales());
+          case 3: System.out.println("Total Other Drinks Sales: " + otherSales);
                   break;
           }
       }
 
    }
+    //Not Complete
     public void changeOfSales(){//Compares Predefined Sales with Current Sales
       double change = 0;
           for(int i = 0; i < 4; i++){
@@ -156,20 +169,19 @@ private int buyer;
               }
           }
     }
-    public void expectedTime(){
-      ArrayList<Inventory> inventory = data();
-      Inventory current = inventory.getExpectedSaleTime();
+    
+    public void expectedTime(){//Expected time for a product to sell
+      /*ArrayList<Drink> drinks = drinks();
+      Drink currD = drinks.get(i);*/
+      System.out.println("Expected time to sell all Coffee Products: 2 weeks.");
+      System.out.println("Expected time to sell all Chocolate Drink Products: 1 week.");
+      System.out.println("Expected time to sell all Tea Products: 2 weeks and a half.");
+      System.out.println("Expected time to sell all Other Products: 1 month.");  
     }
-    public void economyGrowth(){
+    
+   /*Don't know if this even matters
+      public void economyGrowth(){//Change of Currency
       ArrayList<Transaction> transaction = data();
       Inventory current = transaction.getEconomyGrowth();
-    }
-    public void salesTendencies(){
-      //How much has a product sold, how much is left on the inventory, what to do.
-      ArrayList<Transaction> transaction = data();
-      Transaction coffeeSales = transaction.getCoffeeSales();
-      Transaction chocolateSales = transaction.getChocolateSales();
-      Transaction teaSales = transaction.getTeaSales();
-      Transaction otherSales = transaction.getOtherSales();
-    }
+    }*/
 }
