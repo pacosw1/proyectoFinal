@@ -2,6 +2,11 @@ import java.io.*;
 import java.util.*;
 class Employee implements Serializable{
 private double hours;
+private double workingEmployees;
+private String name;
+private int clients;
+private String clientsSuggestions;
+private String employeeSuggestion;
 public Employee(){
 }
 public ArrayList<Employee> readEmployee(String path) {
@@ -94,8 +99,23 @@ public void saveTransaction(ArrayList<Transaction> obj, String path) {//saves ob
                 catch(IOException e) {System.out.println("Error al cerrar el archivo");}
         }
 }
+public double getWorkingEmployees(){
+      return workingEmployees;
+}
 public double getHours(){//Employee hours
       return hours;
+}
+public String getName(){//Employee Name
+      return name;
+}
+public int getClients(){//Clients Served
+      return clients;
+}
+public String getClientsSuggestions(){
+      return clientsSuggestions;
+}
+public String getEmployeeSuggestion(){
+      return employeeSuggestion;
 }
 //Display
 public String toString(){

@@ -9,6 +9,10 @@ private int totalMedium;
 private int totalVenti;
 private double totalCost;
 private double totalPrice;
+private String bestProduct;
+private String highestTemperature;
+private String highestSize;
+
     public TendencyReport(CurrentDate date, String title, String path){
           super(date, title, path);
     }
@@ -27,45 +31,74 @@ private double totalPrice;
     }
     public ArrayList<String> values() {
             ArrayList<String> n = new ArrayList<String>();
-            /*n.add(String.valueOf(productsSales));
-            n.add(String.valueOf(products));*/
+            n.add(String.valueOf(bestProduct));
+            n.add(String.valueOf(highestSize));
+            n.add(String.valueOf(highestTemperature));
             return n;
     }
     @Override
     public String toString(){
-      return " ";
+    bestProduct();
+    highestSize();
+    highestTemperature();
+      return "TendencyReport: [BestProductSold: " + bestProduct + ", BestDrinkSizeSold: " + highestSize + ", BestDrinkTemperatureSold: " + highestTemperature + "]";
     }
     public ArrayList<Transaction> data() {
             Inventory f = new Inventory();
             return f.readTransactions("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
     }
-
-    public void displayReport(){
-    ArrayList<Transaction> data = data(); //list of transactions
-    ArrayList<Drink> product; //Needs to get name from x product sold, where to get product name?
     
-      double cost = 0.0; double price = 0.0;
+    public ArrayList<Drink> drinks() {
+        Inventory f = new Inventory();
+        return f.readDrinks("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat"); //returns data from .dat file as arraylist
+    }
+    
+    public ArrayList<Drink> highestTemperature(){
+    ArrayList<Transaction> data = data(); //list of transactions
+    ArrayList<Drink> drinks = drinks();
+    
+    Drink currD = drinks.get(0);
+     
+    double cost = 0.0; double price = 0.0;
       
       for (int i = 0; i < data.size(); i++){
               totalCost += data.get(i).cost(); //totals per transactions. Declared in transaction class
               totalPrice += data.get(i).total();
       }
-
+      
       
       for(int x = 0; x < totalPrice; x++){//Determines the most selled "temperature" drink
-            if(product.getName().equals("Other")){
+          currD = drinks.get(x);
+          
+            if(currD.getName().equals("Other")){
                 totalCold += 1;
             }
             else
                 totalHot +=1;
       }
-
+    }
+    
+    public ArrayList<Drink> highestSize(){
+    ArrayList<Transaction> data = data(); //list of transactions
+    ArrayList<Drink> drinks = drinks();
+    
+    Drink currD = drinks.get(0);
+    
+    double cost = 0.0; double price = 0.0;
+      
+      for (int i = 0; i < data.size(); i++){
+              totalCost += data.get(i).cost(); //totals per transactions. Declared in transaction class
+              totalPrice += data.get(i).total();
+      }
+      
       for(int y = 0; y < totalPrice; y++){//Determines the most selled size
-            if(data.getSize().equals("small")){
+            currD = drinks.get(y);
+            
+            if(currD.getSize().equals("small")){
                 totalSmall += 1;
             }
             else
-            if(current.getSize().equals("medium")){
+            if(currD.getSize().equals("medium")){
                 totalMedium += 1;
             }
             else
@@ -75,7 +108,7 @@ private double totalPrice;
 
    public void bestProduct(){
       ArrayList<Transaction> data = data();
-      double best = 0.0; double profit = 0.0; //var declaration
+      double bestProfit = 0.0; double profit = 0.0; String bestProfitProduct = "";//var declaration
       for (int i = 0; i < data.size(); i++) { //transaction array
       
          ArrayList<Drink> curr = data.get(i).getProducts(); //product array
@@ -84,8 +117,9 @@ private double totalPrice;
             Drink product = (Drink)curr.get(j);
             profit = product.total() - product.cost();
             
-            if (profit > best) { //checks for highest profit of all products (saves name and profit)
-               bestProduct = product.getName();
+            if (profit > bestProfit) { //checks for highest profit of all products (saves name and profit)
+               bestProfit = profit;
+               bestProfitProduct = product.getName();
             }
             
          }
