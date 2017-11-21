@@ -32,10 +32,11 @@ public ArrayList<String> names() {
 }
 @Override
 public String toString() {
+  DecimalFormat two = new DecimalFormat( "#.##" );
         losses(); totals(); profits(); //bestProduct();
         saveReport();
 
-        return "TransactionReport [totalCost=" + totalCost + ", totalPrice=" + totalPrice  + ", profit=" + profit + ", losses=" + losses + ", profitMargin=" + profitMargin + "]";
+        return "Reporte de Transacciones\nCosto Total: " + two.format(totalCost) + "\nPrecio Total: " + two.format(totalPrice)  + "\nGanancias: " + two.format(profit) + "\nPerdidas: " + two.format(losses) + "\nMargen Ganancia: " + two.format(profitMargin) + "\n";
 }
 
 

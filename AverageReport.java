@@ -2,11 +2,11 @@ import java.io.*;
 import java.util.*;
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
-class TendencyReport extends Report{
-  private String bestProductA;
-  private double bestProfitA;
+class AverageReport extends Report{
+  private double avgSale;
+  private int totalSales;
     //Construct
-    public TendencyReport(CurrentDate date, String title, String path){
+    public AverageReport(CurrentDate date, String title, String path){
           super(date, title, path);
     }
     public void saveReport() {
@@ -18,7 +18,7 @@ class TendencyReport extends Report{
             ArrayList<String> name = new ArrayList<String>();
             name.add("title");
             name.add("date");
-            Field[] f = TendencyReport.class.getDeclaredFields();
+            Field[] f = AverageReport.class.getDeclaredFields();
             for (int i = 0; i < f.length; i++) {
                     name.add((String)f[i].getName());
             }
@@ -26,12 +26,12 @@ class TendencyReport extends Report{
     }
 
     public ArrayList<String> values() {
-      DecimalFormat two = new DecimalFormat( "#.##" );
+      DecimalFormat two = new DecimalFormat( "#.##");
             ArrayList<String> n = new ArrayList<String>();
             n.add(title);
             n.add(date.toString());
-            n.add(bestProductA);
-            n.add(String.valueOf(two.format(bestProfitA)));
+            n.add(String.valueOf(two.format(avgSale)));
+            n.add(String.valueOf(totalSales));
             return n;
     }
 
@@ -41,32 +41,26 @@ class TendencyReport extends Report{
     }
 
 
-       public void bestProduct(){
+       public void avg(){
        ArrayList<Transaction> data = data();
-       double bestProfit = 0.0; double profit = 0.0; String bestProfitProduct = "";//var declaration
+       totalSales = data.size();
+       double sum = 0;
        for (int i = 0; i < data.size(); i++) { //transaction array
 
-          ArrayList<Drink> curr = data.get(i).getProducts(); //product array
+          Transaction curr = data.get(i); //product array
+          sum+= curr.getTotal();
 
-          for (int j = 0; j < curr.size(); j++) {
-             Drink product = (Drink)curr.get(j);
-             profit = product.total() - product.cost();
 
-             if (profit > bestProfit) { //checks for highest profit of all products (saves name and profit)
-                bestProfitA = profit;
-               bestProductA = product.getName();
-             }
 
-          }
       }
+      avgSale = sum / totalSales;
     }
-
 
 	@Override
 	public String toString() {
-    DecimalFormat two = new DecimalFormat( "#.##" );
-    bestProduct();
+    avg();
     saveReport();
-		return "Tendencias\n" + "Mejor producto: " + bestProductA + "\nGanancia Promedio: " + two.format(bestProfitA) + "\n";
+    DecimalFormat two = new DecimalFormat( "#.##" );
+		return "Reporte de Venta Promedio\n" + "Venta Promedio: " + avgSale + "\nVentas Totales: " + totalSales + "\n";
 	}
 }

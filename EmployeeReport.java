@@ -15,7 +15,9 @@ private Name name;
 
   public ArrayList<String> names(){//Not sure if this is right xD
           ArrayList<String> name = new ArrayList<String>();
-          Field[] f = TransactionReport.class.getDeclaredFields();
+          name.add("title");
+          name.add("date");
+          Field[] f = EmployeeReport.class.getDeclaredFields();
           for (int i = 0; i < f.length; i++) {
                   name.add((String)f[i].getName());
           }
@@ -25,13 +27,15 @@ private Name name;
           ArrayList<String> n = new ArrayList<String>();
           n.add(title);
           n.add(date.toString());
+          n.add(String.valueOf(hours));
+          n.add(name.toString());
           return n;
   }
   @Override
   public String toString() {
     getBest();
-    //saveReport();
-    return "EmployeeReport [hours=" + hours + ", name=" + name + "]";
+    saveReport();
+    return "Mejor Empleado\nNombre: "+name + "\nHoras De Trabajo: " + hours + "\n";
   }
 
   public ArrayList<Employee> data() {

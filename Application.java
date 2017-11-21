@@ -8,6 +8,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.DecimalFormat;
 class Application implements Serializable {
 public static void main(String[] args) {
 
@@ -95,7 +96,7 @@ public static void main(String[] args) {
 public static void managerOptions() {         //uses all other methods to provide interface
         boolean end = true;
         do {
-                String[] actions = {"Realizar Venta","Agregar Nueva Bebida","Agregar Nuevo Ingrediente","Inventario","Generar Reportes","Nuevo Empleado","Ajustar Horas","Cerrar Session"};
+                String[] actions = {"Realizar Venta","Agregar Nueva Bebida","Agregar Nuevo Ingrediente","Inventario","Generar Reportes","Nuevo Empleado","Ajustar Horas","Ingesar Sugerencia","Cerrar Session"};
                 int[] options = new int[actions.length];
                 for (int i = 0; i < actions.length; i++) {
                         System.out.println((i+1)+". " + actions[i]);
@@ -124,9 +125,13 @@ public static void managerOptions() {         //uses all other methods to provid
                         updateEmployee();
                         break;
                 case 8:
-                end = false;
-                break;
-                  //reports
+                      createSuggestion();
+                      break;
+                case 9:
+
+                  end = false;
+                  break;
+                    //reports
 
                 }
         } while (end == true);
@@ -137,22 +142,30 @@ public static void managerOptions() {         //uses all other methods to provid
 public static void generateReports() {
         String name = "paco";
         String path = "C:\\Users\\"+name+"\\Documents\\GitHub\\proyectoFinal\\data\\Reports.json";
-
+        System.out.println("Open Index.html to view formatted reports\n");
         TimeReport rep = new TimeReport(new CurrentDate(), "time", path);
         System.out.println(rep);
         TransactionReport report = new TransactionReport(new CurrentDate(),"transactions",path);
         System.out.println(report);
         InventoryReport rr = new InventoryReport(new CurrentDate(),"inventory",path);
         System.out.println(rr);
-        System.out.println("Open Index.html to view formatted reports");
+
         SalesProyectionsReport rf = new SalesProyectionsReport(new CurrentDate(),"salesp",path);
         System.out.println(rf);
         EmployeeReport er = new EmployeeReport(new CurrentDate(),"employee",path);
         System.out.println(er);
-        
-       
+        SuggestionsReport sg = new SuggestionsReport(new CurrentDate(),"suggestions",path);
+        System.out.println(sg);
+        TendencyReport tr = new TendencyReport(new CurrentDate(),"tendency",path);
+        System.out.println(tr);
         SalesReport salesR = new SalesReport(new CurrentDate(),"sales",path);
         System.out.println(salesR);
+        AverageReport av = new AverageReport(new CurrentDate(),"average",path);
+        System.out.println(av);
+        TopFiveReport top = new TopFiveReport(new CurrentDate(),"topFive",path);
+        System.out.println(top);
+
+
 }
 public static void saveIngredient(ArrayList<Ingredient> ingredients) {
         Inventory f = new Inventory();
@@ -174,6 +187,14 @@ public static ArrayList<Employee> readEmployee(){
    public static void saveEmployee(ArrayList<Employee> employee){
         Inventory f = new Inventory();
         f.saveEmployee(employee,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
+   }
+   public static void saveSuggestion(ArrayList<Suggestion> suggestions){
+        Inventory f = new Inventory();
+        f.saveSuggestion(suggestions,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\suggestions.dat");
+   }
+   public static ArrayList<Suggestion> readSuggestion() {         //return list of all transactions from .dat file
+           Inventory f = new Inventory();
+           return f.readSuggestions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\suggestions.dat");
    }
 
 public static ArrayList<Transaction> readTransactions() {         //return list of all transactions from .dat file
@@ -201,6 +222,22 @@ public static void createEmployee() {
   Name name = new Name(first,mid,last);
   added.add(new Employee(0,name,7.23));
   saveEmployee(added);
+}
+
+public static void createSuggestion() {
+  ArrayList<Suggestion> added = new ArrayList<Suggestion>();
+  String complaint = Lectura.readString("Comentario o Sugerencia");
+  String[] op = {"Positivo", "Negativo"};
+  for (int i = 0; i < op.length; i++) {
+          System.out.println((i+1) + ". "+op[i]);
+
+  }
+  int choice = choice(op.length,"Escoge tipo");
+  String selected = op[(choice-1)];
+  added.add(new Suggestion(complaint,selected, new CurrentDate()));
+  saveSuggestion(added);
+
+
 }
 public static void updateEmployee() {
   ArrayList<Employee> employees = readEmployee();
@@ -267,6 +304,7 @@ public static double sizePrice(int choice) {
 public static void sellDrink() {         //Drink sale
 
         ArrayList<Transaction> transactions = readTransactions();
+        DecimalFormat two = new DecimalFormat( "#.##" );
         ArrayList<Drink> drinks = readDrinks();
         System.out.println("Agrega una bebida");
         ArrayList<Drink> added = new ArrayList<Drink>();
@@ -304,7 +342,7 @@ public static void sellDrink() {         //Drink sale
                         added.add(selected);
                         Transaction curr = new Transaction("cash", added, new CurrentDate());
                         transactions.add(curr);
-                        System.out.println("Total: "+ curr.getTotal());
+                        System.out.println("Total: "+ two.format(curr.getTotal()));
                 } else {
                         System.out.println("Uno o mas Ingredientes se han agotado, Escoga otro producto");
                 }

@@ -29,7 +29,7 @@ public ArrayList<String> names(){
 public String toString() {
         sales();
         saveReport();
-        return "Drinks: "+ drinkName + "Perc: " + drinkPercent;
+        return "Bebidas: "+ drinkName + "% de Venta" + drinkPercent;
 
 }
 
@@ -64,9 +64,6 @@ public int getTotalSales() {
         return sum;
 }
 
-public void fill(){
-
-}
 
 public ArrayList<Drink> getPercent() {
         ArrayList<Transaction> transactions = data();
@@ -86,7 +83,6 @@ public ArrayList<Drink> getPercent() {
 }
 
 public ArrayList<String> values() {
-        DecimalFormat two = new DecimalFormat( "#.##" );
         ArrayList<String> n = new ArrayList<String>();
         n.add(title);
         n.add(date.toString());

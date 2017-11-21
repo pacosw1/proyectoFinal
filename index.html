@@ -73,21 +73,12 @@
     </table>
   </div>
   <div class="charts">  <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
-      <thead>
-        <h1 id="4">Reporte de Porcentajes</h1>
-
-        <tr class="rowSelector">
-          <th>Fecha</th>
-
-
-        </tr>
-        <tr id="date">
-        </tr>
         <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
           <thead>
-
+            <h1 id="4">Reporte de Productos</h1>
             <tr class="rowSelector">
-
+              <th>Fecha</th>
+              <th>#</th>
               <th>Bebida</th>
               <th>%</th>
 
@@ -96,15 +87,177 @@
           <tbody id="percentTable">
           </tbody>
         </table>
-      </thead>
-      <tbody id="salesTable">
-      </tbody>
-
-
 
   </div>
+  <div class="charts">  <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+        <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+          <thead>
+            <h1 id="5">Reportes de Proyeccion</h1>
+            <tr class="rowSelector">
+              <th>Fecha</th>
+              <th>Ventas Cafe</th>
+              <th>Ventas Chocolate</th>
+              <th>Ventas Te</th>
+              <th>Ventas Otros</th>
+            </tr>
+          </thead>
+          <tbody id="prTable">
+          </tbody>
+        </table>
+
+  </div>
+  <div class="charts">  <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+        <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+          <thead>
+            <h1 id="6">Reportes de Sugerencias</h1>
+            <tr class="rowSelector">
+              <th>Fecha</th>
+              <th>Comentarios Positivos</th>
+              <th>Comentarios Negativos</th>
+
+            </tr>
+          </thead>
+          <tbody id="sugTable">
+          </tbody>
+        </table>
+
+  </div>
+  <div class="charts">  <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+        <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+          <thead>
+            <h1 id="7">Reportes de Mejor Producto($)</h1>
+            <tr class="rowSelector">
+              <th>Fecha</th>
+              <th>Mejor Producto</th>
+              <th>Ganancia</th>
+
+            </tr>
+          </thead>
+          <tbody id="tenTable">
+          </tbody>
+        </table>
+  </div>
+</div>
+<div class="charts">  <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+      <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+        <thead>
+          <h1 id="8">Mejor Empleado</h1>
+          <tr class="rowSelector">
+            <th>Fecha</th>
+            <th>Mejor Empleado</th>
+            <th>Horas</th>
+
+          </tr>
+        </thead>
+        <tbody id="employeeTable">
+        </tbody>
+      </table>
+</div>
+<div class="charts">  <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+      <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+        <thead>
+          <h1 id="9">Top 5 Ventas</h1>
+          <tr class="rowSelector">
+            <th>Fecha</th>
+            <th>#</th>
+            <th>Total</th>
+
+          </tr>
+        </thead>
+        <tbody id="topTable">
+        </tbody>
+      </table>
+</div>
+<div class="charts">  <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+      <table class="table" id="tables" data-show-toggle="false" data-paging="true" data-paging-size="50">
+        <thead>
+          <h1 id="10">Ventas Promedio</h1>
+          <tr class="rowSelector">
+            <th>Fecha</th>
+            <th>Venta Promedio</th>
+            <th>Ventas Totales</th>
+
+          </tr>
+        </thead>
+        <tbody id="avgTable">
+        </tbody>
+      </table>
+</div>
+<script id="avg" type="text/x-jquery-tmpl">
 
 
+  <tr id="tableRow">
+  <td>${date}</td>
+    <td>${avgSale}</td>
+    <td>${totalSales}</td>
+  </tr>
+
+</script>
+
+<script id="employee" type="text/x-jquery-tmpl">
+
+
+  <tr id="tableRow">
+  <td>${date}</td>
+    <td>${name}</td>
+    <td>${hours}</td>
+  </tr>
+
+</script>
+
+
+<script id="topFive" type="text/x-jquery-tmpl">
+
+
+{{each array}}
+<tr id="tableRow">
+<td>${date}</td>
+<td>${$index +1}</td>
+ <td>${this.name}</td>
+
+</tr>
+{{/each}}
+
+
+</script>
+
+
+
+  <script id="pr" type="text/x-jquery-tmpl">
+
+
+    <tr id="tableRow">
+    <td>${date}</td>
+      <td>${coffeeSales}</td>
+      <td>${chocolateSales}</td>
+      <td>${teaSales}</td>
+      <td>${otherSales}</td>
+    </tr>
+
+  </script>
+  <script id="ten" type="text/x-jquery-tmpl">
+
+
+    <tr id="tableRow">
+    <td>${date}</td>
+      <td>${bestProductA}</td>
+      <td>${bestProfitA}</td>
+
+
+    </tr>
+
+  </script>
+  <script id="sug" type="text/x-jquery-tmpl">
+
+
+    <tr id="tableRow">
+    <td>${date}</td>
+      <td>${positive}%</td>
+      <td>${negative}%</td>
+
+    </tr>
+
+  </script>
   <script id="trans" type="text/x-jquery-tmpl">
 
 
@@ -153,10 +306,13 @@
 
      {{each array}}
     <tr id="tableRow">
+    <td>${date}</td>
+<td>${$index +1}</td>
       <td>${this.name}</td>
       <td>${data}</td>
     </tr>
     {{/each}}
+
 
   </script>
 </body>

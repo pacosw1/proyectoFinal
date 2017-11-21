@@ -19,7 +19,7 @@ class SalesProyectionsReport extends Report{
             ArrayList<String> name = new ArrayList<String>();
             name.add("title");
             name.add("date");
-            Field[] f = TransactionReport.class.getDeclaredFields();
+            Field[] f = SalesProyectionsReport.class.getDeclaredFields();
             for (int i = 0; i < f.length; i++) {
                     name.add((String)f[i].getName());
             }
@@ -70,6 +70,7 @@ class SalesProyectionsReport extends Report{
 	@Override
 	public String toString() {
     totalClientSales();
-		return "SalesProyectionsReport [coffeeSales=" + coffeeSales + ", chocolateSales=" + chocolateSales + ", teaSales=" + teaSales + ", otherSales=" + otherSales +"]";
+    saveReport();
+		return "SalesProyectionsReport\nVentas Cafe: " + coffeeSales + "\nVentas Chocolate: " + chocolateSales + "\nVentas Te: " + teaSales + "\nVentas Otros: " + otherSales +"\n";
 	}
 }

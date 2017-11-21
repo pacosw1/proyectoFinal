@@ -19,7 +19,7 @@ public String toString() {
         bestRange();
         bestOverallHour();
         saveReport();
-        return "TimeReport [bestRange=" + bestRange + ", popularHour=" + popularHour + "]";
+        return "TimeReport \nMayor Trafico: " + bestRange + "\nHora Mas Popular: " + popularHour + "\n";
 }
 
 public ArrayList<String> names() {
@@ -86,7 +86,7 @@ public void bestOverallHour() {
                 }
         }
 
-
+        popularHour += hours[ind];
 
 
 }

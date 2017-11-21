@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 class Drink extends Product {
 protected String size;
 protected Recipe recipe;
@@ -24,7 +25,8 @@ public double total() {
 }
 //Displays
 public String toString() {
-        return name + "   "+"$"+price;
+  DecimalFormat two = new DecimalFormat( "#.##" );
+        return name + "   "+"$"+two.format(price);
 }
 
 

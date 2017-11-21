@@ -15,7 +15,7 @@ public void saveReport() {
 public String toString() {
         findIngredients();
         saveReport();
-        return "InventoryReport [reorder=" + reorder + "]";
+        return "InventoryReport\nReordenar: " + reorder + "\n";
 }
 
 public void findIngredients() {   //find all ingredients that are lower than 20 in stock // returns string

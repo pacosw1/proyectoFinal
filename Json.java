@@ -81,6 +81,34 @@ public void saveReport(ArrayList<String> names, ArrayList<String> values,ArrayLi
         catch (IOException e) {e.printStackTrace();}
         //finally{}
 }
+public void saveReport(ArrayList<String> names, ArrayList<String> values,ArrayList<String> n1, String path) {
+        JSONArray data = getData(path);
+        FileWriter file = null;
+        JSONObject tran = new JSONObject();
+        for (int i = 0; i < names.size(); i++) {
+                //new object to add
+                tran.put(names.get(i),values.get(i));
+        }
+        JSONArray percent = new JSONArray();
+        for (int i =0; i < n1.size(); i++) {
+                JSONObject curr = new JSONObject();
+                curr.put("name",n1.get(i));
+                percent.add(curr);
+        }
+        tran.put("array",percent);
+        data.add(tran);
+
+
+        try { //write updated array to file
+                file = new FileWriter(path);
+                file.write(data.toJSONString());
+                file.close();
+        }
+        catch (FileNotFoundException e) {e.printStackTrace();}
+        catch (IOException e) {e.printStackTrace();}
+        //finally{}
+}
+
 
 
 
