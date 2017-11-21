@@ -1,7 +1,0 @@
-
-
-super.metodo()
-  sirve para modificar metodo del hijo.
-  //dentro del constructor para enviar attr.
-  super(nombre, edad);
-    //siempre en primera linea de constructor
