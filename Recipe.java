@@ -20,9 +20,7 @@ public double cost(){//sums all the prices of each ingredient with their quanity
         return sum;
 }
 
-public void setT(ArrayList<Ingredient> Ingredient) {
-        this.ingredients = ingredients;
-}
+
 public ArrayList<Ingredient> getIngredients() {
         return ingredients;
 }

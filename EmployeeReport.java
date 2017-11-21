@@ -3,7 +3,8 @@ import java.util.*;
 import java.lang.reflect.Field;
 class EmployeeReport extends Report{
   //Construct
-private double hoursEmployee;
+private double hours;
+private Name name;
   public EmployeeReport(CurrentDate date, String title, String path){
       super(date, title , path);
   }
@@ -28,102 +29,33 @@ private double hoursEmployee;
   }
   @Override
   public String toString() {
-    //Values
-    path += "EmployeeReport" +reportCount +".json";
-    totalPayment();
-    suggestions();
-    saveReport();
-    reportCount++;
-
-    return "EmployeeReport: ";
+    getBest();
+    //saveReport();
+    return "EmployeeReport [hours=" + hours + ", name=" + name + "]";
   }
 
-  public ArrayList<Transaction> data() {
+  public ArrayList<Employee> data() {
             Inventory f = new Inventory();
-            return f.readTransactions("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat"); //returns data from .dat file as arraylist
+            return f.readEmployee("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat"); //returns data from .dat file as arraylist
   }
-  public ArrayList<Employee> dataEmployee() {
-  Employee f = new Employee();
-        return f.readEmployee(path + "C:\\Users\\Mario\\Desktop\\employee.dat"); //returns data from .dat file as arraylist
+
+  public Employee getBest() {  //employee with most hours
+    ArrayList<Employee> employees = data();
+    int top = employees.get(0).getHours();
+    int bestIndex = 0;
+    for (int i = 10; i < employees.size();i++) {
+        Employee curr = employees.get(i);
+        if (curr.getHours() > top)
+          top = curr.getHours();bestIndex = i;
+    }
+    Employee winner = employees.get(bestIndex);
+    name = winner.getName();
+    hours = top;
+    return winner;
   }
-  
+
   //Methods
-  public void totalPayment(){
-  ArrayList<Transaction> transaction = data();
-  ArrayList<Employee> employee = dataEmployee();
- 
-  Employee current = employee.get(0);
-  
-  String day = " ";
-  int totalEmployees = 0;
-  double salary = 7.25;
-  double totalPayment = 0.00;
-  double[] payment = new double[7];
-  
-    for(int i = 0; i < employee.size();i++){
-     totalEmployees += 1;
-    }
-       for(int i = 0; i < totalEmployees; i++){
-         Employee currE = employee.get(i);//Gets employee i from array list
-         for(int x = 0; x < 7; x++){
-            switch(x){
-              case 0: day = "Monday";
-                      break;
-              case 1: day = "Tuesday";
-                      break;
-              case 2: day = "Wednesday";
-                      break;
-              case 3: day = "Thursday";
-                      break;
-              case 4: day = "Friday";
-                      break;
-              case 5: day = "Saturday";
-                      break;
-              case 6: day = "Sunday";
-                      break;
-             }
-           
-           hoursEmployee = currE.getHours();
 
-           payment[x] += (hoursEmployee * salary);
-           totalPayment += payment[x];
-           System.out.print("\nPayment on " + day + ": " + payment[x]);
-        }
-        System.out.println("The total payment for employee " + currE.getName() + " is: " + totalPayment);
-      }
-    }
-    
-    public void suggestions(){
-    int clients = 0;
-    
-      ArrayList<Employee> employee = dataEmployee();
-      
-      int totalEmployees = 0;
-      Employee current = employee.get(0);
-      
-       for(int i = 0; i < employee.size();i++){
-            totalEmployees += 1;
-       }
-       
-       for(int i = 0; i < totalEmployees;i++){
-        clients += 1;
-       }
 
-      String[] suggestions = new String[clients];
 
-      for(int y = 0; y < clients; y++){
-        suggestions[y] = current.getClientsSuggestions();
-      }
-
-      if(clients > 0){
-         System.out.println("Client's Suggestions Report: ");
-         for(int i = 0; i < clients; i++) {
-                 System.out.println("Suggestion of Client " + (i + 1) + ": " + suggestions[i]);
-         }
-         System.out.println("The employee's suggestion is: " + current.getEmployeeSuggestion());
-      }
-      else
-        System.out.println("The employee's suggestion is: " + current.getEmployeeSuggestion());
-    }
 }
-

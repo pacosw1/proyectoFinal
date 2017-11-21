@@ -95,7 +95,7 @@ public static void main(String[] args) {
 public static void managerOptions() {         //uses all other methods to provide interface
         boolean end = true;
         do {
-                String[] actions = {"Realizar Venta","Agregar Nueva Bebida","Agregar Nuevo Ingrediente","Inventario","Generar Reportes","Cerrar Session"};
+                String[] actions = {"Realizar Venta","Agregar Nueva Bebida","Agregar Nuevo Ingrediente","Inventario","Generar Reportes","Nuevo Empleado","Ajustar Horas","Cerrar Session"};
                 int[] options = new int[actions.length];
                 for (int i = 0; i < actions.length; i++) {
                         System.out.println((i+1)+". " + actions[i]);
@@ -118,9 +118,16 @@ public static void managerOptions() {         //uses all other methods to provid
                         generateReports();
                         break;
                 case 6:
-                        end = false;
+                        createEmployee();
                         break;
-                        //reports
+                case 7:
+                        updateEmployee();
+                        break;
+                case 8:
+                end = false;
+                break;
+                  //reports
+
                 }
         } while (end == true);
 
@@ -142,11 +149,8 @@ public static void generateReports() {
         System.out.println(rf);
         EmployeeReport er = new EmployeeReport(new CurrentDate(),"employee",path);
         System.out.println(er);
-        ManagerReport mr = new ManagerReport(new CurrentDate(),"manager",path);
-        System.out.println(mr);//Te puse los de empleado y manager, haber si jalan
-        //Me da miedo dar push porque ya le cambiaste y no jalo un merge ahorita :(
-        //Hubieras dejado abierto en el Tendency
-        //Minimo un push
+        
+       
         SalesReport salesR = new SalesReport(new CurrentDate(),"sales",path);
         System.out.println(salesR);
 }
@@ -163,6 +167,10 @@ public static ArrayList<Employee> readEmployee(){
         Inventory f = new Inventory();
         return f.readEmployee("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
    }
+   public static void updateEmployee(ArrayList<Employee> e){
+           Inventory f = new Inventory();
+           f.updateEmployees(e,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
+      }
    public static void saveEmployee(ArrayList<Employee> employee){
         Inventory f = new Inventory();
         f.saveEmployee(employee,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
@@ -185,6 +193,38 @@ public static ArrayList<Drink> readDrinks() {
 public static void saveDrink(ArrayList<Drink> drinks) {
         Inventory f = new Inventory();
         f.saveDrink(drinks,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
+}
+
+public static void createEmployee() {
+  ArrayList<Employee> added = new  ArrayList<Employee>();
+  String first = Lectura.readString("Nombre");String mid = Lectura.readString("Apellido Paterno");String last = Lectura.readString("Apellido Materno");
+  Name name = new Name(first,mid,last);
+  added.add(new Employee(0,name,7.23));
+  saveEmployee(added);
+}
+public static void updateEmployee() {
+  ArrayList<Employee> employees = readEmployee();
+  boolean end = false;
+  do {
+
+          for (int i = 0; i < employees.size(); i++) {
+                  System.out.println((i+1) + ". "+employees.get(i));
+
+          }
+          int choice = choice(employees.size(),"Escoge Empleado a ajustar horas");
+          Employee selected = employees.get(choice-1);
+          int amount = Lectura.getInt("Horas a agregar");
+          selected.setHours(selected.getHours() + amount);
+
+
+          if (choose("Desea ajustar otro empleado?"))
+                  end = true;
+          else
+                  end = false;
+
+  } while(end == true);
+    updateEmployee(employees);
+
 }
 
 public static boolean changeStock(Recipe recipe,int q) {         //during sale, substracts recipe quantities from inventory

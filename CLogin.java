@@ -25,15 +25,7 @@ public boolean checkAccount() {
                 return false;
         }
 }
-public String stringPassword(char[] pass) {
-        String t = "";
-        for (int i = 0; i<pass.length; i++) {
-                t+= pass[i];
-        }
-        return t;
-}
-//char[] password = console.readPassword("Enter password");
-//Arrays.fill(password, ' ');
+
 public boolean loginAttempts() {//Recursive function to test for login attempts
 
         //log in status to true;

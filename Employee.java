@@ -1,64 +1,48 @@
 import java.io.*;
 import java.util.*;
 class Employee implements Serializable{
-private double hours;
-private double workingEmployees;
-private String name;
-private int clients;
-private String clientsSuggestions;
-private String employeeSuggestion;
-public Employee(){
-}
+private int hours;
+private Name name;
+private double salary;
 
 
 
-	public double getHours() {
+	@Override
+	public String toString() {
+		return "Employee [hours=" + hours + ", name=" + name + ", salary=" + salary + "]";
+	}
+
+	public int getHours() {
 		return hours;
 	}
 
-	public double getWorkingEmployees() {
-		return workingEmployees;
-	}
-
-	public String getName() {
+	public Name getName() {
 		return name;
 	}
 
-	public int getClients() {
-		return clients;
+	public double getSalary() {
+		return salary;
 	}
 
-	public String getClientsSuggestions() {
-		return clientsSuggestions;
-	}
-
-	public String getEmployeeSuggestion() {
-		return employeeSuggestion;
-	}
-
-	public void setHours(double hours) {
+	public void setHours(int hours) {
 		this.hours = hours;
 	}
 
-	public void setWorkingEmployees(double workingEmployees) {
-		this.workingEmployees = workingEmployees;
-	}
-
-	public void setName(String name) {
+	public void setName(Name name) {
 		this.name = name;
 	}
 
-	public void setClients(int clients) {
-		this.clients = clients;
+	public void setSalary(double salary) {
+		this.salary = salary;
 	}
 
-	public void setClientsSuggestions(String clientsSuggestions) {
-		this.clientsSuggestions = clientsSuggestions;
+	public Employee() {
+		super();
 	}
 
-	public void setEmployeeSuggestion(String employeeSuggestion) {
-		this.employeeSuggestion = employeeSuggestion;
+	public Employee(int hours, Name name, double salary) {
+		this.hours = hours;
+		this.name = name;
+		this.salary = salary;
 	}
-
-
 }

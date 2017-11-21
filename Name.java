@@ -1,4 +1,6 @@
-class Name
+import java.io.*;
+import java.util.*;
+class Name implements Serializable
 {
    private String first;
    private String mid;
