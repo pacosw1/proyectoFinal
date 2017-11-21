@@ -12,7 +12,7 @@ class Application implements Serializable {
 public static void main(String[] args) {
 
         CLogin user = new CLogin();
-        JFrame frame = new JFrame("Demo application");
+        JFrame frame = new JFrame("Cafe Inc Login");
         frame.setSize(300, 150);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -52,14 +52,16 @@ public static void main(String[] args) {
                                 user.setTypedPassword( passwordText.getText());
                                 if (user.checkAccount()) {
                                         frame.dispose();
-                                        if (user.getStatus() == 0) {          //manage or employee
+                                        if (user.getStatus() == 0) {
+
+
+
+                                                //manage or employee
                                                 //admin actions (access reports etc...)
                                                 managerOptions();          //interface
 
                                         }
-                                        else if (user.getAttempts() == 1) {
-                                                attempts.setText("Ran out of tries Try Again Later");
-                                        }
+
                                         else if (user.getStatus() == 1) {
                                                 employeeOptions();
                                         }
@@ -69,7 +71,9 @@ public static void main(String[] args) {
 
                                 }
 
-                                else {
+                                else if (user.getAttempts() < 1) {
+                                        attempts.setText("Try Again Later");
+                                } else {
                                         userText.setText("");
                                         passwordText.setText("");
                                         attempts.setText("Attempts: " + user.getAttempts());
@@ -124,7 +128,8 @@ public static void managerOptions() {         //uses all other methods to provid
 }
 //read and save Methods
 public static void generateReports() {
-        String path = "C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\Reports.json";
+        String path = "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\Reports.json";
+
         TimeReport rep = new TimeReport(new CurrentDate(), "time", path);
         System.out.println(rep);
         TransactionReport report = new TransactionReport(new CurrentDate(),"transactions",path);
@@ -132,42 +137,45 @@ public static void generateReports() {
         InventoryReport rr = new InventoryReport(new CurrentDate(),"inventory",path);
         System.out.println(rr);
         System.out.println("Open Index.html to view formatted reports");
+
+        SalesReport salesR = new SalesReport(new CurrentDate(),"sales",path);
+        System.out.println(salesR);
 }
 public static void saveIngredient(ArrayList<Ingredient> ingredients) {
         Inventory f = new Inventory();
-        f.saveIngredient(ingredients, "C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
+        f.saveIngredient(ingredients, "C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
 }
 public static ArrayList<Ingredient> readIngredients() {
         Inventory f = new Inventory();
-        return f.readIngredients("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
+        return f.readIngredients("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
 
 }
-public static ArrayList<Employee> readEmployee(){
+/*public static ArrayList<Employee> readEmployee(){
         Employee f = new Employee();
-        return f.readEmployee("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
+        return f.readEmployees("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
    }
    public static void saveEmployee(ArrayList<Employee> employee){
         Employee f = new Employee();
-        f.saveEmployee(employee,"C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
+        f.saveEmployee(employee,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\employee.dat");
    }
-
+ */
 public static ArrayList<Transaction> readTransactions() {         //return list of all transactions from .dat file
         Inventory f = new Inventory();
-        return f.readTransactions("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
+        return f.readTransactions("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
 }
 public static void saveTransactions(ArrayList<Transaction> transactions) {         //saves given transaction arrayList
         Inventory f = new Inventory();
-        f.saveTransaction(transactions,"C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
+        f.saveTransaction(transactions,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\transactions.dat");
 }
 
-public static ArrayList<Drink> readDrinks(){
+public static ArrayList<Drink> readDrinks() {
         Inventory f = new Inventory();
-        ArrayList<Drink> drinks = f.readDrinks("C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
+        ArrayList<Drink> drinks = f.readDrinks("C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
         return drinks;
 }
 public static void saveDrink(ArrayList<Drink> drinks) {
         Inventory f = new Inventory();
-        f.saveDrink(drinks,"C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
+        f.saveDrink(drinks,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\drinks.dat");
 }
 
 public static boolean changeStock(Recipe recipe,int q) {         //during sale, substracts recipe quantities from inventory
@@ -192,11 +200,22 @@ public static boolean changeStock(Recipe recipe,int q) {         //during sale, 
                 }
         }
         Inventory f = new Inventory();
-        f.updateInventory(ingredients,"C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
+        f.updateInventory(ingredients,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");
         return end;
 
 }
-public static void sellDrink() {//Drink sale
+public static double sizePrice(int choice) {
+        if (choice == 0) {
+                return 0.23;
+        }
+        else if (choice == 1) {
+                return 0.89;
+        } else {
+                return 1.23;
+        }
+
+}
+public static void sellDrink() {         //Drink sale
 
         ArrayList<Transaction> transactions = readTransactions();
         ArrayList<Drink> drinks = readDrinks();
@@ -214,15 +233,29 @@ public static void sellDrink() {//Drink sale
                 int quantity = Lectura.getInt("Ingresar cantidad");
                 selected.setQuantity(quantity);
                 if (changeStock(selected.getRecipe(), selected.getQuantity())) {         //checks to see if quantity is > 0 to make drink
+                        for (int m = 0; m < quantity; m++) {
+                                System.out.println("Drink#:"+ (m+1)+"\n");
+                                String[] sizes = {"small","medium","venti"};
+                                for (int i = 0; i < sizes.length; i++) {
+                                        System.out.println((i+1) + ". " + sizes[i]);
+                                }
+                                choice = choice(sizes.length,"Escoge una tamano");
+                                selected.setPrice(selected.getPrice() + sizePrice(choice-1));
 
-                        String[] sizes = {"small","medium","venti"};
-                        for (int i = 0; i < sizes.length; i++) {
-                                System.out.println((i+1) + ". " + sizes[i]);
+                                selected.setSize(sizes[choice-1]);
+                                String[] temp = {"Caliente","Frio"};
+                                for (int i = 0; i < temp.length; i++) {
+                                        System.out.println((i+1) + ". " + temp[i]);
+                                }
+                                choice = choice(temp.length,"Escoge una temperatura");
+                                selected.setTemp(temp[choice-1]);
+
                         }
-                        choice = choice(sizes.length,"Escoge una tamano");
-                        selected.setSize(sizes[choice-1]);
+
                         added.add(selected);
-                        transactions.add(new Transaction("cash", added, new CurrentDate()));
+                        Transaction curr = new Transaction("cash", added, new CurrentDate());
+                        transactions.add(curr);
+                        System.out.println("Total: "+ curr.getTotal());
                 } else {
                         System.out.println("Uno o mas Ingredientes se han agotado, Escoga otro producto");
                 }
@@ -245,7 +278,6 @@ public static int choice(int len, String message) {         //makes list choice 
         else
                 return choice(len, message);
 }
-
 public static void employeeOptions() {
         boolean end = true;
         do {
@@ -277,7 +309,6 @@ public static boolean choose(String message) {         // si o no
         else
                 return choose(message);
 }
-
 public static Recipe createRecipe() {         //creates recipe
         ArrayList<Ingredient> ingredients = readIngredients();
         System.out.println("Agrega un Ingrediente");
@@ -323,7 +354,6 @@ public static void createIngredient() {         //add new ingredient to inventor
         }
         saveIngredient(added);
 }
-
 public static void createDrink() {
         boolean end = true;
         String items[] = {"Cafe, te y otros","Chocolate"};
@@ -333,7 +363,7 @@ public static void createDrink() {
                         System.out.println((i+1) + ". "+items[i]);
                 }
                 int choice = choice(items.length,"Escoge una opcion de la lista");
-                switch (choice-1) {
+                switch (choice) {
                 case 1:
                         added.add(createAll());
                         break;
@@ -348,7 +378,6 @@ public static void createDrink() {
         } while(end == true);
         saveDrink(added);
 }
-
 public static Chocolate createChocolate() {         //creates subclass Drink
         System.out.println("Crear Bebida: ");
         String name = Lectura.readString("Name");
@@ -368,7 +397,6 @@ public static Chocolate createChocolate() {         //creates subclass Drink
         return new Chocolate(price,code,name,size,recipe,quantity,temp,type);
 
 }
-
 public static Drink createAll() {         //creates Drink type
         System.out.println("Crear Bebida: ");
         String name = Lectura.readString("Name");
@@ -382,8 +410,7 @@ public static Drink createAll() {         //creates Drink type
         return new Drink(price,code,name,size,recipe,quantity,temp);
 
 }
-
-public static void showInventory(){//muestra inventario
+public static void showInventory() {         //muestra inventario
         //displays updated inventory list
         ArrayList<Ingredient> list = readIngredients();
         boolean end = true;
@@ -404,7 +431,7 @@ public static void showInventory(){//muestra inventario
 
         } while(end == true);
         Inventory f = new Inventory();
-        f.updateInventory(list,"C:\\Users\\Mario\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");         //.setQuantity(
+        f.updateInventory(list,"C:\\Users\\paco\\Documents\\GitHub\\proyectoFinal\\data\\ingredients.dat");         //.setQuantity(
 }
 
 }

@@ -32,6 +32,7 @@ public JSONArray getData(String path) {
         return array;
 }
 //Puedes ver UserLogin?
+
 public void saveReport(ArrayList<String> names, ArrayList<String> values, String path) {
         JSONArray data = getData(path);
         FileWriter file = null;
@@ -51,6 +52,34 @@ public void saveReport(ArrayList<String> names, ArrayList<String> values, String
         catch (IOException e) {e.printStackTrace();}
         //finally{}
 }
+
+public void saveReport(ArrayList<String> names, ArrayList<String> values,ArrayList<String> n1,ArrayList<String> n2, String path) {
+        JSONArray data = getData(path);
+        FileWriter file = null;
+        JSONObject tran = new JSONObject();
+        for (int i = 0; i < names.size(); i++) {
+                //new object to add
+                tran.put(names.get(i),values.get(i));
+        }
+        JSONArray percent = new JSONArray();
+        for (int i =0; i < n1.size(); i++) {
+                JSONObject curr = new JSONObject();
+                curr.put(n1.get(i),n2.get(i));
+                percent.add(curr);
+        }
+        data.add(tran);
+        data.add(percent);
+
+        try { //write updated array to file
+                file = new FileWriter(path);
+                file.write(data.toJSONString());
+                file.close();
+        }
+        catch (FileNotFoundException e) {e.printStackTrace();}
+        catch (IOException e) {e.printStackTrace();}
+        //finally{}
+}
+
 
 
 public void addTransaction(ArrayList<Transaction> transaction, String path) {
